@@ -3,66 +3,277 @@ package com.example.stopwatchforcompetitions.ui.stopwatch.view_model
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.stopwatchforcompetitions.ui.stopwatch.fragment.StopwatchFragment.Companion.DELETE
+import androidx.lifecycle.viewModelScope
+import com.example.stopwatchforcompetitions.domain.api.StopwatchInteractor
+import com.example.stopwatchforcompetitions.domain.model.Athlete
+import com.example.stopwatchforcompetitions.domain.model.Race
+import com.example.stopwatchforcompetitions.ui.stopwatch.fragment.StopwatchFragment
+import com.example.stopwatchforcompetitions.ui.stopwatch.view_model.state.AddAthleteNumberState
+import com.example.stopwatchforcompetitions.ui.stopwatch.view_model.state.FastResultState
+import com.example.stopwatchforcompetitions.ui.stopwatch.view_model.state.TimerState
+import com.example.stopwatchforcompetitions.util.Util
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class StopwatchViewModel : ViewModel() {
+class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewModel() {
 
-    private var numberOfTextView = 1
+    private var timerJob: Job? = null
+    private var isStarted = false
+    private var startRaceData = 0L
+
+    private var numberOfTextView = StopwatchFragment.FIRST_EDIT_TEXT
     private var valueOfTextViewOne = ""
     private var valueOfTextViewTwo = ""
     private var valueOfTextViewThree = ""
     private var valueOfTextViewFour = ""
 
-//    private val _timerState = MutableLiveData<>()
-//    val timerState: LiveData<>
-//        get() = _timerState
-//
-//    private val _fastResultState = MutableLiveData<>()
-//    val fastResultState: LiveData<>
-//        get() = _fastResultState
+    private var currentRace = Race(
+        startTime = 0,
+        name = "",
+        description = "",
+        imgUrl = "",
+        lapDistance = 0,
+        athletes = emptyList(),
+        isStarted = false
+    )
 
-    private val _addAthleteNumberState = MutableLiveData<AddAthleteNumberState>()
+    private var athletesListInCurrentRace = emptyList<Athlete>()
+
+    private val _timerState = MutableLiveData<TimerState>(TimerState.Default)
+    val timerState: LiveData<TimerState>
+        get() = _timerState
+
+    private val _fastResultState = MutableLiveData<FastResultState>(FastResultState.Default)
+    val fastResultState: LiveData<FastResultState>
+        get() = _fastResultState
+
+    private val _addAthleteNumberState = MutableLiveData<AddAthleteNumberState>(
+        AddAthleteNumberState.Default
+    )
     val addAthleteNumberState: LiveData<AddAthleteNumberState>
         get() = _addAthleteNumberState
 
-    init {
+    fun checkRaceHasBeenStarted() {
+        viewModelScope.launch {
+            val race = interactor.checkRaceIsStarted()
+            if (race != null) {
+                isStarted = true
+                startRaceData = race.startTime
+                updateRaceInformation()
+                renderAddAthleteNumberState()
+            }
+        }
+    }
+
+    private fun updateRaceInformation() {
+        viewModelScope.launch {
+            val race = interactor.getRaceInformation(startRaceData)
+            if (race.isStarted) {
+                currentRace = race
+                updateTimer()
+                updateAthletesInformation(race)
+            }
+        }
+    }
+
+    private fun updateTimer() {
+        if (timerJob == null) {
+            timerJob = viewModelScope.launch {
+                while (true) {
+                    delay(UPDATE_DELAY)
+                    renderTimer(
+                        TimerState.IsStarted(
+                            time =
+                            Util.getTimeFormat(
+                                System.currentTimeMillis() - currentRace.startTime
+                            )
+                        )
+                    )
+                }
+            }
+        } else {
+            if (!isStarted) {
+                timerJob?.cancel()
+                timerJob = null
+                renderTimer(TimerState.Default)
+            }
+        }
+    }
+
+    private fun updateAthletesInformation(race: Race) {
+        viewModelScope.launch {
+            interactor.getAllAthletesInRace(race.startTime).collect() {
+                athletesListInCurrentRace = it
+                renderAthletesFastResult(athletesListInCurrentRace)
+            }
+        }
+    }
+
+    fun onPlayStopButtonClicked() {
+        if (isStarted) {
+            stop()
+        } else {
+            start()
+        }
+    }
+
+    private fun start() {
+        viewModelScope.launch {
+            startRaceData = System.currentTimeMillis()
+            interactor.updateRace(
+                Race(
+                    startTime = startRaceData,
+                    name = "",
+                    description = "",
+                    imgUrl = "",
+                    lapDistance = 10,
+                    athletes = emptyList<String>(),
+                    isStarted = true
+                )
+            )
+            isStarted = true
+            updateRaceInformation()
+            renderAddAthleteNumberState()
+        }
+    }
+
+    private fun stop() {
+        viewModelScope.launch {
+            interactor.stopRace()
+        }
+        isStarted = false
         renderAddAthleteNumberState()
+        updateTimer()
     }
 
     fun changeTextViewFocus(newNumberOfTv: Int) {
-        numberOfTextView = newNumberOfTv
-        renderAddAthleteNumberState()
+        if (isStarted) {
+            numberOfTextView = newNumberOfTv
+            renderAddAthleteNumberState()
+        }
     }
 
     fun changeTextViewText(char: String) {
-        if (char == DELETE) {
-            when (numberOfTextView) {
-                1 -> valueOfTextViewOne = valueOfTextViewOne.dropLast(1)
-                2 -> valueOfTextViewTwo = valueOfTextViewTwo.dropLast(1)
-                3 -> valueOfTextViewThree = valueOfTextViewThree.dropLast(1)
-                4 -> valueOfTextViewFour = valueOfTextViewFour.dropLast(1)
+        if (isStarted) {
+            if (char == StopwatchFragment.DELETE) {
+                when (numberOfTextView) {
+                    StopwatchFragment.FIRST_EDIT_TEXT -> valueOfTextViewOne =
+                        valueOfTextViewOne.dropLast(1)
+
+                    StopwatchFragment.SECOND_EDIT_TEXT -> valueOfTextViewTwo =
+                        valueOfTextViewTwo.dropLast(1)
+
+                    StopwatchFragment.THIRD_EDIT_TEXT -> valueOfTextViewThree =
+                        valueOfTextViewThree.dropLast(1)
+
+                    StopwatchFragment.FOURTH_EDIT_TEXT -> valueOfTextViewFour =
+                        valueOfTextViewFour.dropLast(1)
+                }
+            } else {
+                when (numberOfTextView) {
+                    StopwatchFragment.FIRST_EDIT_TEXT -> valueOfTextViewOne += char
+                    StopwatchFragment.SECOND_EDIT_TEXT -> valueOfTextViewTwo += char
+                    StopwatchFragment.THIRD_EDIT_TEXT -> valueOfTextViewThree += char
+                    StopwatchFragment.FOURTH_EDIT_TEXT -> valueOfTextViewFour += char
+                }
             }
-        } else {
-            when (numberOfTextView) {
-                1 -> valueOfTextViewOne += char
-                2 -> valueOfTextViewTwo += char
-                3 -> valueOfTextViewThree += char
-                4 -> valueOfTextViewFour += char
+            renderAddAthleteNumberState()
+        }
+    }
+
+    fun addAthleteResult(btnNumber: Int) {
+        if (isStarted) {
+            var addAthleteNumber = ""
+            when (btnNumber) {
+                1 -> {
+                    addAthleteNumber = valueOfTextViewOne
+                    valueOfTextViewOne = ""
+                }
+
+                2 -> {
+                    addAthleteNumber = valueOfTextViewTwo
+                    valueOfTextViewTwo = ""
+                }
+
+                3 -> {
+                    addAthleteNumber = valueOfTextViewThree
+                    valueOfTextViewThree = ""
+                }
+
+                else -> {
+                    addAthleteNumber = valueOfTextViewFour
+                    valueOfTextViewFour = ""
+                }
+            }
+            renderAddAthleteNumberState()
+
+            viewModelScope.launch {
+                if (currentRace.athletes.contains(addAthleteNumber)) {
+                    for (athlete in athletesListInCurrentRace) {
+                        if (athlete.number == addAthleteNumber) {
+                            val newLapsTimeList = athlete.lapsTime.toMutableList()
+                            newLapsTimeList.add(System.currentTimeMillis())
+                            val athleteAfterUpdate = athlete.copy(
+                                lapsTime = newLapsTimeList,
+                                addLastResult = System.currentTimeMillis()
+                            )
+                            interactor.addAthleteResult(athleteAfterUpdate)
+                            break
+                        }
+                    }
+                } else {
+                    if (addAthleteNumber.isNotBlank()) {
+                        val id = getAthleteId(addAthleteNumber)
+                        val newAthlete = Athlete(
+                            id = id,
+                            race = currentRace.startTime,
+                            number = addAthleteNumber,
+                            lapsTime = listOf<Long>(System.currentTimeMillis()),
+                            addLastResult = System.currentTimeMillis(),
+                            isExpandable = false
+                        )
+                        val newAthleteList = currentRace.athletes.toMutableList()
+                        newAthleteList.add(newAthlete.number)
+                        val updateRace = currentRace.copy(athletes = newAthleteList)
+                        interactor.updateRace(updateRace)
+                        interactor.addAthleteResult(newAthlete)
+                    }
+                    updateRaceInformation()
+                }
             }
         }
-        renderAddAthleteNumberState()
+    }
+
+    private fun getAthleteId(number: String): Long {
+        return (currentRace.startTime.toString() + number).toLong()
+    }
+
+    private fun renderTimer(state: TimerState) {
+        _timerState.postValue(state)
+    }
+
+    private fun renderAthletesFastResult(athletesList: List<Athlete>) {
+        _fastResultState.value = FastResultState.Content(athletesList)
     }
 
     private fun renderAddAthleteNumberState() {
-        _addAthleteNumberState.postValue(
-            AddAthleteNumberState(
-                numberOfTextView,
-                valueOfTextViewOne,
-                valueOfTextViewTwo,
-                valueOfTextViewThree,
-                valueOfTextViewFour
+        if (isStarted) {
+            _addAthleteNumberState.postValue(
+                AddAthleteNumberState.IsStarted(
+                    numberOfTextView,
+                    valueOfTextViewOne,
+                    valueOfTextViewTwo,
+                    valueOfTextViewThree,
+                    valueOfTextViewFour
+                )
             )
-        )
+        } else {
+            _addAthleteNumberState.postValue(AddAthleteNumberState.Default)
+        }
     }
 
+    companion object {
+        private const val UPDATE_DELAY = 100L
+    }
 }

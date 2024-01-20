@@ -28,9 +28,13 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/start_btn"
+        android:id="@+id/start_stop_btn"
         style="@style/StartStopButton"
         android:backgroundTint="@color/green"
+        app:icon="@drawable/ic_start"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,9 +42,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/stop_btn"
+        android:id="@+id/race_detail_btn"
         style="@style/StartStopButton"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/blue"
+        app:icon="@drawable/ic_laps_detail"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="@+id/guidelineStopButton"
@@ -51,12 +59,12 @@
         android:id="@+id/timer_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="01:30:45"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="@+id/guidelineStartButton"
         app:layout_constraintStart_toStartOf="@+id/guidelineStopButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/default_timer" />
 
     <LinearLayout
         android:id="@+id/fast_view_titles"
@@ -98,8 +106,10 @@
             android:textSize="15dp" />
     </LinearLayout>
 
+    <!-- addAthleteNumber -->
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/fastResultRv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -107,11 +117,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fast_view_titles"
-        app:reverseLayout="true"
-        app:stackFromEnd="true"
         tools:listitem="@layout/fast_result_item" />
-
-    <!-- addAthleteNumber -->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineAddAthleteNumber"
@@ -147,9 +153,12 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/athlete_number_add_btn_1"
-                style="@style/AddNumberButton" />
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/addAthleteNumberFieldTwo"
@@ -168,7 +177,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/athlete_number_add_btn_2"
-                style="@style/AddNumberButton" />
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -188,7 +201,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/athlete_number_add_btn_3"
-                style="@style/AddNumberButton" />
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,7 +225,11 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/athlete_number_add_btn_4"
-                style="@style/AddNumberButton" />
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
 
         </LinearLayout>
     </LinearLayout>
@@ -329,7 +350,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/menu"
-            style="@style/NumberButton" />
+            style="@style/NumberButton"
+            android:backgroundTint="@color/white" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/figure_zero"
@@ -339,9 +361,11 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/del"
             style="@style/NumberButton"
-            app:icon="@drawable/ic_delete_one_24"
+            android:backgroundTint="@color/white"
+            app:icon="@drawable/ic_delete_one"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
-            app:iconTint="@color/white" />
+            app:iconSize="48dp"
+            app:iconTint="@color/orange" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

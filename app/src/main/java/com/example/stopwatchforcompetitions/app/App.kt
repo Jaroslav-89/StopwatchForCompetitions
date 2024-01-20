@@ -1,6 +1,9 @@
 package com.example.stopwatchforcompetitions.app
 
 import android.app.Application
+import com.example.stopwatchforcompetitions.di.dataModule
+import com.example.stopwatchforcompetitions.di.domainModule
+import com.example.stopwatchforcompetitions.di.repositoryModule
 import com.example.stopwatchforcompetitions.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -12,9 +15,9 @@ class App : Application() {
         startKoin {
             androidContext(this@App)
             modules(
-//                dataModule,
-//                repositoryModule,
-//                domainModule,
+                dataModule,
+                repositoryModule,
+                domainModule,
                 viewModelModule
             )
         }

@@ -14,6 +14,18 @@ class SaveRaceViewModel(
     private val interactor: StopwatchInteractor
 ) : ViewModel() {
 
+    private var athletes = emptyList<Athlete>()
+
+    private var currentRace = Race(
+        startTime = 0,
+        name = "",
+        description = "",
+        imgUrl = "",
+        lapDistance = 0,
+        athletes = emptyList(),
+        isStarted = false
+    )
+
     private val _saveRacesState = MutableLiveData<SaveRaceState>(SaveRaceState.Empty)
     val saveRacesState: LiveData<SaveRaceState>
         get() = _saveRacesState
@@ -22,16 +34,37 @@ class SaveRaceViewModel(
         viewModelScope.launch {
             if (data != 0L) {
                 val race = interactor.getRaceInformation(data)
+                currentRace = race
 
                 interactor.getAllAthletesInRace(data).collect() {
-                    renderState(race = race, athleteList = it)
+                    athletes = it
+                    renderState(race = currentRace, athleteList = athletes)
                 }
             } else {
                 val race = interactor.getLastRace()
+                currentRace = race
 
                 interactor.getAllAthletesInRace(race.startTime).collect() {
-                    renderState(race = race, athleteList = it)
+                    athletes = it
+                    renderState(race = currentRace, athleteList = athletes)
                 }
+            }
+        }
+    }
+
+    fun toggleLapDetail(updateAthlete: Athlete) {
+        for (athlete in athletes) {
+            if (athlete.number == updateAthlete.number) {
+                val newList = athletes.toMutableList()
+                newList.remove(athlete)
+                if (updateAthlete.isExpandable) {
+                    newList.add(athlete.copy(isExpandable = false))
+                } else {
+                    newList.add(athlete.copy(isExpandable = true))
+                }
+                athletes = newList
+                renderState(currentRace, newList)
+                break
             }
         }
     }

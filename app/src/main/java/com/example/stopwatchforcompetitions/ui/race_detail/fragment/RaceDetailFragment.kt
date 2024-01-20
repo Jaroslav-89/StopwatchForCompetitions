@@ -59,7 +59,6 @@ class RaceDetailFragment : Fragment() {
                 startDate.text = Util.convertLongToDate(raceInfo.race.startTime)
                 raceName.text = raceInfo.race.name
                 lapDistance.text = raceInfo.race.lapDistance.toString()
-                // athletes.text = raceInfo.athleteList.toString()
                 raceDetailAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
             }
         }

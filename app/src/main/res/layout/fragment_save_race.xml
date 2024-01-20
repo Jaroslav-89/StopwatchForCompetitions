@@ -78,6 +78,7 @@
         tools:text="athletes in race" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/saveRaceRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:itemCount="5"

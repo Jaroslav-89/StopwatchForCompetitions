@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.stopwatchforcompetitions.databinding.FragmentSaveRaceBinding
+import com.example.stopwatchforcompetitions.ui.save_race.fragment.adapter.SaveRaceAdapter
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceViewModel
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRaceState
 import com.example.stopwatchforcompetitions.util.Util
@@ -18,6 +19,9 @@ class SaveRaceFragment : Fragment() {
     private val args: SaveRaceFragmentArgs by navArgs()
     private var startRaceData = 0L
     private val viewModel: SaveRaceViewModel by viewModel()
+    private val saveRaceAdapter = SaveRaceAdapter {
+        viewModel.toggleLapDetail(it)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +37,8 @@ class SaveRaceFragment : Fragment() {
 
         viewModel.getRaceInfo(args.startRaceDataSaveRace)
 
+        setSaveRaceAdapter()
+
         binding.editBtn.setOnClickListener {
             val argument = startRaceData
             val action =
@@ -45,6 +51,10 @@ class SaveRaceFragment : Fragment() {
         }
     }
 
+    private fun setSaveRaceAdapter() {
+        binding.saveRaceRv.adapter = saveRaceAdapter
+    }
+
     private fun renderRaceInformation(raceInfo: SaveRaceState) {
         if (raceInfo is SaveRaceState.Content) {
             if (raceInfo.race != null) {
@@ -54,7 +64,7 @@ class SaveRaceFragment : Fragment() {
                     raceName.text = raceInfo.race.name
                     numberOfAthletes.text = raceInfo.race.athletes.size.toString()
                     lapDistance.text = raceInfo.race.lapDistance.toString()
-                    athletes.text = raceInfo.athleteList.toString()
+                    saveRaceAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
                 }
             }
         }

@@ -49,41 +49,6 @@ object Util {
         return format.format(date)
     }
 
-    fun convertLongToTime(time: Long): String {
-        val h = TimeUnit.MILLISECONDS.toHours(time)
-        val m = TimeUnit.MILLISECONDS.toMinutes(time)
-        val s = TimeUnit.MILLISECONDS.toSeconds(time)
-        val mSec = (TimeUnit.MILLISECONDS.toMillis(time) % 10)
-        val hh = if (h < 10) {
-            if (h < 1) {
-                ""
-            } else {
-                "0$h:"
-            }
-        } else {
-            "$h:"
-        }
-        val mm = if (m < 10) {
-            if (m < 1) {
-                "00:"
-            } else {
-                "0$m:"
-            }
-        } else {
-            "$m:"
-        }
-        val ss = if (s < 10) {
-            if (s < 1) {
-                "00."
-            } else {
-                "0$s."
-            }
-        } else {
-            "$s."
-        }
-        return ("$hh$mm$ss$mSec")
-    }
-
     fun convertToSpeed(distance: Int, time: Long): String {
         val timeSeconds = TimeUnit.MILLISECONDS.toSeconds(time).toDouble()
         var speed = 0.0

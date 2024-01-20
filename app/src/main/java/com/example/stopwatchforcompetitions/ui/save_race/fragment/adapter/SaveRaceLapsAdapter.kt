@@ -1,4 +1,4 @@
-package com.example.stopwatchforcompetitions.ui.race_detail.fragment.adapter
+package com.example.stopwatchforcompetitions.ui.save_race.fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,28 +10,28 @@ import com.example.stopwatchforcompetitions.util.Util
 import com.example.stopwatchforcompetitions.util.Util.convertToPace
 import com.example.stopwatchforcompetitions.util.Util.convertToSpeed
 
-class LapsAdapter(private val athlete: Athlete, private val race: Race) :
-    RecyclerView.Adapter<LapsViewHolder>() {
+class SaveRaceLapsAdapter(private val athlete: Athlete, private val race: Race) :
+    RecyclerView.Adapter<SaveRaceLapsViewHolder>() {
 
     var laps = athlete.lapsTime
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LapsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaveRaceLapsViewHolder {
         val binding = DetailLapItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return LapsViewHolder(binding)
+        return SaveRaceLapsViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: LapsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SaveRaceLapsViewHolder, position: Int) {
         holder.bind(position, athlete, race.lapDistance)
     }
 
     override fun getItemCount() = laps.size
 }
 
-class LapsViewHolder(private val binding: DetailLapItemBinding) :
+class SaveRaceLapsViewHolder(private val binding: DetailLapItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(position: Int, athlete: Athlete, lapDistance: Int) {

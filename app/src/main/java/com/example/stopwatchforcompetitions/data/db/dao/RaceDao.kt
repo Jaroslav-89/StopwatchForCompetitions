@@ -12,9 +12,6 @@ interface RaceDao {
     @Upsert(entity = RaceEntity::class)
     suspend fun insertRace(race: RaceEntity)
 
-    @Delete(entity = RaceEntity::class)
-    suspend fun deleteRace(race: RaceEntity)
-
     @Query("SELECT * FROM race_table WHERE isStarted = :isStarted LIMIT 1")
     suspend fun checkRaceOnStarted(isStarted: Boolean): RaceEntity?
 
@@ -26,4 +23,7 @@ interface RaceDao {
 
     @Query("SELECT * FROM race_table ORDER BY startTime DESC LIMIT 1")
     suspend fun getLastRace(): RaceEntity
+
+    @Query("DELETE FROM race_table WHERE startTime = :startData")
+    suspend fun deleteRaceByData(startData: Long)
 }

@@ -7,4 +7,18 @@
     <color name="green">#3AD501</color>
     <color name="red">#D50101</color>
     <color name="blue">#FF3772E7</color>
+    <color name="done_btn_green">#41BA46</color>
+    <color name="race_result_btn">#82EF7A</color>
+    <color name="delete_btn">#F68299</color>
+    <color name="bg_create_delete_competition_img">#601A1B22</color>
+    <color name="bg_add_competition_in_favorite">#A41A1B22</color>
+    <color name="favorite_active">#ED9434</color>
+    <color name="place_holder_background">#F3F1F1</color>
+    <color name="bg_header_edit_race">#B2FFFFFF</color>
+    <color name="dark_gray">#1A1B22</color>
+    <color name="divider">#3C3C3C</color>
+    <color name="bg_header_race_detail">#B2FFFFFF</color>
+    <color name="bg_detail_result_item">#EFE37A</color>
+    <color name="bg_detail_lap_heading_item">#FDFAE1</color>
+    <color name="bg_detail_lap_item">#C0C0C0</color>
 </resources>

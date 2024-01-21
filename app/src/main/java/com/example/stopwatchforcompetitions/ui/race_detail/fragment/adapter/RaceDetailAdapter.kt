@@ -59,10 +59,10 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
             totalLaps.text = athlete.lapsTime.size.toString()
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             if (athlete.isExpandable) {
-                lapsRv.visibility = View.VISIBLE
+                lapInfoGroup.visibility = View.VISIBLE
                 openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_close_laps_info))
             } else {
-                lapsRv.visibility = View.GONE
+                lapInfoGroup.visibility = View.GONE
                 openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_open_laps_info))
             }
         }

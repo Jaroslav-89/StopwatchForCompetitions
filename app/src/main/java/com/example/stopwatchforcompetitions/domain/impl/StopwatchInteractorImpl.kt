@@ -23,6 +23,10 @@ class StopwatchInteractorImpl(private val repository: StopwatchRepository) : Sto
         repository.stopRace()
     }
 
+    override suspend fun deleteDaceAndAthletes(startData: Long) {
+        repository.deleteDaceAndAthletes(startData)
+    }
+
     override suspend fun addAthleteResult(newAthlete: Athlete) {
         repository.addAthleteResult(newAthlete)
     }

@@ -35,7 +35,14 @@ class RaceDetailFragment : Fragment() {
 
         setRaceDetailAdapter()
         viewModel.getRaceInfo()
+        setClickListeners()
 
+        viewModel.raceDetailState.observe(viewLifecycleOwner) {
+            renderRaceDetail(it)
+        }
+    }
+
+    private fun setClickListeners() {
         binding.editBtn.setOnClickListener {
             val argument = startRaceData
             val action =
@@ -43,8 +50,8 @@ class RaceDetailFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        viewModel.raceDetailState.observe(viewLifecycleOwner) {
-            renderRaceDetail(it)
+        binding.back.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 
@@ -57,6 +64,7 @@ class RaceDetailFragment : Fragment() {
             startRaceData = raceInfo.race.startTime
             with(binding) {
                 startDate.text = Util.convertLongToDate(raceInfo.race.startTime)
+                startTime.text = Util.convertLongToTime(raceInfo.race.startTime)
                 raceName.text = raceInfo.race.name
                 lapDistance.text = raceInfo.race.lapDistance.toString()
                 raceDetailAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)

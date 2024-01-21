@@ -9,6 +9,7 @@ interface StopwatchRepository {
     suspend fun getRaceInformation(startData: Long): Race
     suspend fun updateRace(race: Race)
     suspend fun stopRace()
+    suspend fun deleteDaceAndAthletes(startData: Long)
     suspend fun addAthleteResult(newAthlete: Athlete)
     fun getAllAthletesInRace(race: Long): Flow<List<Athlete>>
     fun getAllRaces(): Flow<List<Race>>

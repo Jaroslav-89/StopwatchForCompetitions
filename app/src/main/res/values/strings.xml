@@ -2,4 +2,38 @@
     <string name="app_name">StopwatchForCompetitions</string>
     <string name="default_timer">00:00.0</string>
     <string name="athlete_number_hint">№ УЧАСТНИКА</string>
+    <string name="change_competition">Изменить событие</string>
+    <string name="race_name">Название\nсобытия</string>
+    <string name="race_description">Описание</string>
+    <string name="delete_competition">Удалить событие</string>
+    <string name="start_data">Дата старта</string>
+    <string name="start_time">Время старта</string>
+    <string name="lap_distance">Длинна круга\n(в метрах)</string>
+    <!--    race_detail-->
+    <string name="lap_distance_race_detail">Длинна круга (в метрах)</string>
+    <string name="race_name_race_detail">Название события</string>
+    <string name="race_detail_header">Информация о гонке</string>
+    <string name="position">Позиция</string>
+    <string name="athlete_number">№\nучастника</string>
+    <string name="total_lap">Кол-во\nкругов</string>
+    <string name="total_time">Общее\nвремя</string>
+    <string name="lap_number">№ круга</string>
+    <string name="pace">Темп м/км</string>
+    <string name="speed">Скорость км/ч</string>
+    <string name="lap_time">Время круга</string>
+    <!--    save_race-->
+    <string name="number_of_athletes">Количество\nучастников</string>
+    <string name="save_race_xls">Сохранить\nв формате .xls</string>
+    <string name="race_result">Результаты</string>
+    <string name="xls">xls</string>
+    <!--    alert_dialog_message-->
+    <string name="title_save">Сохранение</string>
+    <string name="title_back">Выход</string>
+    <string name="title_delete">Удаление</string>
+    <string name="message_save">Сохранить изменения и выдти?</string>
+    <string name="message_back">Выдти без сохранения?</string>
+    <string name="message_delete_race">Удалить событие из истории?</string>
+    <string name="message_delete_img">Удалить обложку события?</string>
+    <string name="answer_positive">Да</string>
+    <string name="answer_negative">Нет</string>
 </resources>

@@ -13,7 +13,7 @@ import com.example.stopwatchforcompetitions.util.Util.convertToSpeed
 class LapsAdapter(private val athlete: Athlete, private val race: Race) :
     RecyclerView.Adapter<LapsViewHolder>() {
 
-    var laps = athlete.lapsTime
+    private var laps = athlete.lapsTime
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LapsViewHolder {
         val binding = DetailLapItemBinding.inflate(

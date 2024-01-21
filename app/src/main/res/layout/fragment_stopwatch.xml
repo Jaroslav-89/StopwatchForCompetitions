@@ -20,6 +20,15 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.8" />
 
+    <View
+        android:id="@+id/timerDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTimer"
         android:layout_width="wrap_content"
@@ -45,7 +54,7 @@
         android:id="@+id/race_detail_btn"
         style="@style/StartStopButton"
         android:backgroundTint="@color/blue"
-        app:icon="@drawable/ic_laps_detail"
+        app:icon="@drawable/ic_menu"
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="48dp"
@@ -82,7 +91,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="№ участника"
-            android:textSize="15dp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/athlete_lap_title_tv"
@@ -92,7 +101,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="Кол-во кругов"
-            android:textSize="15dp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/athlete_time_title_tv"
@@ -103,8 +112,17 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="Общее время"
-            android:textSize="15dp" />
+            android:textSize="14sp" />
     </LinearLayout>
+
+    <View
+        android:id="@+id/fastResultDivider"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/fast_view_titles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- addAthleteNumber -->
 
@@ -118,6 +136,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fast_view_titles"
         tools:listitem="@layout/fast_result_item" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toTopOf="@id/guidelineAddAthleteNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineAddAthleteNumber"
@@ -233,6 +260,15 @@
 
         </LinearLayout>
     </LinearLayout>
+
+    <View
+        android:id="@+id/numberDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toTopOf="@id/guidelineKeyboard_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- keyboard -->
 

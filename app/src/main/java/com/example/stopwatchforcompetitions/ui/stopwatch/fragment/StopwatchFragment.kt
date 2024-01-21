@@ -221,7 +221,7 @@ class StopwatchFragment : Fragment() {
                 R.color.blue
             )
         )
-        binding.raceDetailBtn.setIconResource(R.drawable.ic_laps_detail)
+        binding.raceDetailBtn.setIconResource(R.drawable.ic_laps_detail_new)
     }
 
     private fun showMenuBtn() {

@@ -45,7 +45,13 @@ object Util {
     @SuppressLint("SimpleDateFormat")
     fun convertLongToDate(time: Long): String {
         val date = Date(time)
-        val format = SimpleDateFormat("dd.MM.yyyy HH:mm")
+        val format = SimpleDateFormat("dd.MM.yyyy")
+        return format.format(date)
+    }
+
+    fun convertLongToTime(time: Long): String {
+        val date = Date(time)
+        val format = SimpleDateFormat("HH:mm")
         return format.format(date)
     }
 

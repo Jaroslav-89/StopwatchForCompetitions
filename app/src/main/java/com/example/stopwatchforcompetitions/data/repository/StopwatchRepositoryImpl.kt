@@ -39,6 +39,11 @@ class StopwatchRepositoryImpl(
         race?.copy(isStarted = false)?.let { dataBase.raceDao().insertRace(it) }
     }
 
+    override suspend fun deleteDaceAndAthletes(startData: Long) {
+        dataBase.raceDao().deleteRaceByData(startData)
+        dataBase.athleteDao().deleteAllAthletesInRace(startData)
+    }
+
     override suspend fun addAthleteResult(newAthlete: Athlete) {
         val addTime = System.currentTimeMillis()
         dataBase.athleteDao().insertAthlete(

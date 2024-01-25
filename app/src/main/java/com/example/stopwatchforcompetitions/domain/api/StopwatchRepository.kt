@@ -14,4 +14,5 @@ interface StopwatchRepository {
     fun getAllAthletesInRace(race: Long): Flow<List<Athlete>>
     fun getAllRaces(): Flow<List<Race>>
     suspend fun getLastRace(): Race
+    suspend fun saveResultInXls(race: Long)
 }

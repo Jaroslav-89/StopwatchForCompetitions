@@ -1,5 +1,6 @@
 package com.example.stopwatchforcompetitions.ui.save_race.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -47,8 +48,6 @@ class SaveRaceFragment : Fragment() {
 
         setClickListeners()
 
-
-
         viewModel.saveRacesState.observe(viewLifecycleOwner) {
             renderRaceInformation(it)
         }
@@ -58,6 +57,7 @@ class SaveRaceFragment : Fragment() {
         binding.saveRaceRv.adapter = saveRaceAdapter
     }
 
+    @SuppressLint("Recycle")
     private fun setClickListeners() {
         binding.editBtn.setOnClickListener {
             val argument = startRaceData
@@ -84,6 +84,10 @@ class SaveRaceFragment : Fragment() {
                 binding.athleteHeadingDivider.visibility = View.VISIBLE
                 binding.saveRaceRv.visibility = View.VISIBLE
             }
+        }
+
+        binding.saveXlsBtn.setOnClickListener {
+            viewModel.saveResultInXls()
         }
     }
 

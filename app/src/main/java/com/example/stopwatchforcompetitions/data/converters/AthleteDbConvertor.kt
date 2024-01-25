@@ -33,7 +33,7 @@ class AthleteDbConvertor {
         return result.toList()
     }
 
-    private fun mapStringToListLong(lapsTime: String): List<Long> {
+    fun mapStringToListLong(lapsTime: String): List<Long> {
         return if (lapsTime.isEmpty()) {
             emptyList()
         } else {

@@ -1,6 +1,371 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.save_race.fragment.SaveRaceFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/productEditCreateGroupNestedScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/productEditCreateGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/competitionImage"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"
+                android:background="@color/place_holder_background"
+                android:cropToPadding="false"
+                android:scaleType="center"
+                android:src="@drawable/img_competition_placeholder"
+                app:layout_constraintDimensionRatio="h,4:3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/productEditCreateGroup" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_add_competition_in_favorite"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/competitionImage"
+                app:layout_constraintTop_toTopOf="@+id/competitionImage">
+
+                <ImageView
+                    android:id="@+id/addRaceInFavoriteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    android:src="@drawable/ic_inactive_favorite_detail_product"
+                    app:tint="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_add_competition_in_favorite"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/competitionImage"
+                app:layout_constraintEnd_toEndOf="@+id/competitionImage">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="@string/xls"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/saveXlsBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingBottom="10dp"
+                    android:src="@drawable/ic_save_xls"
+                    app:tint="@color/white" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/startDateHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/start_data"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/startDate"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/startDate" />
+
+            <TextView
+                android:id="@+id/startDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/raceName"
+                app:layout_constraintStart_toEndOf="@+id/startDateHeading"
+                app:layout_constraintTop_toBottomOf="@+id/competitionImage"
+                tools:text="10.10.2023" />
+
+            <TextView
+                android:id="@+id/startTimeHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_time"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/startTime"
+                app:layout_constraintStart_toStartOf="@+id/startDateHeading"
+                app:layout_constraintTop_toTopOf="@+id/startTime" />
+
+            <TextView
+                android:id="@+id/startTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/raceName"
+                app:layout_constraintStart_toStartOf="@+id/startDate"
+                app:layout_constraintTop_toBottomOf="@+id/startDate"
+                tools:text="15:20" />
+
+            <TextView
+                android:id="@+id/raceNameHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/race_name"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/raceName"
+                app:layout_constraintStart_toStartOf="@+id/startDateHeading"
+                app:layout_constraintTop_toTopOf="@+id/raceName" />
+
+            <TextView
+                android:id="@+id/raceName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/startDate"
+                app:layout_constraintTop_toBottomOf="@+id/startTime" />
+
+            <TextView
+                android:id="@+id/lapDistanceHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lap_distance"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/lapDistance"
+                app:layout_constraintStart_toStartOf="@+id/startDateHeading"
+                app:layout_constraintTop_toTopOf="@+id/lapDistance" />
+
+            <TextView
+                android:id="@+id/lapDistance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/raceName"
+                app:layout_constraintStart_toStartOf="@+id/startDate"
+                app:layout_constraintTop_toBottomOf="@+id/raceName" />
+
+            <TextView
+                android:id="@+id/raceDescriptionHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/race_description"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/raceDescription"
+                app:layout_constraintStart_toStartOf="@+id/startDateHeading"
+                app:layout_constraintTop_toTopOf="@+id/raceDescription" />
+
+            <TextView
+                android:id="@+id/raceDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/raceName"
+                app:layout_constraintStart_toStartOf="@+id/startDate"
+                app:layout_constraintTop_toBottomOf="@+id/lapDistance" />
+
+            <TextView
+                android:id="@+id/numberOfAthletesHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_athletes"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/numberOfAthletes"
+                app:layout_constraintStart_toStartOf="@+id/startDateHeading"
+                app:layout_constraintTop_toTopOf="@+id/numberOfAthletes" />
+
+            <TextView
+                android:id="@+id/numberOfAthletes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/raceName"
+                app:layout_constraintStart_toStartOf="@+id/startDate"
+                app:layout_constraintTop_toBottomOf="@+id/raceDescription" />
+
+            <LinearLayout
+                android:id="@+id/raceResultBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@color/race_result_btn"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/numberOfAthletes">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/race_result"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_arrow_down" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/raceResultGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_detail_lap_item"
+                android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:visibility="gone"
+                android:weightSum="5.0"
+                app:layout_constraintTop_toBottomOf="@+id/raceResultBtn"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/athletePosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/position"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/athleteNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/athlete_number"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/totalLaps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/total_lap"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/athlete_time_title_tv"
+                    style="@style/FastViewResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="20dp"
+                    android:layout_weight="3"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="@string/total_time"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/athleteHeadingDivider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/divider"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/raceResultGroup"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/saveRaceRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/raceResultGroup"
+                tools:itemCount="1"
+                android:paddingBottom="30dp"
+                tools:listitem="@layout/detail_result_item"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/headerGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_header_edit_race"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/headingProductTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/change_competition"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/editBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="14dp"
+            android:src="@drawable/ic_edit_new" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

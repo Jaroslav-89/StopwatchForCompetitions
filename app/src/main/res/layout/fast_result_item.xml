@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/number"
+            style="@style/Result_tx"
+            android:layout_weight="1.5"
+            android:hint="15" />
+
+        <TextView
+            android:id="@+id/totalLap"
+            style="@style/Result_tx"
+            android:layout_weight="1.5"
+            android:hint="2" />
+
+        <TextView
+            android:id="@+id/totalTime"
+            style="@style/Result_tx"
+            android:layout_weight="2"
+            android:hint="1:30:25" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

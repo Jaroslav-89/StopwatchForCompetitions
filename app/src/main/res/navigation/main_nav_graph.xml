@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/stopwatch">
 
+    <fragment
+        android:id="@+id/stopwatch"
+        android:name="com.example.stopwatchforcompetitions.ui.stopwatch.fragment.StopwatchFragment"
+        android:label="Stopwatch"
+        tools:layout="@layout/fragment_stopwatch">
+        <action
+            android:id="@+id/action_stopwatch_to_allRacesFragment"
+            app:destination="@id/allRacesFragment" />
+        <action
+            android:id="@+id/action_stopwatch_to_saveRaceFragment"
+            app:destination="@id/saveRaceFragment" />
+        <action
+            android:id="@+id/action_stopwatch_to_raceDetailFragment"
+            app:destination="@id/raceDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allRacesFragment"
+        android:name="com.example.stopwatchforcompetitions.ui.all_races.fragment.AllRacesFragment"
+        android:label="AllRacesFragment"
+        tools:layout="@layout/fragment_all_races">
+        <action
+            android:id="@+id/action_allRacesFragment_to_saveRaceFragment"
+            app:destination="@id/saveRaceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/raceDetailFragment"
+        android:name="com.example.stopwatchforcompetitions.ui.race_detail.fragment.RaceDetailFragment"
+        android:label="RaceDetailFragment"
+        tools:layout="@layout/fragment_race_detail">
+        <action
+            android:id="@+id/action_raceDetailFragment_to_editRaceFragment"
+            app:destination="@id/editRaceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveRaceFragment"
+        android:name="com.example.stopwatchforcompetitions.ui.save_race.fragment.SaveRaceFragment"
+        android:label="SaveRaceFragment"
+        tools:layout="@layout/fragment_save_race">
+        <action
+            android:id="@+id/action_saveRaceFragment_to_editRaceFragment"
+            app:destination="@id/editRaceFragment" />
+        <argument
+            android:name="startRaceDataSaveRace"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/editRaceFragment"
+        android:name="com.example.stopwatchforcompetitions.ui.edit_race.fragment.EditRaceFragment"
+        android:label="EditRaceFragment"
+        tools:layout="@layout/fragment_edit_race">
+        <argument
+            android:name="startRaceDataEditRace"
+            app:argType="long" />
+    </fragment>
 </navigation>

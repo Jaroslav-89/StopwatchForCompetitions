@@ -1,6 +1,407 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.stopwatch.fragment.StopwatchFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStopButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <View
+        android:id="@+id/timerDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toTopOf="@id/guidelineTimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/start_stop_btn"
+        style="@style/StartStopButton"
+        android:backgroundTint="@color/green"
+        app:icon="@drawable/ic_start"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStartButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/race_detail_btn"
+        style="@style/StartStopButton"
+        android:backgroundTint="@color/blue"
+        app:icon="@drawable/ic_menu"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineStopButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/timer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
+        app:layout_constraintEnd_toEndOf="@+id/guidelineStartButton"
+        app:layout_constraintStart_toStartOf="@+id/guidelineStopButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/default_timer" />
+
+    <LinearLayout
+        android:id="@+id/fast_view_titles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5.0"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTimer">
+
+        <TextView
+            android:id="@+id/athlete_number_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="№ участника"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/athlete_lap_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="Кол-во кругов"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/athlete_time_title_tv"
+            style="@style/FastViewResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="Общее время"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/fastResultDivider"
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/fast_view_titles"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- addAthleteNumber -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fastResultRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="@+id/guidelineAddAthleteNumber"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fast_view_titles"
+        tools:listitem="@layout/fast_result_item" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toTopOf="@id/guidelineAddAthleteNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineAddAthleteNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="489dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:weightSum="4.0"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineKeyboard_1"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineAddAthleteNumber">
+
+        <LinearLayout
+            android:id="@+id/addAthleteNumberFieldOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3.0">
+
+            <TextView
+                android:id="@+id/athlete_number_add_tx_1"
+                style="@style/AddNumberEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/athlete_number_add_btn_1"
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/addAthleteNumberFieldTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3.0">
+
+            <TextView
+                android:id="@+id/athlete_number_add_tx_2"
+                style="@style/AddNumberEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/athlete_number_add_btn_2"
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/addAthleteNumberFieldTree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3.0">
+
+            <TextView
+                android:id="@+id/athlete_number_add_tx_3"
+                style="@style/AddNumberEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/athlete_number_add_btn_3"
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/addAthleteNumberFieldFour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3.0">
+
+            <TextView
+                android:id="@+id/athlete_number_add_tx_4"
+                style="@style/AddNumberEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/athlete_number_add_btn_4"
+                style="@style/AddNumberButton"
+                app:icon="@drawable/ic_add_athlete_result"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="48dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/numberDivider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintBottom_toTopOf="@id/guidelineKeyboard_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- keyboard -->
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineKeyboard_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.68" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guidelineKeyboard_2"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineKeyboard_1">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_one"
+            style="@style/NumberButton"
+            android:text="1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_two"
+            style="@style/NumberButton"
+            android:text="2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_three"
+            style="@style/NumberButton"
+            android:text="3" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineKeyboard_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.76" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guidelineKeyboard_3"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineKeyboard_2">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_four"
+            style="@style/NumberButton"
+            android:text="4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_five"
+            style="@style/NumberButton"
+            android:text="5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_six"
+            style="@style/NumberButton"
+            android:text="6" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineKeyboard_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.84" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/guidelineKeyboard_4"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineKeyboard_3">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_seven"
+            style="@style/NumberButton"
+            android:text="7" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_eight"
+            style="@style/NumberButton"
+            android:text="8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_nine"
+            style="@style/NumberButton"
+            android:text="9" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineKeyboard_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.92" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineKeyboard_4">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/menu"
+            style="@style/NumberButton"
+            android:backgroundTint="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/figure_zero"
+            style="@style/NumberButton"
+            android:text="0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/del"
+            style="@style/NumberButton"
+            android:backgroundTint="@color/white"
+            app:icon="@drawable/ic_delete_one"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="48dp"
+            app:iconTint="@color/orange" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

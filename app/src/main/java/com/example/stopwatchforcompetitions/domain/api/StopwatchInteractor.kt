@@ -1,6 +1,5 @@
 package com.example.stopwatchforcompetitions.domain.api
 
-import com.example.stopwatchforcompetitions.data.db.entity.RaceEntity
 import com.example.stopwatchforcompetitions.domain.model.Athlete
 import com.example.stopwatchforcompetitions.domain.model.Race
 import kotlinx.coroutines.flow.Flow
@@ -15,4 +14,5 @@ interface StopwatchInteractor {
     fun getAllAthletesInRace(race: Long): Flow<List<Athlete>>
     fun getAllRaces(): Flow<List<Race>>
     suspend fun getLastRace(): Race
+    suspend fun saveResultInXls(race: Long)
 }

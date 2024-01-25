@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.stopwatchforcompetitions"
-        minSdk = 23
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -60,4 +60,8 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.apache.poi:poi:5.2.0")
+    implementation("org.apache.poi:poi-ooxml:5.2.0")
 }

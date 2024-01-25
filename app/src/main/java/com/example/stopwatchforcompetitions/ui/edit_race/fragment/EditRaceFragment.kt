@@ -149,9 +149,13 @@ class EditRaceFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_PICK) {
-            imageUri = data?.data ?: imageUri
-            viewModel.editPlaceHolderImg(imageUri.toString())
+        try {
+            if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_PICK) {
+                imageUri = data?.data ?: imageUri
+                viewModel.editPlaceHolderImg(imageUri.toString())
+            }
+        } catch (e: Exception) {
+
         }
     }
 

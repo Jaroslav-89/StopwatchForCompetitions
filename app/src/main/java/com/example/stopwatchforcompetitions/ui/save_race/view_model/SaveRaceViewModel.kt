@@ -69,8 +69,13 @@ class SaveRaceViewModel(
         }
     }
 
+    fun saveResultInXls() {
+        viewModelScope.launch {
+            interactor.saveResultInXls(currentRace.startTime)
+        }
+    }
+
     private fun renderState(race: Race, athleteList: List<Athlete>) {
         _saveRacesState.postValue(SaveRaceState.Content(race, athleteList))
     }
-
 }

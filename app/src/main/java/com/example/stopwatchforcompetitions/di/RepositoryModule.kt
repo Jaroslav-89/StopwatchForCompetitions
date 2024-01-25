@@ -9,7 +9,8 @@ val repositoryModule = module {
         StopwatchRepositoryImpl(
             dataBase = get(),
             raceDbConvertor = get(),
-            athleteDbConvertor = get()
+            athleteDbConvertor = get(),
+            saveResultXls = get()
         )
     }
 }

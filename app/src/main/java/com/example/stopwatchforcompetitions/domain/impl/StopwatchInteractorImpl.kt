@@ -42,4 +42,8 @@ class StopwatchInteractorImpl(private val repository: StopwatchRepository) : Sto
     override suspend fun getLastRace(): Race {
         return repository.getLastRace()
     }
+
+    override suspend fun saveResultInXls(race: Long) {
+        repository.saveResultInXls(race)
+    }
 }

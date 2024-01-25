@@ -4,6 +4,7 @@ import com.example.stopwatchforcompetitions.data.converters.AthleteDbConvertor
 import com.example.stopwatchforcompetitions.data.converters.RaceDbConvertor
 import com.example.stopwatchforcompetitions.data.db.AppDataBase
 import com.example.stopwatchforcompetitions.data.db.entity.AthleteEntity
+import com.example.stopwatchforcompetitions.data.local_storage.SaveResultXls
 import com.example.stopwatchforcompetitions.domain.api.StopwatchRepository
 import com.example.stopwatchforcompetitions.domain.model.Athlete
 import com.example.stopwatchforcompetitions.domain.model.Race
@@ -14,7 +15,8 @@ import kotlinx.coroutines.flow.map
 class StopwatchRepositoryImpl(
     private val dataBase: AppDataBase,
     private val raceDbConvertor: RaceDbConvertor,
-    private val athleteDbConvertor: AthleteDbConvertor
+    private val athleteDbConvertor: AthleteDbConvertor,
+    private val saveResultXls: SaveResultXls
 ) : StopwatchRepository {
 
     override suspend fun checkRaceIsStarted(): Race? {
@@ -71,5 +73,13 @@ class StopwatchRepositoryImpl(
 
     override suspend fun getLastRace(): Race {
         return raceDbConvertor.map(dataBase.raceDao().getLastRace())
+    }
+
+    override suspend fun saveResultInXls(race: Long) {
+        val raceEntity = dataBase.raceDao().getRaceInformation(race)
+        dataBase.athleteDao().getAllAthletesInRace(race).collect() {
+            val athletesEntity = it
+            saveResultXls.saveRaceInXls(raceEntity, athletesEntity)
+        }
     }
 }

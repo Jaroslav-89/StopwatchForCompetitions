@@ -1,7 +1,11 @@
 package com.example.stopwatchforcompetitions.data.local_storage
 
+import android.content.ContentValues
 import android.content.Context
+import android.os.Build
 import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import com.example.stopwatchforcompetitions.data.converters.AthleteDbConvertor
 import com.example.stopwatchforcompetitions.data.db.entity.AthleteEntity
 import com.example.stopwatchforcompetitions.data.db.entity.RaceEntity
@@ -15,7 +19,11 @@ class SaveResultXls(
     private val context: Context,
     private val athleteDbConvertor: AthleteDbConvertor
 ) {
-    fun saveRaceInXls(race: RaceEntity, athletesEntity: List<AthleteEntity>) {
+
+    fun saveRaceInXls(
+        race: RaceEntity,
+        athletesEntity: List<AthleteEntity>
+    ) {
         try {
             val athletes = athleteDbConvertor.mapList(athletesEntity)
             val athletesSortedByPosition =
@@ -108,23 +116,53 @@ class SaveResultXls(
                 cell.setCellValue(totalRaceTime)
             }
 
-            val filePath =
-                File(
-                    context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
-                    "exel_result"
+            if (Build.VERSION.SDK_INT > 29) {
+                val contentValues = ContentValues().apply {
+                    put(
+                        MediaStore.MediaColumns.DISPLAY_NAME,
+                        "${Util.convertLongToDate(race.startTime)}:${Util.convertLongToTime(race.startTime)}.xls"
+                    )
+                    put(MediaStore.Downloads.MIME_TYPE, "application/vnd.ms-excel")
+                    put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+                }
+                val dstUri =
+                    context.contentResolver.insert(
+                        MediaStore.Downloads.EXTERNAL_CONTENT_URI,
+                        contentValues
+                    )
+                if (dstUri != null) {
+                    val dst = context.contentResolver.openOutputStream(dstUri)
+                    wb.write(dst)
+                    dst?.close()
+                }
+            } else {
+                val downloadsDirectory =
+                    context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+                val file = File(
+                    downloadsDirectory,
+                    "${Util.convertLongToDate(race.startTime)}:${Util.convertLongToTime(race.startTime)}.xls"
                 )
-            if (!filePath.exists()) {
-                filePath.mkdirs()
-            }
-            val file = File(
-                filePath,
-                "${Util.convertLongToDate(race.startTime)}:${Util.convertLongToTime(race.startTime)}.xls"
-            )
-            val outputStream = FileOutputStream(file)
+                file.createNewFile()
 
-            wb.write(outputStream)
-            outputStream.close()
+                val fileOutputStream = FileOutputStream(file)
+
+                wb.write(fileOutputStream)
+                fileOutputStream.close()
+
+                context.openFileOutput(
+                    "${Util.convertLongToDate(race.startTime)}:${
+                        Util.convertLongToTime(
+                            race.startTime
+                        )
+                    }.xls", Context.MODE_APPEND
+                )
+                val outputStream = FileOutputStream(file)
+
+                wb.write(outputStream)
+                outputStream.close()
+            }
         } catch (e: Exception) {
+            Log.d("xxx", e.toString())
         }
     }
 

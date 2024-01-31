@@ -72,6 +72,7 @@ class SaveRaceViewModel(
     fun saveResultInXls() {
         viewModelScope.launch {
             interactor.saveResultInXls(currentRace.startTime)
+
         }
     }
 

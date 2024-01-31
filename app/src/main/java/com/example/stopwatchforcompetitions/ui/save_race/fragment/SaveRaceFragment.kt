@@ -1,10 +1,14 @@
 package com.example.stopwatchforcompetitions.ui.save_race.fragment
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -30,6 +34,37 @@ class SaveRaceFragment : Fragment() {
         viewModel.toggleLapDetail(it)
     }
 
+//    private val createDocumentResult =
+//        registerForActivityResult(ActivityResultContracts.CreateDocument()) {
+//            // тут мы обрабатываем результат запроса
+//            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+//            Log.d("xxx", it.toString())
+//
+//            try {
+////                val fis = FileInputStream(it.toString())
+////                val wb: Workbook = WorkbookFactory.create(fis)
+////                fis.close()
+////                val sheet = wb.createSheet("Sheet1")
+//
+//
+//                val wb = XSSFWorkbook()
+//                val sheet = wb.createSheet("Sheet1")
+//
+//                var row = sheet.createRow(0)
+//                var cell = row.createCell(0)
+//                cell.setCellValue("Дата старта:")
+//
+//                val file = File(it.toString())
+//                Log.d("xxx", file.toString())
+//                val fileOutputStream = FileOutputStream("/storage/emulated/0/Download/pricol.xls", true)
+//
+//                wb.write(fileOutputStream)
+//                fileOutputStream.close()
+//            } catch (e: Exception) {
+//
+//            }
+//        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -50,6 +85,27 @@ class SaveRaceFragment : Fragment() {
 
         viewModel.saveRacesState.observe(viewLifecycleOwner) {
             renderRaceInformation(it)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Разрешение предоставлено
+                    viewModel.saveResultInXls()
+                } else {
+                    // Разрешение не предоставлено
+                }
+                return
+            }
+
+            else -> {
+            }
         }
     }
 
@@ -87,7 +143,23 @@ class SaveRaceFragment : Fragment() {
         }
 
         binding.saveXlsBtn.setOnClickListener {
-            viewModel.saveResultInXls()
+            if (Build.VERSION.SDK_INT > 29) {
+                viewModel.saveResultInXls()
+            } else {
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    requireActivity().requestPermissions(
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+                    )
+                } else {
+                    //  createDocumentResult.launch("invoice.xls")
+                    viewModel.saveResultInXls()
+                }
+            }
         }
     }
 
@@ -122,5 +194,9 @@ class SaveRaceFragment : Fragment() {
                 ),
             )
             .into(binding.competitionImage)
+    }
+
+    companion object {
+        private const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 200
     }
 }

@@ -102,11 +102,15 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
     }
 
     private fun updateAthletesInformation(race: Race) {
-        viewModelScope.launch {
-            interactor.getAllAthletesInRace(race.startTime).collect() {
-                athletesListInCurrentRace = it
-                renderAthletesFastResult(athletesListInCurrentRace)
+        if (isStarted) {
+            viewModelScope.launch {
+                interactor.getAllAthletesInRace(race.startTime).collect() {
+                    athletesListInCurrentRace = it
+                    renderAthletesFastResult(athletesListInCurrentRace)
+                }
             }
+        } else {
+            renderAthletesFastResult(emptyList())
         }
     }
 
@@ -127,7 +131,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
                     name = "",
                     description = "",
                     imgUrl = "",
-                    lapDistance = 10,
+                    lapDistance = 0,
                     athletes = emptyList<String>(),
                     isStarted = true
                 )
@@ -145,6 +149,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
         isStarted = false
         renderAddAthleteNumberState()
         updateTimer()
+        updateAthletesInformation(currentRace)
     }
 
     fun changeTextViewFocus(newNumberOfTv: Int) {

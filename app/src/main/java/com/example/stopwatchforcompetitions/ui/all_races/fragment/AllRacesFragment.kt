@@ -37,6 +37,8 @@ class AllRacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
+        viewModel.loadRaceHistory()
+        setClickListeners()
 
         viewModel.allRacesState.observe(viewLifecycleOwner) {
             renderRaceList(it)
@@ -45,6 +47,12 @@ class AllRacesFragment : Fragment() {
 
     private fun setAdapter() {
         binding.allRacesRv.adapter = allRacesAdapter
+    }
+
+    private fun setClickListeners() {
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     private fun renderRaceList(state: AllRaceState) {

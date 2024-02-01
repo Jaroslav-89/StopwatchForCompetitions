@@ -5,9 +5,11 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
@@ -24,6 +26,7 @@ import com.example.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRa
 import com.example.stopwatchforcompetitions.util.Util
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+
 class SaveRaceFragment : Fragment() {
     private lateinit var binding: FragmentSaveRaceBinding
     private val args: SaveRaceFragmentArgs by navArgs()
@@ -33,37 +36,6 @@ class SaveRaceFragment : Fragment() {
     private val saveRaceAdapter = SaveRaceAdapter {
         viewModel.toggleLapDetail(it)
     }
-
-//    private val createDocumentResult =
-//        registerForActivityResult(ActivityResultContracts.CreateDocument()) {
-//            // тут мы обрабатываем результат запроса
-//            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
-//            Log.d("xxx", it.toString())
-//
-//            try {
-////                val fis = FileInputStream(it.toString())
-////                val wb: Workbook = WorkbookFactory.create(fis)
-////                fis.close()
-////                val sheet = wb.createSheet("Sheet1")
-//
-//
-//                val wb = XSSFWorkbook()
-//                val sheet = wb.createSheet("Sheet1")
-//
-//                var row = sheet.createRow(0)
-//                var cell = row.createCell(0)
-//                cell.setCellValue("Дата старта:")
-//
-//                val file = File(it.toString())
-//                Log.d("xxx", file.toString())
-//                val fileOutputStream = FileOutputStream("/storage/emulated/0/Download/pricol.xls", true)
-//
-//                wb.write(fileOutputStream)
-//                fileOutputStream.close()
-//            } catch (e: Exception) {
-//
-//            }
-//        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,9 +50,7 @@ class SaveRaceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getRaceInfo(args.startRaceDataSaveRace)
-
         setSaveRaceAdapter()
-
         setClickListeners()
 
         viewModel.saveRacesState.observe(viewLifecycleOwner) {
@@ -96,10 +66,8 @@ class SaveRaceFragment : Fragment() {
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // Разрешение предоставлено
+                    showToast()
                     viewModel.saveResultInXls()
-                } else {
-                    // Разрешение не предоставлено
                 }
                 return
             }
@@ -144,6 +112,7 @@ class SaveRaceFragment : Fragment() {
 
         binding.saveXlsBtn.setOnClickListener {
             if (Build.VERSION.SDK_INT > 29) {
+                showToast()
                 viewModel.saveResultInXls()
             } else {
                 if (ContextCompat.checkSelfPermission(
@@ -156,7 +125,7 @@ class SaveRaceFragment : Fragment() {
                         MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
                     )
                 } else {
-                    //  createDocumentResult.launch("invoice.xls")
+                    showToast()
                     viewModel.saveResultInXls()
                 }
             }
@@ -181,8 +150,20 @@ class SaveRaceFragment : Fragment() {
         }
     }
 
-    private fun setImgFromPlaceHolder(uri: String) {
+    private fun showToast() {
+        val msg = if (Build.VERSION.SDK_INT > 29) {
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                .toString()
+        } else {
+            requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
+        }
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.save_msg) + msg, Toast.LENGTH_LONG
+        ).show()
+    }
 
+    private fun setImgFromPlaceHolder(uri: String) {
         val newUri = uri.toUri()
         Glide.with(this)
             .load(newUri)

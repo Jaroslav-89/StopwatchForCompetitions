@@ -11,6 +11,7 @@ import com.example.stopwatchforcompetitions.data.db.entity.AthleteEntity
 import com.example.stopwatchforcompetitions.data.db.entity.RaceEntity
 import com.example.stopwatchforcompetitions.domain.model.Athlete
 import com.example.stopwatchforcompetitions.util.Util
+import org.apache.poi.ss.formula.functions.Replace
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
 import java.io.FileOutputStream
@@ -120,7 +121,7 @@ class SaveResultXls(
                 val contentValues = ContentValues().apply {
                     put(
                         MediaStore.MediaColumns.DISPLAY_NAME,
-                        "${Util.convertLongToDate(race.startTime)}:${Util.convertLongToTime(race.startTime)}.xls"
+                        "${Util.convertLongToDate(race.startTime)} ${Util.convertLongToTime(race.startTime)}.xls"
                     )
                     put(MediaStore.Downloads.MIME_TYPE, "application/vnd.ms-excel")
                     put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
@@ -140,7 +141,7 @@ class SaveResultXls(
                     context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
                 val file = File(
                     downloadsDirectory,
-                    "${Util.convertLongToDate(race.startTime)}:${Util.convertLongToTime(race.startTime)}.xls"
+                    "${Util.convertLongToDate(race.startTime)} ${Util.convertLongToTime(race.startTime)}.xls"
                 )
                 file.createNewFile()
 
@@ -156,7 +157,7 @@ class SaveResultXls(
                         )
                     }.xls", Context.MODE_APPEND
                 )
-                val outputStream = FileOutputStream(file)
+                val outputStream = FileOutputStream(file,true)
 
                 wb.write(outputStream)
                 outputStream.close()

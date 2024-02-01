@@ -25,6 +25,7 @@
     <string name="number_of_athletes">Количество\nучастников</string>
     <string name="save_race_xls">Сохранить\nв формате .xls</string>
     <string name="race_result">Результаты</string>
+    <string name="save_msg">Файл скачан в папку:</string>
     <string name="xls">xls</string>
     <!--    alert_dialog_message-->
     <string name="title_save">Сохранение</string>
@@ -36,4 +37,11 @@
     <string name="message_delete_img">Удалить обложку события?</string>
     <string name="answer_positive">Да</string>
     <string name="answer_negative">Нет</string>
+    <!--    menu-->
+    <string name="race_history_heading">История</string>
+    <string name="start_data_tv">Дата</string>
+    <string name="start_time_tv">Время старта</string>
+    <string name="race_name_tv">Название</string>
+    <string name="athletes_in_race_tv">Участников</string>
+    <string name="distance_tv">Дистанция</string>
 </resources>

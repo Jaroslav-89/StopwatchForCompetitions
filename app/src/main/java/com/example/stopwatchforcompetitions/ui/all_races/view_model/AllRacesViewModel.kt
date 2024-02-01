@@ -14,7 +14,7 @@ class AllRacesViewModel(private val interactor: StopwatchInteractor) : ViewModel
     val allRacesState: LiveData<AllRaceState>
         get() = _allRacesState
 
-    init {
+    fun loadRaceHistory() {
         viewModelScope.launch {
             interactor.getAllRaces().collect() {
                 if (it.isEmpty()) {

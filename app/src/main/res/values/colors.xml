@@ -3,22 +3,48 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="orange">#FB7730</color>
+
     <color name="green">#3AD501</color>
-    <color name="red">#D50101</color>
-    <color name="blue">#FF3772E7</color>
+    <color name="red1">#D50101</color>
+    <color name="blue1">#FF3772E7</color>
     <color name="done_btn_green">#41BA46</color>
     <color name="race_result_btn">#82EF7A</color>
     <color name="delete_btn">#F68299</color>
     <color name="bg_create_delete_competition_img">#601A1B22</color>
     <color name="bg_add_competition_in_favorite">#A41A1B22</color>
     <color name="favorite_active">#ED9434</color>
-    <color name="place_holder_background">#F3F1F1</color>
-    <color name="bg_header_edit_race">#B2FFFFFF</color>
+
+
     <color name="dark_gray">#1A1B22</color>
     <color name="divider">#3C3C3C</color>
     <color name="bg_header_race_detail">#B2FFFFFF</color>
-    <color name="bg_detail_result_item">#EFE37A</color>
-    <color name="bg_detail_lap_heading_item">#FDFAE1</color>
-    <color name="bg_detail_lap_item">#C0C0C0</color>
+
+
+
+    <color name="bg_settings_ic">#AEAFB4</color>
+
+    <color name="main_blue">#3772E7</color>
+
+    <!-- new color. -->
+    <color name="black_day_night">#1A1B22</color>
+    <color name="white_day_night">#FDFDFD</color>
+    <color name="text_hint_day_night">#AEAFB4</color>
+    <color name="black_universal">#1A1B22</color>
+    <color name="white_universal">#FDFDFD</color>
+    <color name="blue">#3772E7</color>
+    <color name="red">#F56B6C</color>
+    <color name="gray">#AEAFB4</color>
+    <color name="light_gray">#E6E8EB</color>
+    <color name="background_gray">#801A1B22</color>
+    <color name="thumb_day_night">#AEAFB4</color>
+    <color name="track_day_night">#E6E8EB</color>
+    <color name="orange">#FB7730</color>
+    <color name="add_athlete_number_field_day_night">#3C3AD501</color>
+    <color name="dark_gray_day_night">#1A1B22</color>
+    <color name="place_holder_background_day_night">#F3F1F1</color>
+    <color name="bg_detail_lap_item_day_night">#C0C0C0</color>
+    <color name="bg_detail_result_item_day_night">#EFE37A</color>
+    <color name="bg_detail_lap_heading_item_day_night">#FDFAE1</color>
+    <color name="bg_header_edit_race_day_night">#B2FFFFFF</color>
+
 </resources>

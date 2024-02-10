@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.stopwatchforcompetitions.R
 import com.example.stopwatchforcompetitions.databinding.FragmentAllRacesBinding
 import com.example.stopwatchforcompetitions.ui.all_races.fragment.adapter.AllRacesAdapter
 import com.example.stopwatchforcompetitions.ui.all_races.view_model.AllRacesViewModel
@@ -37,6 +38,8 @@ class AllRacesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setAdapter()
+        viewModel.loadRaceHistory()
+        setClickListeners()
 
         viewModel.allRacesState.observe(viewLifecycleOwner) {
             renderRaceList(it)
@@ -45,6 +48,16 @@ class AllRacesFragment : Fragment() {
 
     private fun setAdapter() {
         binding.allRacesRv.adapter = allRacesAdapter
+    }
+
+    private fun setClickListeners() {
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.settingsBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_allRacesFragment_to_settingsFragment)
+        }
     }
 
     private fun renderRaceList(state: AllRaceState) {

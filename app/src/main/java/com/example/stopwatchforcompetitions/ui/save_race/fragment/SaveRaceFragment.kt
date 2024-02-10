@@ -1,10 +1,17 @@
 package com.example.stopwatchforcompetitions.ui.save_race.fragment
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -19,6 +26,7 @@ import com.example.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceView
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRaceState
 import com.example.stopwatchforcompetitions.util.Util
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class SaveRaceFragment : Fragment() {
     private lateinit var binding: FragmentSaveRaceBinding
@@ -43,13 +51,30 @@ class SaveRaceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getRaceInfo(args.startRaceDataSaveRace)
-
         setSaveRaceAdapter()
-
         setClickListeners()
 
         viewModel.saveRacesState.observe(viewLifecycleOwner) {
             renderRaceInformation(it)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    showToast()
+                    viewModel.saveResultInXls()
+                }
+                return
+            }
+
+            else -> {
+            }
         }
     }
 
@@ -70,6 +95,10 @@ class SaveRaceFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.addRaceInFavoriteBtn.setOnClickListener {
+            viewModel.toggleFavoriteBtn()
+        }
+
         binding.raceResultBtn.setOnClickListener {
             if (resultIsVisible) {
                 resultIsVisible = false
@@ -87,7 +116,24 @@ class SaveRaceFragment : Fragment() {
         }
 
         binding.saveXlsBtn.setOnClickListener {
-            viewModel.saveResultInXls()
+            if (Build.VERSION.SDK_INT > 29) {
+                showToast()
+                viewModel.saveResultInXls()
+            } else {
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) {
+                    requireActivity().requestPermissions(
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+                    )
+                } else {
+                    showToast()
+                    viewModel.saveResultInXls()
+                }
+            }
         }
     }
 
@@ -97,6 +143,7 @@ class SaveRaceFragment : Fragment() {
                 startRaceData = raceInfo.race.startTime
                 with(binding) {
                     setImgFromPlaceHolder(raceInfo.race.imgUrl)
+                    addRaceInFavoriteBtn.setImageDrawable(getFavoriteToggleDrawable(raceInfo.race.isFavorite))
                     startDate.text = Util.convertLongToDate(raceInfo.race.startTime)
                     startTime.text = Util.convertLongToTime(raceInfo.race.startTime)
                     raceName.text = raceInfo.race.name
@@ -109,8 +156,28 @@ class SaveRaceFragment : Fragment() {
         }
     }
 
-    private fun setImgFromPlaceHolder(uri: String) {
+    private fun getFavoriteToggleDrawable(isFavorite: Boolean?): Drawable? {
+        return if (isFavorite == null || !isFavorite) {
+            requireContext().getDrawable(R.drawable.ic_inactive_favorite_save_race)
+        } else {
+            requireContext().getDrawable(R.drawable.ic_active_favorite__save_race)
+        }
+    }
 
+    private fun showToast() {
+        val msg = if (Build.VERSION.SDK_INT > 29) {
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                .toString()
+        } else {
+            requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
+        }
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.save_msg) + msg, Toast.LENGTH_LONG
+        ).show()
+    }
+
+    private fun setImgFromPlaceHolder(uri: String) {
         val newUri = uri.toUri()
         Glide.with(this)
             .load(newUri)
@@ -122,5 +189,9 @@ class SaveRaceFragment : Fragment() {
                 ),
             )
             .into(binding.competitionImage)
+    }
+
+    companion object {
+        private const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 200
     }
 }

@@ -23,7 +23,8 @@ class RaceDetailViewModel(
         imgUrl = "",
         lapDistance = 0,
         athletes = emptyList(),
-        isStarted = false
+        isStarted = false,
+        isFavorite = false
     )
 
     private val _raceDetailState = MutableLiveData<RaceDetailState>(RaceDetailState.Empty)

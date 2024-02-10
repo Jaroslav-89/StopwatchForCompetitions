@@ -3,7 +3,7 @@ package com.example.stopwatchforcompetitions.util
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
 object Util {
     fun getTimeFormat(time: Long): String {
@@ -56,22 +56,25 @@ object Util {
     }
 
     fun convertToSpeed(distance: Int, time: Long): String {
-        val timeSeconds = TimeUnit.MILLISECONDS.toSeconds(time).toDouble()
-        var speed = 0.0
         return if (distance != 0) {
-            speed = (((distance.toDouble() / timeSeconds) * 3.6) % 10)
-            String.format("%.1f", speed)
+            val timeHr = time.toDouble() / 3600000
+            val distanceKm = distance.toDouble() / 1000
+            val speed = distanceKm / timeHr
+            String.format("%.2f", speed)
         } else {
             "N/A"
         }
     }
 
     fun convertToPace(distance: Int, time: Long): String {
-        val timeSeconds = TimeUnit.MILLISECONDS.toSeconds(time).toDouble()
-        var pace = 0.0
         return if (distance != 0) {
-            pace = (((timeSeconds / distance.toDouble()) * 1000) / 60)
-            String.format("%.2f", pace)
+            val timeMin = time.toDouble() / 60000
+            val distanceKm = distance.toDouble() / 1000
+            val pace = timeMin / distanceKm
+            val minStr = pace.toString().substringBefore(".")
+            val secStr = pace.toString().substringAfter(".")
+            val sec = (secStr.toDouble() * 60).roundToInt().toString().take(2)
+            "$minStr.$sec"
         } else {
             "N/A"
         }

@@ -1,5 +1,6 @@
 package com.example.stopwatchforcompetitions.ui.stopwatch.view_model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,6 +22,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
     private var timerJob: Job? = null
     private var isStarted = false
     private var startRaceData = 0L
+    private var updateAthletesInformationJob: Job? = null
 
     private var numberOfTextView = StopwatchFragment.FIRST_EDIT_TEXT
     private var valueOfTextViewOne = ""
@@ -35,7 +37,8 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
         imgUrl = "",
         lapDistance = 0,
         athletes = emptyList(),
-        isStarted = false
+        isStarted = false,
+        isFavorite = false
     )
 
     private var athletesListInCurrentRace = emptyList<Athlete>()
@@ -103,14 +106,21 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
 
     private fun updateAthletesInformation(race: Race) {
         if (isStarted) {
-            viewModelScope.launch {
-                interactor.getAllAthletesInRace(race.startTime).collect() {
-                    athletesListInCurrentRace = it
-                    renderAthletesFastResult(athletesListInCurrentRace)
+            if(updateAthletesInformationJob == null) {
+                updateAthletesInformationJob = viewModelScope.launch {
+                    interactor.getAllAthletesInRace(race.startTime).collect() {
+                        if (athletesListInCurrentRace != it){
+                            athletesListInCurrentRace = it
+                        }
+                        Log.d("xxx", athletesListInCurrentRace.toString())
+                        renderAthletesFastResult(athletesListInCurrentRace)
+                    }
                 }
             }
         } else {
-            renderAthletesFastResult(emptyList())
+            updateAthletesInformationJob?.cancel()
+            updateAthletesInformationJob = null
+            _fastResultState.value = FastResultState.Default
         }
     }
 
@@ -133,7 +143,8 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
                     imgUrl = "",
                     lapDistance = 0,
                     athletes = emptyList<String>(),
-                    isStarted = true
+                    isStarted = true,
+                    isFavorite = false
                 )
             )
             isStarted = true
@@ -147,6 +158,17 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
             interactor.stopRace()
         }
         isStarted = false
+        currentRace = Race(
+            startTime = 0,
+            name = "",
+            description = "",
+            imgUrl = "",
+            lapDistance = 0,
+            athletes = emptyList(),
+            isStarted = false,
+            isFavorite = false
+        )
+        athletesListInCurrentRace = emptyList<Athlete>()
         renderAddAthleteNumberState()
         updateTimer()
         updateAthletesInformation(currentRace)
@@ -274,6 +296,11 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
                 )
             )
         } else {
+            numberOfTextView = 1
+            valueOfTextViewOne = ""
+            valueOfTextViewTwo = ""
+            valueOfTextViewThree = ""
+            valueOfTextViewFour = ""
             _addAthleteNumberState.postValue(AddAthleteNumberState.Default)
         }
     }

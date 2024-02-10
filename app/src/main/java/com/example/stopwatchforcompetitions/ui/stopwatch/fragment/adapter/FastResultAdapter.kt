@@ -13,6 +13,7 @@ class FastResultAdapter :
     private var athletes = emptyList<Athlete>()
 
     fun updateFastResultAdapter(content: List<Athlete>) {
+        athletes = emptyList()
         athletes = content
         this.notifyDataSetChanged()
     }

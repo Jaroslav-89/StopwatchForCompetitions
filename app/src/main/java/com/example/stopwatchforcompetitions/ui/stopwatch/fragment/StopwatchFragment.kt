@@ -1,10 +1,12 @@
 package com.example.stopwatchforcompetitions.ui.stopwatch.fragment
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -64,11 +66,10 @@ class StopwatchFragment : Fragment() {
 
     private fun setTextViewClickListeners() {
         binding.startStopBtn.setOnClickListener {
-            viewModel.onPlayStopButtonClicked()
             if (raceWasStarted) {
-                val action =
-                    StopwatchFragmentDirections.actionStopwatchToSaveRaceFragment(0)
-                findNavController().navigate(action)
+                alertDialog()
+            } else {
+                viewModel.onPlayStopButtonClicked()
             }
         }
 
@@ -164,6 +165,36 @@ class StopwatchFragment : Fragment() {
         }
     }
 
+    private fun alertDialog() {
+        val title = requireContext().getString(R.string.title_stop_race)
+        val message = requireContext().getString(R.string.message_stop_race)
+        val positive = requireContext().getString(R.string.stop_race_answer_positive)
+        val negative = requireContext().getString(R.string.stop_race_answer_negative)
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton(positive) { dialogInterface: DialogInterface, i: Int ->
+            viewModel.onPlayStopButtonClicked()
+            val action =
+                StopwatchFragmentDirections.actionStopwatchToSaveRaceFragment(0)
+            findNavController().navigate(action)
+        }
+
+        builder.setNegativeButton(negative) { dialogInterface: DialogInterface, i: Int ->
+            return@setNegativeButton
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+        val positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
+        positiveButton.setTextColor(requireContext().getColor(R.color.dark_gray_day_night))
+
+        val negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE)
+        negativeButton.setTextColor(requireContext().getColor(R.color.dark_gray_day_night))
+    }
+
     private fun renderTimer(state: TimerState) {
         if (state is TimerState.IsStarted) {
             raceWasStarted = true
@@ -181,8 +212,15 @@ class StopwatchFragment : Fragment() {
     }
 
     private fun renderFastResult(athletesResults: FastResultState) {
-        if (athletesResults is FastResultState.Content) {
-            fastResultAdapter.updateFastResultAdapter(athletesResults.athletesList)
+        when (athletesResults) {
+            is FastResultState.Content -> {
+                fastResultAdapter.updateFastResultAdapter(athletesResults.athletesList)
+                binding.fastResultRv.smoothScrollToPosition(0)
+            }
+
+            is FastResultState.Default -> {
+                fastResultAdapter.updateFastResultAdapter(emptyList())
+            }
         }
     }
 
@@ -269,10 +307,10 @@ class StopwatchFragment : Fragment() {
     }
 
     private fun resetAddAthleteBackground() {
-        binding.addAthleteNumberFieldOne.setBackgroundResource(R.color.white)
-        binding.addAthleteNumberFieldTwo.setBackgroundResource(R.color.white)
-        binding.addAthleteNumberFieldTree.setBackgroundResource(R.color.white)
-        binding.addAthleteNumberFieldFour.setBackgroundResource(R.color.white)
+        binding.addAthleteNumberFieldOne.setBackgroundResource(R.color.white_day_night)
+        binding.addAthleteNumberFieldTwo.setBackgroundResource(R.color.white_day_night)
+        binding.addAthleteNumberFieldTree.setBackgroundResource(R.color.white_day_night)
+        binding.addAthleteNumberFieldFour.setBackgroundResource(R.color.white_day_night)
     }
 
     companion object {

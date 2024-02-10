@@ -9,7 +9,7 @@
         android:id="@+id/raceDetailHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_detail_result_item"
+        android:background="@color/bg_detail_result_item_day_night"
         android:orientation="horizontal"
         android:weightSum="4"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,9 +19,10 @@
             android:id="@+id/openCloseLapsIc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
+            android:layout_gravity="center_vertical"
             android:padding="10dp"
-            android:src="@drawable/ic_open_laps_info" />
+            android:src="@drawable/ic_open_laps_info"
+            app:tint="@color/black_universal" />
 
         <TextView
             android:id="@+id/athletePosition"
@@ -30,6 +31,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/black_universal"
             android:textSize="20sp"
             tools:text="позиция" />
 
@@ -41,6 +43,7 @@
             android:layout_marginStart="14dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="@color/black_universal"
             android:textSize="20sp"
             tools:text="номер" />
 
@@ -52,6 +55,7 @@
             android:layout_marginStart="14dp"
             android:layout_weight="1"
             android:gravity="end"
+            android:textColor="@color/black_universal"
             android:textSize="20sp"
             tools:text="всего кругов" />
 
@@ -63,6 +67,7 @@
             android:layout_marginEnd="20dp"
             android:layout_weight="1"
             android:gravity="end"
+            android:textColor="@color/black_universal"
             android:textSize="20sp"
             tools:text="общее время" />
 
@@ -89,9 +94,9 @@
             android:id="@+id/lapInfoHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_detail_lap_heading_item"
-            android:paddingStart="20dp"
+            android:background="@color/bg_detail_lap_heading_item_day_night"
             android:orientation="horizontal"
+            android:paddingStart="20dp"
             android:weightSum="4"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -100,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/lap_number"
+                android:textColor="@color/black_universal"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -110,6 +116,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/pace"
+                android:textColor="@color/black_universal"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -120,6 +127,7 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:text="@string/speed"
+                android:textColor="@color/black_universal"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -131,6 +139,7 @@
                 android:layout_weight="1"
                 android:gravity="end"
                 android:text="@string/lap_time"
+                android:textColor="@color/black_universal"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

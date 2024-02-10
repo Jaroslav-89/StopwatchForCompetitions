@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_allRacesFragment_to_saveRaceFragment"
             app:destination="@id/saveRaceFragment" />
+        <action
+            android:id="@+id/action_allRacesFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/raceDetailFragment"
@@ -59,4 +62,9 @@
             android:name="startRaceDataEditRace"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.stopwatchforcompetitions.ui.settings.fragment.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

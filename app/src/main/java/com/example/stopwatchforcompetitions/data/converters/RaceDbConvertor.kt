@@ -12,7 +12,8 @@ class RaceDbConvertor {
             imgUrl = race.imgUrl,
             lapDistance = race.lapDistance,
             athletes = race.athletes.joinToString(","),
-            isStarted = race.isStarted
+            isStarted = race.isStarted,
+            isFavorite = race.isFavorite
         )
     }
 
@@ -24,7 +25,8 @@ class RaceDbConvertor {
             imgUrl = race.imgUrl,
             lapDistance = race.lapDistance,
             athletes = mapStringToList(race.athletes),
-            isStarted = race.isStarted
+            isStarted = race.isStarted,
+            isFavorite = race.isFavorite
         )
     }
 

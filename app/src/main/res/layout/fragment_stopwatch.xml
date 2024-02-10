@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_day_night"
     tools:context=".ui.stopwatch.fragment.StopwatchFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -34,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.10123119" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/start_stop_btn"
@@ -44,6 +45,7 @@
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="48dp"
+        app:iconTint="@color/white_universal"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +60,7 @@
         app:iconGravity="textStart"
         app:iconPadding="0dp"
         app:iconSize="48dp"
+        app:iconTint="@color/white_universal"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="@+id/guidelineStopButton"
@@ -68,7 +71,8 @@
         android:id="@+id/timer_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
+        android:textColor="@color/black_day_night"
+        android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="@+id/guidelineStartButton"
         app:layout_constraintStart_toStartOf="@+id/guidelineStopButton"
@@ -91,6 +95,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="№ участника"
+            android:textColor="@color/black_day_night"
             android:textSize="14sp" />
 
         <TextView
@@ -101,6 +106,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="Кол-во кругов"
+            android:textColor="@color/black_day_night"
             android:textSize="14sp" />
 
         <TextView
@@ -112,6 +118,7 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="Общее время"
+            android:textColor="@color/black_day_night"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -120,9 +127,9 @@
         android:layout_width="0dp"
         android:layout_height="0.5dp"
         android:background="@color/divider"
-        app:layout_constraintTop_toBottomOf="@id/fast_view_titles"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fast_view_titles" />
 
     <!-- addAthleteNumber -->
 
@@ -132,8 +139,6 @@
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineAddAthleteNumber"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fast_view_titles"
         tools:listitem="@layout/fast_result_item" />
 
@@ -151,7 +156,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="489dp" />
+        app:layout_constraintGuide_percent="0.33242133" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -184,7 +189,8 @@
                 app:icon="@drawable/ic_add_athlete_result"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
-                app:iconSize="48dp" />
+                app:iconSize="48dp"
+                app:iconTint="@color/white_universal" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,7 +214,8 @@
                 app:icon="@drawable/ic_add_athlete_result"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
-                app:iconSize="48dp" />
+                app:iconSize="48dp"
+                app:iconTint="@color/white_universal" />
         </LinearLayout>
 
         <LinearLayout
@@ -232,7 +239,8 @@
                 app:icon="@drawable/ic_add_athlete_result"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
-                app:iconSize="48dp" />
+                app:iconSize="48dp"
+                app:iconTint="@color/white_universal" />
         </LinearLayout>
 
         <LinearLayout
@@ -256,7 +264,8 @@
                 app:icon="@drawable/ic_add_athlete_result"
                 app:iconGravity="textStart"
                 app:iconPadding="0dp"
-                app:iconSize="48dp" />
+                app:iconSize="48dp"
+                app:iconTint="@color/white_universal" />
 
         </LinearLayout>
     </LinearLayout>
@@ -277,7 +286,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.68" />
+        app:layout_constraintGuide_percent="0.68262655" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -387,7 +396,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/menu"
             style="@style/NumberButton"
-            android:backgroundTint="@color/white" />
+            android:backgroundTint="@color/white_day_night" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/figure_zero"
@@ -397,7 +406,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/del"
             style="@style/NumberButton"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/white_day_night"
             app:icon="@drawable/ic_delete_one"
             app:iconGravity="textStart"
             app:iconPadding="0dp"

@@ -7,5 +7,6 @@ data class Race(
     val imgUrl: String,
     val lapDistance: Int,
     val athletes: List<String>,
-    val isStarted: Boolean
+    val isStarted: Boolean,
+    val isFavorite: Boolean
 )

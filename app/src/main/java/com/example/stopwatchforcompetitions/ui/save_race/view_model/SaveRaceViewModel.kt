@@ -23,7 +23,8 @@ class SaveRaceViewModel(
         imgUrl = "",
         lapDistance = 0,
         athletes = emptyList(),
-        isStarted = false
+        isStarted = false,
+        isFavorite = false
     )
 
     private val _saveRacesState = MutableLiveData<SaveRaceState>(SaveRaceState.Empty)
@@ -49,6 +50,20 @@ class SaveRaceViewModel(
                     renderState(race = currentRace, athleteList = athletes)
                 }
             }
+        }
+    }
+
+    fun toggleFavoriteBtn() {
+        viewModelScope.launch {
+            if (currentRace.isFavorite) {
+                interactor.updateRace(currentRace.copy(isFavorite = false))
+            } else {
+                interactor.updateRace(currentRace.copy(isFavorite = true))
+            }
+
+            val race = interactor.getRaceInformation(currentRace.startTime)
+            currentRace = race
+            renderState(race = currentRace, athleteList = athletes)
         }
     }
 

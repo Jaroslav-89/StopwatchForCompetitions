@@ -7,7 +7,9 @@
 
     <style name="Theme.StopwatchForCompetitions" parent="Base.Theme.StopwatchForCompetitions">
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorSecondaryVariant</item>
+        <item name="android:statusBarColor">@color/white_day_night</item>
         <item name="android:windowLightStatusBar">false</item>
+        <item name="trackTint">@color/track_day_night</item>
+        <item name="thumbTint">@color/thumb_day_night</item>
     </style>
 </resources>

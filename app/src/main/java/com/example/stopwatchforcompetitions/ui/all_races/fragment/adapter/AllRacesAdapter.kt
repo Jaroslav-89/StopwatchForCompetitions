@@ -1,5 +1,6 @@
 package com.example.stopwatchforcompetitions.ui.all_races.fragment.adapter
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -53,6 +54,7 @@ class AllRacesViewHolder(private val binding: RaceItemBinding) :
             raceName.text = race.name
             numberOfAthletes.text = race.athletes.size.toString()
             lapDistance.text = race.lapDistance.toString()
+            favorite.setImageDrawable(getFavoriteToggleDrawable(race.isFavorite))
 
             Glide.with(itemView)
                 .load(race.imgUrl)
@@ -65,5 +67,11 @@ class AllRacesViewHolder(private val binding: RaceItemBinding) :
                 )
                 .into(raceImg)
         }
+    }
+
+    private fun getFavoriteToggleDrawable(isFavorite: Boolean?): Drawable? {
+        return itemView.context.getDrawable(
+            if (isFavorite == null || !isFavorite) R.drawable.ic_inactive_favorite else R.drawable.ic_active_favorite
+        )
     }
 }

@@ -15,7 +15,6 @@
         android:layout_gravity="center_vertical"
         android:layout_marginVertical="8dp"
         android:layout_marginStart="13dp"
-        android:backgroundTint="?attr/colorPrimary"
         android:scaleType="fitCenter"
         android:src="@drawable/img_competition_placeholder" />
 
@@ -29,34 +28,34 @@
         android:paddingVertical="8dp">
 
         <TextView
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/start_data_tv"
-            android:textSize="12sp" />
+            android:text="@string/start_data_tv" />
 
         <TextView
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/start_time_tv"
-            android:textSize="12sp" />
+            android:text="@string/start_time_tv" />
 
         <TextView
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/race_name_tv"
-            android:textSize="12sp" />
+            android:text="@string/race_name_tv" />
 
         <TextView
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/athletes_in_race_tv"
-            android:textSize="12sp" />
+            android:text="@string/athletes_in_race_tv" />
 
         <TextView
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/distance_tv"
-            android:textSize="12sp" />
+            android:text="@string/distance_tv" />
 
     </LinearLayout>
 
@@ -71,42 +70,43 @@
 
         <TextView
             android:id="@+id/startDate"
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/startTime"
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/raceName"
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/numberOfAthletes"
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lapDistance"
+            style="@style/RaceItemTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

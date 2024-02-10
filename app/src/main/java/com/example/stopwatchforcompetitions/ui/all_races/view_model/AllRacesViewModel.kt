@@ -16,11 +16,11 @@ class AllRacesViewModel(private val interactor: StopwatchInteractor) : ViewModel
 
     fun loadRaceHistory() {
         viewModelScope.launch {
-            interactor.getAllRaces().collect() {
-                if (it.isEmpty()) {
+            interactor.getAllRaces().collect() { raceList ->
+                if (raceList.isEmpty()) {
                     _allRacesState.postValue(AllRaceState.Empty)
                 } else {
-                    _allRacesState.postValue(AllRaceState.Content(raceList = it))
+                    _allRacesState.postValue(AllRaceState.Content(raceList = raceList.sortedByDescending { it.isFavorite }))
                 }
             }
         }

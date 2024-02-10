@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">StopwatchForCompetitions</string>
     <string name="default_timer">00:00.0</string>
@@ -22,6 +23,7 @@
     <string name="speed">Скорость км/ч</string>
     <string name="lap_time">Время круга</string>
     <!--    save_race-->
+    <string name="save_competition_heading">Информация о гонке</string>
     <string name="number_of_athletes">Количество\nучастников</string>
     <string name="save_race_xls">Сохранить\nв формате .xls</string>
     <string name="race_result">Результаты</string>
@@ -31,12 +33,16 @@
     <string name="title_save">Сохранение</string>
     <string name="title_back">Выход</string>
     <string name="title_delete">Удаление</string>
+    <string name="title_stop_race">Завершение</string>
     <string name="message_save">Сохранить изменения и выдти?</string>
     <string name="message_back">Выдти без сохранения?</string>
     <string name="message_delete_race">Удалить событие из истории?</string>
     <string name="message_delete_img">Удалить обложку события?</string>
+    <string name="message_stop_race">Завершить событие и перейти к просмотру и сохранению результатов?</string>
     <string name="answer_positive">Да</string>
     <string name="answer_negative">Нет</string>
+    <string name="stop_race_answer_positive">Завершить</string>
+    <string name="stop_race_answer_negative">Отмена</string>
     <!--    menu-->
     <string name="race_history_heading">История</string>
     <string name="start_data_tv">Дата</string>
@@ -44,4 +50,16 @@
     <string name="race_name_tv">Название</string>
     <string name="athletes_in_race_tv">Участников</string>
     <string name="distance_tv">Дистанция</string>
+    <!--    settings-->
+    <string name="settings_heading">Настройки</string>
+    <string name="night_tv">Темная тема</string>
+    <string name="share_tv">Поделиться приложением</string>
+    <string name="support_tv">Связаться с автором</string>
+    <string name="agreement_tv">Пользовательское соглашение</string>
+
+    <string name="share_url">https://practicum.yandex.ru/android-developer/</string>
+    <string name="email_support">jaroslavnefrit@yandex.ru</string>
+    <string name="email_support_subject">Stopwatch for competitions</string>
+    <string name="email_support_message"> </string>
+    <string name="user_agreement_url"> </string>
 </resources>

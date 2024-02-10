@@ -3,6 +3,7 @@ package com.example.stopwatchforcompetitions.ui.save_race.fragment
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -94,6 +95,10 @@ class SaveRaceFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        binding.addRaceInFavoriteBtn.setOnClickListener {
+            viewModel.toggleFavoriteBtn()
+        }
+
         binding.raceResultBtn.setOnClickListener {
             if (resultIsVisible) {
                 resultIsVisible = false
@@ -138,6 +143,7 @@ class SaveRaceFragment : Fragment() {
                 startRaceData = raceInfo.race.startTime
                 with(binding) {
                     setImgFromPlaceHolder(raceInfo.race.imgUrl)
+                    addRaceInFavoriteBtn.setImageDrawable(getFavoriteToggleDrawable(raceInfo.race.isFavorite))
                     startDate.text = Util.convertLongToDate(raceInfo.race.startTime)
                     startTime.text = Util.convertLongToTime(raceInfo.race.startTime)
                     raceName.text = raceInfo.race.name
@@ -147,6 +153,14 @@ class SaveRaceFragment : Fragment() {
                     saveRaceAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
                 }
             }
+        }
+    }
+
+    private fun getFavoriteToggleDrawable(isFavorite: Boolean?): Drawable? {
+        return if (isFavorite == null || !isFavorite) {
+            requireContext().getDrawable(R.drawable.ic_inactive_favorite_save_race)
+        } else {
+            requireContext().getDrawable(R.drawable.ic_active_favorite__save_race)
         }
     }
 

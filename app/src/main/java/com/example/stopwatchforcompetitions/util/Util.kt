@@ -3,7 +3,6 @@ package com.example.stopwatchforcompetitions.util
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.Date
-import kotlin.math.roundToInt
 
 object Util {
     fun getTimeFormat(time: Long): String {
@@ -68,13 +67,12 @@ object Util {
 
     fun convertToPace(distance: Int, time: Long): String {
         return if (distance != 0) {
-            val timeMin = time.toDouble() / 60000
-            val distanceKm = distance.toDouble() / 1000
-            val pace = timeMin / distanceKm
-            val minStr = pace.toString().substringBefore(".")
-            val secStr = pace.toString().substringAfter(".")
-            val sec = (secStr.toDouble() * 60).roundToInt().toString().take(2)
-            "$minStr.$sec"
+            val timeSec = time.toDouble() / 1000
+            val distKm = distance.toDouble() / 1000
+            val paceSecKm = timeSec / distKm
+            val min = (paceSecKm / 60).toInt()
+            val sec = paceSecKm - (min * 60).toDouble()
+            return "$min.${sec.toInt()}"
         } else {
             "N/A"
         }

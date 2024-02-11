@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.StopwatchForCompetitions" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
@@ -8,8 +8,10 @@
     <style name="Theme.StopwatchForCompetitions" parent="Base.Theme.StopwatchForCompetitions">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/white_day_night</item>
+        <item name="android:navigationBarColor">@color/white_day_night</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="trackTint">@color/track_day_night</item>
         <item name="thumbTint">@color/thumb_day_night</item>
+        <item name="android:windowBackground">@drawable/splash_screen_logo_white</item>
     </style>
 </resources>

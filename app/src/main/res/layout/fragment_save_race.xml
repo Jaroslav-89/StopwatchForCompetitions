@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_day_night"
     tools:context=".ui.save_race.fragment.SaveRaceFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -103,6 +104,7 @@
                 android:gravity="center"
                 android:textColor="@color/black_day_night"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toEndOf="@+id/startDateHeading"
                 app:layout_constraintTop_toBottomOf="@+id/competitionImage"
@@ -127,6 +129,7 @@
                 android:gravity="center"
                 android:textColor="@color/black_day_night"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
                 app:layout_constraintTop_toBottomOf="@+id/startDate"
@@ -150,8 +153,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:gravity="center"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/black_day_night"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
                 app:layout_constraintTop_toBottomOf="@+id/startTime" />
@@ -175,6 +181,7 @@
                 android:gravity="center"
                 android:textColor="@color/black_day_night"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
                 app:layout_constraintTop_toBottomOf="@+id/raceName" />
@@ -198,6 +205,7 @@
                 android:gravity="center"
                 android:textColor="@color/black_day_night"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
                 app:layout_constraintTop_toBottomOf="@+id/lapDistance" />
@@ -221,6 +229,7 @@
                 android:gravity="center"
                 android:textColor="@color/black_day_night"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
                 app:layout_constraintTop_toBottomOf="@+id/raceDescription" />

@@ -25,8 +25,9 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1.5</item>
         <item name="android:clickable">false</item>
-        <item name="android:textColor">@color/text_hint_day_night</item>
+        <item name="android:textColor">@color/black_day_night</item>
         <item name="android:hint">@string/athlete_number_hint</item>
+        <item name="android:textColorHint">@color/text_hint_day_night</item>
         <item name="android:textSize">30sp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_day_night"
     tools:context=".ui.all_races.fragment.AllRacesFragment">
 
     <ImageView
@@ -35,15 +36,45 @@
         android:padding="14dp"
         android:src="@drawable/ic_settings_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/allRacesRv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/backBtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/race_item" />
+        app:layout_constraintTop_toBottomOf="@+id/backBtn"
+        tools:listitem="@layout/race_item"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/raceHistoryPlaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/place_holder_race_history"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/black_day_night"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/raceHistoryPlaceholderText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/race_history_place_holder_text"
+        android:textColor="@color/black_day_night"
+        android:textSize="22sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/raceHistoryPlaceholder"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

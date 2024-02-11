@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class AllRacesViewModel(private val interactor: StopwatchInteractor) : ViewModel() {
 
-    private val _allRacesState = MutableLiveData<AllRaceState>(AllRaceState.Empty)
+    private val _allRacesState = MutableLiveData<AllRaceState>()
     val allRacesState: LiveData<AllRaceState>
         get() = _allRacesState
 

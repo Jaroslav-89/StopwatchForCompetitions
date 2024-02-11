@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">StopwatchForCompetitions</string>
+    <string name="app_name">Stopwatch For Competitions</string>
     <string name="default_timer">00:00.0</string>
     <string name="athlete_number_hint">№ УЧАСТНИКА</string>
     <string name="change_competition">Изменить событие</string>
@@ -50,6 +50,7 @@
     <string name="race_name_tv">Название</string>
     <string name="athletes_in_race_tv">Участников</string>
     <string name="distance_tv">Дистанция</string>
+    <string name="race_history_place_holder_text">История пуста</string>
     <!--    settings-->
     <string name="settings_heading">Настройки</string>
     <string name="night_tv">Темная тема</string>
@@ -62,4 +63,7 @@
     <string name="email_support_subject">Stopwatch for competitions</string>
     <string name="email_support_message"> </string>
     <string name="user_agreement_url"> </string>
+    <!--    privacy_policy-->
+    <string name="privacy_policy_heading">Политика конфиденциальности</string>
+    <string name="privacy_policy_text">Темная тема</string>
 </resources>

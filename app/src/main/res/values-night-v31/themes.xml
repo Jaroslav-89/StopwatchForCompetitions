@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.StopwatchForCompetitions" parent="Base.Theme.StopwatchForCompetitions">
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/white_day_night</item>
+        <item name="android:navigationBarColor">@color/white_day_night</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="trackTint">@color/track_day_night</item>
+        <item name="thumbTint">@color/thumb_day_night</item>
+        <item name="android:windowBackground">@color/white_day_night</item>
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/brand_logo</item>
+    </style>
+</resources>

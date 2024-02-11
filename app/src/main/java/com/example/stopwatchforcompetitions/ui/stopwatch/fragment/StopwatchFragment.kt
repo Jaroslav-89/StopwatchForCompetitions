@@ -189,10 +189,10 @@ class StopwatchFragment : Fragment() {
         alertDialog.show()
 
         val positiveButton = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE)
-        positiveButton.setTextColor(requireContext().getColor(R.color.dark_gray_day_night))
+        positiveButton.setTextColor(requireContext().getColor(R.color.black_day_night))
 
         val negativeButton = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE)
-        negativeButton.setTextColor(requireContext().getColor(R.color.dark_gray_day_night))
+        negativeButton.setTextColor(requireContext().getColor(R.color.black_day_night))
     }
 
     private fun renderTimer(state: TimerState) {

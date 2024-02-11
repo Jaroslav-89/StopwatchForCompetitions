@@ -61,10 +61,20 @@ class AllRacesFragment : Fragment() {
     }
 
     private fun renderRaceList(state: AllRaceState) {
-        if (state is AllRaceState.Content) {
-            allRacesAdapter.updateFastResultAdapter(state.raceList)
-        } else {
-            allRacesAdapter.updateFastResultAdapter(emptyList())
+        when (state) {
+            is AllRaceState.Content -> {
+                binding.allRacesRv.visibility = View.VISIBLE
+                binding.raceHistoryPlaceholder.visibility = View.GONE
+                binding.raceHistoryPlaceholderText.visibility = View.GONE
+                allRacesAdapter.updateFastResultAdapter(state.raceList)
+            }
+
+            is AllRaceState.Empty -> {
+                binding.allRacesRv.visibility = View.GONE
+                binding.raceHistoryPlaceholder.visibility = View.VISIBLE
+                binding.raceHistoryPlaceholderText.visibility = View.VISIBLE
+                allRacesAdapter.updateFastResultAdapter(emptyList())
+            }
         }
     }
 }

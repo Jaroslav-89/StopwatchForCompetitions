@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_day_night"
     tools:context=".ui.race_detail.fragment.RaceDetailFragment">
 
     <LinearLayout
         android:id="@+id/headerGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_header_race_detail"
+        android:background="@color/white_day_night"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,14 +27,15 @@
 
         <TextView
             android:id="@+id/raceInfoHeading"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
             android:text="@string/race_detail_header"
-            android:textSize="24sp" />
+            android:textColor="@color/black_day_night"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/editBtn"
@@ -51,6 +53,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:text="@string/start_data"
+        android:textColor="@color/black_day_night"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerGroup" />
@@ -59,7 +62,9 @@
         android:id="@+id/startDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textColor="@color/black_day_night"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/startDateHeading"
         app:layout_constraintStart_toStartOf="@+id/lapDistance"
         app:layout_constraintTop_toTopOf="@+id/startDateHeading"
@@ -71,6 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/start_time"
+        android:textColor="@color/black_day_night"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/startDateHeading"
         app:layout_constraintTop_toBottomOf="@+id/startDateHeading" />
@@ -79,7 +85,9 @@
         android:id="@+id/startTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textColor="@color/black_day_night"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/startTimeHeading"
         app:layout_constraintStart_toStartOf="@+id/lapDistance"
         app:layout_constraintTop_toTopOf="@+id/startTimeHeading"
@@ -91,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/race_name_race_detail"
+        android:textColor="@color/black_day_night"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/startDateHeading"
         app:layout_constraintTop_toBottomOf="@+id/startTimeHeading" />
@@ -99,7 +108,11 @@
         android:id="@+id/raceName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:focusedByDefault="false"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/black_day_night"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/raceNameHeading"
         app:layout_constraintEnd_toEndOf="@+id/lapDistance"
         app:layout_constraintStart_toStartOf="@+id/lapDistance"
@@ -111,6 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/lap_distance_race_detail"
+        android:textColor="@color/black_day_night"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/startDateHeading"
         app:layout_constraintTop_toBottomOf="@+id/raceNameHeading" />
@@ -120,8 +134,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:focusedByDefault="false"
-        android:inputType="number"
+        android:textColor="@color/black_day_night"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/lapDistanceHeading"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lapDistanceHeading"
@@ -140,8 +155,9 @@
         android:id="@+id/raceDetailHeading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:paddingStart="10dp"
         android:layout_marginTop="10dp"
+        android:background="@color/bg_detail_lap_item_day_night"
         android:orientation="horizontal"
         android:weightSum="5.0"
         app:layout_constraintTop_toBottomOf="@+id/lapDistance">
@@ -150,11 +166,13 @@
             android:id="@+id/athletePosition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="center"
             android:padding="0dp"
             android:text="@string/position"
-            android:textSize="14sp" />
+            android:textColor="@color/black_universal"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/athleteNumber"
@@ -164,7 +182,9 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="@string/athlete_number"
-            android:textSize="14sp" />
+            android:textColor="@color/black_universal"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/totalLaps"
@@ -174,19 +194,22 @@
             android:gravity="center"
             android:padding="0dp"
             android:text="@string/total_lap"
-            android:textSize="14sp" />
+            android:textColor="@color/black_universal"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/athlete_time_title_tv"
             style="@style/FastViewResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:layout_weight="3"
             android:gravity="center"
-            android:padding="0dp"
+            android:paddingEnd="20dp"
             android:text="@string/total_time"
-            android:textSize="14sp" />
+            android:textColor="@color/black_universal"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <View
@@ -203,8 +226,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/raceDetailHeading"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/raceDetailHeading"
         tools:itemCount="5"
         tools:listitem="@layout/detail_result_item" />
 

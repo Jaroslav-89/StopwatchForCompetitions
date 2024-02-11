@@ -36,7 +36,9 @@ class SaveRaceAdapter(private val clickListener: AthleteClickListener) :
         val adapter = SaveRaceLapsAdapter(athletes[position], race!!)
         holder.lapsRv.adapter = adapter
         holder.bind(athletes[position], position, race!!)
-        holder.itemView.setOnClickListener { clickListener.onAthleteClick(athletes[position]) }
+        holder.itemView.setOnClickListener {
+            clickListener.onAthleteClick(athletes[position])
+        }
     }
 
     override fun getItemCount() = athletes.size

@@ -7,11 +7,14 @@ import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -30,6 +33,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SaveRaceFragment : Fragment() {
     private lateinit var binding: FragmentSaveRaceBinding
+    private lateinit var vibrator: Vibrator
     private val args: SaveRaceFragmentArgs by navArgs()
     private var startRaceData = 0L
     private var resultIsVisible = false
@@ -165,6 +169,7 @@ class SaveRaceFragment : Fragment() {
     }
 
     private fun showToast() {
+        vibrate()
         val msg = if (Build.VERSION.SDK_INT > 29) {
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 .toString()
@@ -175,6 +180,11 @@ class SaveRaceFragment : Fragment() {
             requireContext(),
             getString(R.string.save_msg) + msg, Toast.LENGTH_LONG
         ).show()
+    }
+
+    private fun vibrate() {
+        vibrator = requireActivity().getSystemService()!!
+        vibrator.vibrate(VibrationEffect.createOneShot(300, VibrationEffect.DEFAULT_AMPLITUDE))
     }
 
     private fun setImgFromPlaceHolder(uri: String) {

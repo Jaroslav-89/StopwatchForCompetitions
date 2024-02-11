@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.stopwatchforcompetitions.R
 import com.example.stopwatchforcompetitions.databinding.FragmentSettingsBinding
 import com.example.stopwatchforcompetitions.ui.settings.view_model.SettingsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,7 +49,9 @@ class SettingsFragment : Fragment() {
         }
         binding.settingsShareBtn.setOnClickListener { viewModel.shareApp() }
         binding.settingsSupportBtn.setOnClickListener { viewModel.contactSupport() }
-        binding.settingsUserAgreementBtn.setOnClickListener { viewModel.openTerms() }
+        binding.privacyPolicyBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_settingsFragment_to_privacyPolicyFragment)
+        }
     }
 
     private fun renderState(darkMode: Boolean) {

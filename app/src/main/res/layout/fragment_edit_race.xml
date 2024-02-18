@@ -26,14 +26,16 @@
                 android:id="@+id/competitionImage"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="48dp"
                 android:adjustViewBounds="true"
                 android:background="@color/place_holder_background_day_night"
+                android:contentDescription="@string/album_cover_description"
                 android:cropToPadding="false"
                 android:scaleType="center"
                 android:src="@drawable/img_competition_placeholder"
                 app:layout_constraintDimensionRatio="h,4:3"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/productEditCreateGroup" />
 
@@ -55,15 +57,17 @@
                         android:id="@+id/addRaceImg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:contentDescription="@string/btn_album_cover_description"
                         android:padding="20dp"
                         android:src="@drawable/ic_competition_img"
-                        app:tint="@color/white" />
+                        app:tint="@color/white_universal" />
                 </LinearLayout>
 
                 <ImageView
                     android:id="@+id/deleteImgBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/btn_delete_album_cover_description"
                     android:padding="20dp"
                     android:src="@drawable/ic_delete"
                     android:visibility="gone"
@@ -135,7 +139,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
+                android:autofillHints="username"
                 android:focusedByDefault="false"
+                android:hint="@string/race_name_hint"
+                android:inputType="none"
                 android:textColor="@color/black_day_night"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
@@ -158,11 +165,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:focusedByDefault="false"
+                android:hint="@string/lap_distance_hint"
                 android:inputType="number"
                 android:textColor="@color/black_day_night"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
-                app:layout_constraintTop_toBottomOf="@+id/raceName" />
+                app:layout_constraintTop_toBottomOf="@+id/raceName"
+                tools:ignore="Autofill" />
+
+            <TextView
+                android:id="@+id/totalLapInRaceHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/total_lap_in_race"
+                android:textColor="@color/black_day_night"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/totalLapInRace"
+                app:layout_constraintStart_toStartOf="@+id/startDateHeading"
+                app:layout_constraintTop_toTopOf="@+id/totalLapInRace" />
+
+            <EditText
+                android:id="@+id/totalLapInRace"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:focusedByDefault="false"
+                android:hint="@string/total_lap_in_race_hint"
+                android:inputType="number"
+                android:textColor="@color/black_day_night"
+                app:layout_constraintEnd_toEndOf="@+id/raceName"
+                app:layout_constraintStart_toStartOf="@+id/startDate"
+                app:layout_constraintTop_toBottomOf="@+id/lapDistance"
+                tools:ignore="Autofill" />
 
             <TextView
                 android:id="@+id/raceDescriptionHeading"
@@ -171,7 +205,6 @@
                 android:text="@string/race_description"
                 android:textColor="@color/black_day_night"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/raceDescription"
                 app:layout_constraintStart_toStartOf="@+id/startDateHeading"
                 app:layout_constraintTop_toTopOf="@+id/raceDescription" />
 
@@ -180,18 +213,23 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:autofillHints="username"
                 android:focusedByDefault="false"
+                android:hint="@string/race_description_hint"
+                android:inputType="none"
                 android:textColor="@color/black_day_night"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
-                app:layout_constraintTop_toBottomOf="@+id/lapDistance" />
+                app:layout_constraintTop_toBottomOf="@+id/totalLapInRace" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteRaceBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="40dp"
+                android:layout_marginTop="20dp"
                 android:backgroundTint="@color/delete_btn"
+                android:contentDescription="@string/btn_delete_race_description"
                 android:text="@string/delete_competition"
                 android:visibility="gone"
                 app:cornerRadius="20dp"
@@ -201,6 +239,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/raceDescription"
                 tools:visibility="visible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/deleteRaceBtn" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -221,6 +264,7 @@
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/btn_back_description"
             android:padding="20dp"
             android:src="@drawable/ic_back" />
 
@@ -239,6 +283,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:contentDescription="@string/btn_save_race_description"
             android:padding="10dp"
             android:src="@drawable/ic_done_active" />
 

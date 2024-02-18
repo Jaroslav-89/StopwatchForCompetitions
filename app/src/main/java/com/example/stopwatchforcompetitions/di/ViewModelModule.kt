@@ -6,6 +6,7 @@ import com.example.stopwatchforcompetitions.ui.race_detail.view_model.RaceDetail
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceViewModel
 import com.example.stopwatchforcompetitions.ui.settings.view_model.SettingsViewModel
 import com.example.stopwatchforcompetitions.ui.stopwatch.view_model.StopwatchViewModel
+import com.example.stopwatchforcompetitions.ui.support_project.view_model.SupportProjectViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -43,6 +44,12 @@ val viewModelModule = module {
     viewModel {
         SettingsViewModel(
             settingsInteractor = get(),
+            sharingInteractor = get(),
+        )
+    }
+
+    viewModel {
+        SupportProjectViewModel(
             sharingInteractor = get()
         )
     }

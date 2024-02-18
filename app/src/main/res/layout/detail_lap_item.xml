@@ -1,61 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white_day_night"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="start"
+    android:layout_margin="2dp"
+    android:padding="2dp"
+    android:background="@drawable/bg_lap_item"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/lapNumberHeader"
+        style="@style/LapDetailItemTxHeader"
+        android:text="@string/lap_number_header" />
 
-        <TextView
-            android:id="@+id/lapNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_weight="1"
-            android:textColor="@color/black_day_night"
-            android:textSize="16sp"
-            tools:text="номер круга" />
+    <TextView
+        android:id="@+id/lapNumber"
+        style="@style/LapDetailItemTx"
+        tools:text="3" />
 
-        <TextView
-            android:id="@+id/pace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_weight="1"
-            android:textColor="@color/black_day_night"
-            android:textSize="16sp"
-            tools:text="темп" />
+    <TextView
+        android:id="@+id/paceHeader"
+        style="@style/LapDetailItemTxHeader"
+        android:text="@string/pace_header" />
 
-        <TextView
-            android:id="@+id/speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/black_day_night"
-            android:textSize="16sp"
-            tools:text="скорость" />
+    <TextView
+        android:id="@+id/pace"
+        style="@style/LapDetailItemTx"
+        tools:text="5.11" />
 
-        <TextView
-            android:id="@+id/lapTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:textColor="@color/black_day_night"
-            android:textSize="16sp"
-            tools:text="время круга" />
+    <TextView
+        android:id="@+id/speedHeader"
+        style="@style/LapDetailItemTxHeader"
+        android:text="@string/speed_header" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/speed"
+        style="@style/LapDetailItemTx"
+        tools:text="11.7" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/lapTimeHeader"
+        style="@style/LapDetailItemTxHeader"
+        android:text="@string/lap_time_header" />
+
+    <TextView
+        android:id="@+id/lapTime"
+        style="@style/LapDetailItemTx"
+        tools:text="15:25.1" />
+
+</LinearLayout>

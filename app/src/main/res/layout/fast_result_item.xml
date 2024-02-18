@@ -1,38 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fastResultItemBg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white_day_night">
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="2dp"
+    android:background="@drawable/bg_fast_result_stroke"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:paddingVertical="2dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="5.0"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/numberHeader"
+        style="@style/FastResultTxHeader"
+        android:text="@string/number_header" />
 
-        <TextView
-            android:id="@+id/number"
-            style="@style/Result_tx"
-            android:layout_weight="1.5"
-            android:hint="15" />
+    <TextView
+        android:id="@+id/number"
+        style="@style/FastResultTx"
+        tools:hint="15" />
 
-        <TextView
-            android:id="@+id/totalLap"
-            style="@style/Result_tx"
-            android:layout_weight="1.5"
-            android:hint="2" />
+    <TextView
+        android:id="@+id/totalLapHeader"
+        style="@style/FastResultTxHeader"
+        android:text="@string/total_lap_header" />
 
-        <TextView
-            android:id="@+id/totalTime"
-            style="@style/Result_tx"
-            android:layout_weight="2"
-            android:hint="1:30:25" />
+    <TextView
+        android:id="@+id/totalLap"
+        style="@style/FastResultTx"
+        tools:hint="2" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/lastLapTimeHeader"
+        style="@style/FastResultTxHeader"
+        android:text="@string/last_lap_time_header" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/lastLapTime"
+        style="@style/FastResultTx"
+        tools:hint="0:30:25" />
+
+    <TextView
+        android:id="@+id/totalTimeHeader"
+        style="@style/FastResultTxHeader"
+        android:text="@string/total_time_header" />
+
+    <TextView
+        android:id="@+id/totalTime"
+        style="@style/FastResultTx"
+        tools:hint="1:30:25" />
+
+
+</LinearLayout>

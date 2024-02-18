@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <!-- new color. -->
     <color name="black_day_night">#FDFDFD</color>
     <color name="white_day_night">#1A1B22</color>
     <color name="text_hint_day_night">#FDFDFD</color>
@@ -25,4 +21,8 @@
     <color name="bg_detail_lap_heading_item_day_night">#6A6643</color>
     <color name="bg_header_edit_race_day_night">#97303030</color>
     <color name="favorite_active">#ED9434</color>
+    <color name="bg_bottom_sheet_race_result_day_night">#3A3C4B</color>
+    <color name="athlete_race_result_laps_done_item">#6EEE64</color>
+    <color name="athlete_race_result_item">#FFEB3B</color>
+    <color name="athlete_fast_result_item">#B6B6B6</color>
 </resources>

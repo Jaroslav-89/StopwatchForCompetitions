@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <solid android:color="@color/bg_create_delete_competition_img" />
-    <stroke android:color="@color/white" android:width="2dp"/>
+    <stroke android:color="@color/white_universal" android:width="2dp"/>
     <corners android:radius="14dp" />
 
 </shape>

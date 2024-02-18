@@ -68,20 +68,16 @@ class SaveRaceViewModel(
     }
 
     fun toggleLapDetail(updateAthlete: Athlete) {
-        for (athlete in athletes) {
-            if (athlete.number == updateAthlete.number) {
-                val newList = athletes.toMutableList()
-                newList.remove(athlete)
-                if (updateAthlete.isExpandable) {
-                    newList.add(athlete.copy(isExpandable = false))
-                } else {
-                    newList.add(athlete.copy(isExpandable = true))
-                }
-                athletes = newList
-                renderState(currentRace, newList)
-                break
-            }
+        val athlete = athletes.filter { it.number == updateAthlete.number }
+        val newList = athletes.toMutableList()
+        newList.remove(athlete[0])
+        if (updateAthlete.isExpandable) {
+            newList.add(athlete[0].copy(isExpandable = false))
+        } else {
+            newList.add(athlete[0].copy(isExpandable = true))
         }
+        athletes = newList
+        renderState(currentRace, newList)
     }
 
     fun saveResultInXls() {

@@ -16,6 +16,24 @@ class ExternalNavigator(private val context: Context) {
 //        }
     }
 
+    fun donateStreamLink(url: String) {
+        Intent().apply {
+            action = Intent.ACTION_VIEW
+            data = Uri.parse(url)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(this)
+        }
+    }
+
+    fun rateLink(url: String) {
+//        Intent().apply {
+//            action = Intent.ACTION_VIEW
+//            data = Uri.parse(url)
+//            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//            context.startActivity(this)
+//        }
+    }
+
     fun openLink(url: String) {
 //        Intent().apply {
 //            action = Intent.ACTION_VIEW

@@ -113,8 +113,13 @@ class EditRaceFragment : Fragment() {
             if (binding.lapDistance.text.isBlank()) "0"
             else
                 binding.lapDistance.text.toString()
+        val totalLapInRace =
+            if (binding.totalLapInRace.text.isBlank()) "0"
+            else
+                binding.totalLapInRace.text.toString()
         viewModel.editNameText(binding.raceName.text.toString())
         viewModel.editLapDistance(distance)
+        viewModel.editTotalLapInRace(totalLapInRace)
         viewModel.editDescriptionText(binding.raceDescription.text.toString())
     }
 
@@ -288,6 +293,7 @@ class EditRaceFragment : Fragment() {
             raceName.setText(race.name)
             raceDescription.setText(race.description)
             lapDistance.setText(race.lapDistance.toString())
+            totalLapInRace.setText(race.totalLapsInRace.toString())
             setImgFromPlaceHolder(race.imgUrl)
             if (race.isStarted)
                 binding.deleteRaceBtn.visibility = View.GONE

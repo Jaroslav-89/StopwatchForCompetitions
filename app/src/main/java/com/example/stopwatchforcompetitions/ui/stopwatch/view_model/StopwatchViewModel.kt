@@ -1,6 +1,5 @@
 package com.example.stopwatchforcompetitions.ui.stopwatch.view_model
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,16 +29,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
     private var valueOfTextViewThree = ""
     private var valueOfTextViewFour = ""
 
-    private var currentRace = Race(
-        startTime = 0,
-        name = "",
-        description = "",
-        imgUrl = "",
-        lapDistance = 0,
-        athletes = emptyList(),
-        isStarted = false,
-        isFavorite = false
-    )
+    private var currentRace = Race()
 
     private var athletesListInCurrentRace = emptyList<Athlete>()
 
@@ -58,13 +48,18 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
         get() = _addAthleteNumberState
 
     fun checkRaceHasBeenStarted() {
-        viewModelScope.launch {
-            val race = interactor.checkRaceIsStarted()
-            if (race != null) {
-                isStarted = true
-                startRaceData = race.startTime
-                updateRaceInformation()
-                renderAddAthleteNumberState()
+        if (isStarted) {
+            updateRaceInformation()
+        } else {
+            viewModelScope.launch {
+                val race = interactor.checkRaceIsStarted()
+                if (race != null) {
+                    isStarted = true
+                    startRaceData = race.startTime
+                    currentRace = race
+                    updateRaceInformation()
+                    renderAddAthleteNumberState()
+                }
             }
         }
     }
@@ -106,17 +101,16 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
 
     private fun updateAthletesInformation(race: Race) {
         if (isStarted) {
-            if(updateAthletesInformationJob == null) {
+            if (updateAthletesInformationJob == null) {
                 updateAthletesInformationJob = viewModelScope.launch {
                     interactor.getAllAthletesInRace(race.startTime).collect() {
-                        if (athletesListInCurrentRace != it){
+                        if (athletesListInCurrentRace != it) {
                             athletesListInCurrentRace = it
                         }
-                        Log.d("xxx", athletesListInCurrentRace.toString())
                         renderAthletesFastResult(athletesListInCurrentRace)
                     }
                 }
-            }
+            } else renderAthletesFastResult(athletesListInCurrentRace)
         } else {
             updateAthletesInformationJob?.cancel()
             updateAthletesInformationJob = null
@@ -138,13 +132,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
             interactor.updateRace(
                 Race(
                     startTime = startRaceData,
-                    name = "",
-                    description = "",
-                    imgUrl = "",
-                    lapDistance = 0,
-                    athletes = emptyList<String>(),
                     isStarted = true,
-                    isFavorite = false
                 )
             )
             isStarted = true
@@ -158,16 +146,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
             interactor.stopRace()
         }
         isStarted = false
-        currentRace = Race(
-            startTime = 0,
-            name = "",
-            description = "",
-            imgUrl = "",
-            lapDistance = 0,
-            athletes = emptyList(),
-            isStarted = false,
-            isFavorite = false
-        )
+        currentRace = Race()
         athletesListInCurrentRace = emptyList<Athlete>()
         renderAddAthleteNumberState()
         updateTimer()
@@ -281,7 +260,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
     }
 
     private fun renderAthletesFastResult(athletesList: List<Athlete>) {
-        _fastResultState.value = FastResultState.Content(athletesList)
+        _fastResultState.value = FastResultState.Content(athletesList, currentRace)
     }
 
     private fun renderAddAthleteNumberState() {

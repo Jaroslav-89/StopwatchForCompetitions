@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/bg_add_competition_in_favorite" />
-    <stroke android:color="@color/white_universal" android:width="2dp"/>
+    <solid android:color="@color/athlete_fast_result_item" />
+    <stroke android:color="@color/black_day_night" android:width="2dp"/>
     <corners android:radius="14dp" />
 
 </shape>

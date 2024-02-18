@@ -13,7 +13,8 @@ val dataModule = module {
     single {
         Room.databaseBuilder(androidContext(), AppDataBase::class.java, "database.db")
             .addMigrations(
-                AppDataBase.MIGRATION_2_3
+                AppDataBase.MIGRATION_2_3,
+                AppDataBase.MIGRATION_3_4,
             )
             .build()
     }

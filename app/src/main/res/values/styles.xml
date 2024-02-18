@@ -40,7 +40,7 @@
         <item name="android:layout_weight">1.5</item>
         <item name="android:clickable">false</item>
         <item name="android:layout_margin">0dp</item>
-        <item name="android:backgroundTint">@color/green</item>
+        <item name="android:backgroundTint">@color/start_btn_green</item>
         <item name="cornerRadius">10dp</item>
         <item name="android:elevation">6dp</item>
     </style>
@@ -60,13 +60,65 @@
         <item name="android:padding">0dp</item>
     </style>
 
-    <style name="Result_tx">
+    <style name="FastResultTxHeader">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">6dp</item>
         <item name="android:gravity">center_horizontal</item>
-        <item name="android:textColor">@color/black_day_night</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black_universal</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
+    </style>
+
+    <style name="FastResultTx">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textColor">@color/black_universal</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
+    </style>
+
+    <style name="AthleteDetailResultTxHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/black_universal</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
+    </style>
+
+    <style name="AthleteDetailResultTx">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/black_universal</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
+    </style>
+
+    <style name="LapDetailItemTxHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/black_universal</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
+    </style>
+
+    <style name="LapDetailItemTx">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/black_universal</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
     </style>
 
     <style name="SettingsTv">

@@ -16,16 +16,7 @@ class RaceDetailViewModel(
 
     private var athletes = emptyList<Athlete>()
 
-    private var currentRace = Race(
-        startTime = 0,
-        name = "",
-        description = "",
-        imgUrl = "",
-        lapDistance = 0,
-        athletes = emptyList(),
-        isStarted = false,
-        isFavorite = false
-    )
+    private var currentRace = Race()
 
     private val _raceDetailState = MutableLiveData<RaceDetailState>(RaceDetailState.Empty)
     val raceDetailState: LiveData<RaceDetailState>
@@ -45,20 +36,16 @@ class RaceDetailViewModel(
     }
 
     fun toggleLapDetail(updateAthlete: Athlete) {
-        for (athlete in athletes) {
-            if (athlete.number == updateAthlete.number) {
-                val newList = athletes.toMutableList()
-                newList.remove(athlete)
-                if (updateAthlete.isExpandable) {
-                    newList.add(athlete.copy(isExpandable = false))
-                } else {
-                    newList.add(athlete.copy(isExpandable = true))
-                }
-                athletes = newList
-                renderState(currentRace, newList)
-                break
-            }
+        val athlete = athletes.filter { it.number == updateAthlete.number }
+        val newList = athletes.toMutableList()
+        newList.remove(athlete[0])
+        if (updateAthlete.isExpandable) {
+            newList.add(athlete[0].copy(isExpandable = false))
+        } else {
+            newList.add(athlete[0].copy(isExpandable = true))
         }
+        athletes = newList
+        renderState(currentRace, newList)
     }
 
     private fun renderState(race: Race, athleteList: List<Athlete>) {

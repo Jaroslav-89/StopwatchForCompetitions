@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailResultItemBg"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    android:layout_marginHorizontal="6dp"
+    android:background="@drawable/bg_athlete_result_in_progress_item"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/raceDetailHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_detail_result_item_day_night"
+        android:layout_gravity="center"
         android:orientation="horizontal"
-        android:weightSum="4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,159 +24,65 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:padding="10dp"
+            android:contentDescription="@string/btn_open_close_laps_detail_description"
+            android:padding="6dp"
             android:src="@drawable/ic_open_laps_info"
             app:tint="@color/black_universal" />
 
         <TextView
+            android:id="@+id/athletePositionHeader"
+            style="@style/AthleteDetailResultTxHeader"
+            android:layout_marginStart="0dp"
+            android:text="@string/athlete_position_header" />
+
+        <TextView
             android:id="@+id/athletePosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/black_universal"
-            android:textSize="20sp"
-            tools:text="позиция" />
+            style="@style/AthleteDetailResultTx"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/athleteNumberHeader"
+            style="@style/AthleteDetailResultTxHeader"
+            android:text="@string/athlete_number_header" />
 
         <TextView
             android:id="@+id/athleteNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="14dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/black_universal"
-            android:textSize="20sp"
-            tools:text="номер" />
+            style="@style/AthleteDetailResultTx"
+            tools:text="25" />
+
+        <TextView
+            android:id="@+id/totalLapsHeader"
+            style="@style/AthleteDetailResultTxHeader"
+            android:text="@string/total_laps_header" />
 
         <TextView
             android:id="@+id/totalLaps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="14dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:textColor="@color/black_universal"
-            android:textSize="20sp"
-            tools:text="всего кругов" />
+            style="@style/AthleteDetailResultTx"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/totalTimeHeader"
+            style="@style/AthleteDetailResultTxHeader"
+            android:text="@string/total_time_header" />
 
         <TextView
             android:id="@+id/totalTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="1"
-            android:gravity="end"
-            android:textColor="@color/black_universal"
-            android:textSize="20sp"
-            tools:text="общее время" />
+            style="@style/AthleteDetailResultTx"
+            tools:text="21:14.1" />
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/lapInfoGroup"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lapsDetailRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/raceDetailHeader"
-        tools:visibility="visible">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0.7dp"
-            android:background="@color/divider"
-            app:layout_constraintBottom_toTopOf="@+id/lapInfoGroup"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/lapInfoHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg_detail_lap_heading_item_day_night"
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:weightSum="4"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lap_number"
-                android:textColor="@color/black_universal"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/pace"
-                android:textColor="@color/black_universal"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/speed"
-                android:textColor="@color/black_universal"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="14dp"
-                android:layout_marginEnd="20dp"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/lap_time"
-                android:textColor="@color/black_universal"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0.7dp"
-            android:background="@color/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lapInfoHeader" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lapsDetailRv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lapInfoHeader"
-            tools:itemCount="5"
-            tools:listitem="@layout/detail_lap_item"
-            tools:visibility="visible" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/divider"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="6dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/raceDetailHeader"
+        tools:itemCount="5"
+        tools:listitem="@layout/detail_lap_item"
+        tools:visibility="visible" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

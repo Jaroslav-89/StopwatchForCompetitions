@@ -214,12 +214,15 @@ class StopwatchFragment : Fragment() {
     private fun renderFastResult(athletesResults: FastResultState) {
         when (athletesResults) {
             is FastResultState.Content -> {
-                fastResultAdapter.updateFastResultAdapter(athletesResults.athletesList)
+                fastResultAdapter.updateFastResultAdapter(
+                    athletesResults.athletesList,
+                    athletesResults.race
+                )
                 binding.fastResultRv.smoothScrollToPosition(0)
             }
 
             is FastResultState.Default -> {
-                fastResultAdapter.updateFastResultAdapter(emptyList())
+                fastResultAdapter.updateFastResultAdapter(emptyList(), null)
             }
         }
     }
@@ -236,7 +239,7 @@ class StopwatchFragment : Fragment() {
         binding.startStopBtn.setBackgroundColor(
             ContextCompat.getColor(
                 requireContext(),
-                R.color.green
+                R.color.start_btn_green
             )
         )
         binding.startStopBtn.setIconResource(R.drawable.ic_start)

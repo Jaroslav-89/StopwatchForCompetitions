@@ -45,7 +45,7 @@
         android:id="@+id/saveRaceFragment"
         android:name="com.example.stopwatchforcompetitions.ui.save_race.fragment.SaveRaceFragment"
         android:label="SaveRaceFragment"
-        tools:layout="@layout/fragment_save_race">
+        tools:layout="@layout/old_fragment_save_race">
         <action
             android:id="@+id/action_saveRaceFragment_to_editRaceFragment"
             app:destination="@id/editRaceFragment" />
@@ -70,10 +70,18 @@
         <action
             android:id="@+id/action_settingsFragment_to_privacyPolicyFragment"
             app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_supportProjectFragment"
+            app:destination="@id/supportProjectFragment" />
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
         android:name="com.example.stopwatchforcompetitions.ui.privacy_policy.fragment.PrivacyPolicyFragment"
         android:label="fragment_privacy_policy"
         tools:layout="@layout/fragment_privacy_policy" />
+    <fragment
+        android:id="@+id/supportProjectFragment"
+        android:name="com.example.stopwatchforcompetitions.ui.support_project.fragment.SupportProjectFragment"
+        android:label="fragment_support_project"
+        tools:layout="@layout/fragment_support_project" />
 </navigation>

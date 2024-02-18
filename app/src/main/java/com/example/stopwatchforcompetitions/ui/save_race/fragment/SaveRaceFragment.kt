@@ -12,13 +12,16 @@ import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
+import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -28,15 +31,18 @@ import com.example.stopwatchforcompetitions.ui.save_race.fragment.adapter.SaveRa
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceViewModel
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRaceState
 import com.example.stopwatchforcompetitions.util.Util
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.math.abs
 
 
 class SaveRaceFragment : Fragment() {
     private lateinit var binding: FragmentSaveRaceBinding
     private lateinit var vibrator: Vibrator
+    private lateinit var raceResultBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private val args: SaveRaceFragmentArgs by navArgs()
     private var startRaceData = 0L
-    private var resultIsVisible = false
+
     private val viewModel: SaveRaceViewModel by viewModel()
     private val saveRaceAdapter = SaveRaceAdapter {
         viewModel.toggleLapDetail(it)
@@ -48,6 +54,9 @@ class SaveRaceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSaveRaceBinding.inflate(inflater, container, false)
+        binding.root.doOnNextLayout {
+            calculatePeekHeight()
+        }
         return binding.root
     }
 
@@ -55,12 +64,41 @@ class SaveRaceFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getRaceInfo(args.startRaceDataSaveRace)
-        setSaveRaceAdapter()
+        initBottomSheets()
         setClickListeners()
 
         viewModel.saveRacesState.observe(viewLifecycleOwner) {
             renderRaceInformation(it)
         }
+    }
+
+    private fun initBottomSheets() {
+        raceResultBottomSheetBehavior = BottomSheetBehavior.from(binding.resultBottomSheet).apply {
+            state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        raceResultBottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        binding.overlay.visibility = View.GONE
+                    }
+
+                    else -> {
+                        binding.overlay.visibility = View.VISIBLE
+                    }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                binding.overlay.alpha = abs(slideOffset)
+            }
+        })
+
+        binding.saveRaceRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.saveRaceRv.adapter = saveRaceAdapter
     }
 
     override fun onRequestPermissionsResult(
@@ -82,10 +120,6 @@ class SaveRaceFragment : Fragment() {
         }
     }
 
-    private fun setSaveRaceAdapter() {
-        binding.saveRaceRv.adapter = saveRaceAdapter
-    }
-
     @SuppressLint("Recycle")
     private fun setClickListeners() {
         binding.editBtn.setOnClickListener {
@@ -101,22 +135,6 @@ class SaveRaceFragment : Fragment() {
 
         binding.addRaceInFavoriteBtn.setOnClickListener {
             viewModel.toggleFavoriteBtn()
-        }
-
-        binding.raceResultBtn.setOnClickListener {
-            if (resultIsVisible) {
-                resultIsVisible = false
-                binding.arrow.setImageDrawable(requireContext().getDrawable(R.drawable.ic_arrow_down))
-                binding.raceResultGroup.visibility = View.GONE
-                binding.athleteHeadingDivider.visibility = View.GONE
-                binding.saveRaceRv.visibility = View.GONE
-            } else {
-                resultIsVisible = true
-                binding.arrow.setImageDrawable(requireContext().getDrawable(R.drawable.ic_arrow_up))
-                binding.raceResultGroup.visibility = View.VISIBLE
-                binding.athleteHeadingDivider.visibility = View.VISIBLE
-                binding.saveRaceRv.visibility = View.VISIBLE
-            }
         }
 
         binding.saveXlsBtn.setOnClickListener {
@@ -153,8 +171,17 @@ class SaveRaceFragment : Fragment() {
                     raceName.text = raceInfo.race.name
                     numberOfAthletes.text = raceInfo.race.athletes.size.toString()
                     lapDistance.text = raceInfo.race.lapDistance.toString()
+                    totalLapInRace.text = raceInfo.race.totalLapsInRace.toString()
                     raceDescription.text = raceInfo.race.description
-                    saveRaceAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
+                    if (raceInfo.athleteList.isNotEmpty()) {
+                        placeholderMessage.visibility = View.GONE
+                        saveRaceRv.visibility = View.VISIBLE
+                        saveRaceAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
+                    } else {
+                        placeholderMessage.visibility = View.VISIBLE
+                        saveRaceRv.visibility = View.GONE
+                    }
+
                 }
             }
         }
@@ -201,7 +228,18 @@ class SaveRaceFragment : Fragment() {
             .into(binding.competitionImage)
     }
 
+    private fun calculatePeekHeight() {
+        val screenHeight = binding.root.height
+        raceResultBottomSheetBehavior.peekHeight =
+            (screenHeight - binding.numberOfAthletesHeading.bottom - BS_OFFSET_PX).coerceAtLeast(
+                BS_MIN_SIZE_PX
+            )
+        raceResultBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
     companion object {
+        private const val BS_OFFSET_PX = 24
+        private const val BS_MIN_SIZE_PX = 200
         private const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 200
     }
 }

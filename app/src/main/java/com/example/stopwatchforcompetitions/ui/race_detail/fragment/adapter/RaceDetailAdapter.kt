@@ -53,16 +53,26 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
     fun bind(athlete: Athlete, position: Int, race: Race) {
 
         with(binding) {
+            if (race.totalLapsInRace > 0) {
+                if (athlete.lapsTime.size >= race.totalLapsInRace) {
+                    detailResultItemBg.setBackgroundResource(R.drawable.bg_athlete_result_laps_done_item)
+                } else {
+                    detailResultItemBg.setBackgroundResource(R.drawable.bg_athlete_result_in_progress_item)
+                }
+            } else {
+                detailResultItemBg.setBackgroundResource(R.drawable.bg_athlete_result_in_progress_item)
+            }
+            
             val athletePositionInRace = (position + 1)
             athletePosition.text = athletePositionInRace.toString()
             athleteNumber.text = athlete.number
             totalLaps.text = athlete.lapsTime.size.toString()
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             if (athlete.isExpandable) {
-                lapInfoGroup.visibility = View.VISIBLE
+                lapsDetailRv.visibility = View.VISIBLE
                 openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_close_laps_info))
             } else {
-                lapInfoGroup.visibility = View.GONE
+                lapsDetailRv.visibility = View.GONE
                 openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_open_laps_info))
             }
         }

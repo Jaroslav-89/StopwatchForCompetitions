@@ -11,7 +11,8 @@ data class RaceEntity(
     val description: String,
     val imgUrl: String,
     val lapDistance: Int,
+    val totalLapsInRace: Int,
     val athletes: String,
     val isStarted: Boolean,
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
 )

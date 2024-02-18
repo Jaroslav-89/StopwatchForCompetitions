@@ -57,6 +57,11 @@ class EditRaceViewModel(
         renderState(raceAfterChange!!)
     }
 
+    fun editTotalLapInRace(text: String) {
+        raceAfterChange = raceAfterChange?.copy(totalLapsInRace = text.trim().toInt())
+        renderState(raceAfterChange!!)
+    }
+
     fun editDescriptionText(text: String) {
         raceAfterChange = raceAfterChange?.copy(description = text)
         renderState(raceAfterChange!!)

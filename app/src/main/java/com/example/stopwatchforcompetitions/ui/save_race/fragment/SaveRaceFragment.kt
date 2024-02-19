@@ -27,6 +27,8 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.stopwatchforcompetitions.R
 import com.example.stopwatchforcompetitions.databinding.FragmentSaveRaceBinding
+import com.example.stopwatchforcompetitions.domain.model.SortingState
+import com.example.stopwatchforcompetitions.ui.race_detail.view_model.state.SortingScreenState
 import com.example.stopwatchforcompetitions.ui.save_race.fragment.adapter.SaveRaceAdapter
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceViewModel
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRaceState
@@ -70,6 +72,10 @@ class SaveRaceFragment : Fragment() {
         viewModel.saveRacesState.observe(viewLifecycleOwner) {
             renderRaceInformation(it)
         }
+
+        viewModel.sortingScreenState.observe(viewLifecycleOwner) {
+            renderSortingScreen(it)
+        }
     }
 
     private fun initBottomSheets() {
@@ -86,8 +92,15 @@ class SaveRaceFragment : Fragment() {
                         binding.overlay.visibility = View.GONE
                     }
 
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        binding.sortingTv.visibility = View.VISIBLE
+                        binding.sortingIc.visibility = View.VISIBLE
+                    }
+
                     else -> {
                         binding.overlay.visibility = View.VISIBLE
+                        binding.sortingTv.visibility = View.GONE
+                        binding.sortingIc.visibility = View.GONE
                     }
                 }
             }
@@ -122,39 +135,65 @@ class SaveRaceFragment : Fragment() {
 
     @SuppressLint("Recycle")
     private fun setClickListeners() {
-        binding.editBtn.setOnClickListener {
-            val argument = startRaceData
-            val action =
-                SaveRaceFragmentDirections.actionSaveRaceFragmentToEditRaceFragment(argument)
-            findNavController().navigate(action)
-        }
+        with(binding) {
+            editBtn.setOnClickListener {
+                val argument = startRaceData
+                val action =
+                    SaveRaceFragmentDirections.actionSaveRaceFragmentToEditRaceFragment(argument)
+                findNavController().navigate(action)
+            }
 
-        binding.backBtn.setOnClickListener {
-            findNavController().navigateUp()
-        }
+            backBtn.setOnClickListener {
+                findNavController().navigateUp()
+            }
 
-        binding.addRaceInFavoriteBtn.setOnClickListener {
-            viewModel.toggleFavoriteBtn()
-        }
+            addRaceInFavoriteBtn.setOnClickListener {
+                viewModel.toggleFavoriteBtn()
+            }
 
-        binding.saveXlsBtn.setOnClickListener {
-            if (Build.VERSION.SDK_INT > 29) {
-                showToast()
-                viewModel.saveResultInXls()
-            } else {
-                if (ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ) != PackageManager.PERMISSION_GRANTED
-                ) {
-                    requireActivity().requestPermissions(
-                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-                    )
-                } else {
+            saveXlsBtn.setOnClickListener {
+                if (Build.VERSION.SDK_INT > 29) {
                     showToast()
                     viewModel.saveResultInXls()
+                } else {
+                    if (ContextCompat.checkSelfPermission(
+                            requireContext(),
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        requireActivity().requestPermissions(
+                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+                        )
+                    } else {
+                        showToast()
+                        viewModel.saveResultInXls()
+                    }
                 }
+            }
+
+            sortingBtn.setOnClickListener {
+                viewModel.toggleSortingBtn()
+            }
+
+            sortPosFtL.setOnClickListener {
+                viewModel.changeSorting(SortingState.POSITION_FIRST_TO_LAST_ORDER)
+            }
+
+            sortPosLtF.setOnClickListener {
+                viewModel.changeSorting(SortingState.POSITION_LAST_TO_FIRST_ORDER)
+            }
+
+            sortNumFtL.setOnClickListener {
+                viewModel.changeSorting(SortingState.NUMBER_FIRST_TO_LAST_ORDER)
+            }
+
+            sortNumLtF.setOnClickListener {
+                viewModel.changeSorting(SortingState.NUMBER_LAST_TO_FIRST_ORDER)
+            }
+
+            overlaySorting.setOnClickListener {
+                viewModel.toggleSortingBtn()
             }
         }
     }
@@ -181,10 +220,80 @@ class SaveRaceFragment : Fragment() {
                         placeholderMessage.visibility = View.VISIBLE
                         saveRaceRv.visibility = View.GONE
                     }
-
                 }
             }
         }
+    }
+
+    private fun renderSortingScreen(sortingScreenState: SortingScreenState) {
+        when (sortingScreenState) {
+            is SortingScreenState.Gone -> {
+                binding.overlaySorting.visibility = View.GONE
+                binding.sortingGroup.visibility = View.GONE
+                binding.resultBottomSheet.visibility = View.VISIBLE
+                binding.sortingTv.text = getSortingText(sortingScreenState.sortingState)
+
+            }
+
+            is SortingScreenState.Visible -> {
+                binding.resultBottomSheet.visibility = View.GONE
+                binding.overlaySorting.visibility = View.VISIBLE
+                binding.sortingGroup.visibility = View.VISIBLE
+                showSelectSortingPosition(sortingScreenState.sortingState)
+            }
+        }
+    }
+
+    private fun getSortingText(sortingState: SortingState): String {
+        return when (sortingState) {
+            SortingState.POSITION_FIRST_TO_LAST_ORDER -> {
+                binding.sortPosFtLIc.visibility = View.VISIBLE
+                requireContext().getString(R.string.pos_first_to_last)
+            }
+
+            SortingState.POSITION_LAST_TO_FIRST_ORDER -> {
+                binding.sortPosLtFIc.visibility = View.VISIBLE
+                requireContext().getString(R.string.pos_last_to_first)
+            }
+
+            SortingState.NUMBER_FIRST_TO_LAST_ORDER -> {
+                binding.sortNumFtLIc.visibility = View.VISIBLE
+                requireContext().getString(R.string.num_first_to_last)
+            }
+
+            SortingState.NUMBER_LAST_TO_FIRST_ORDER -> {
+                binding.sortNumLtFIc.visibility = View.VISIBLE
+                requireContext().getString(R.string.num_last_to_first)
+            }
+        }
+    }
+
+    private fun showSelectSortingPosition(sortingState: SortingState) {
+        hideSortingIcon()
+        when (sortingState) {
+            SortingState.POSITION_FIRST_TO_LAST_ORDER -> {
+                binding.sortPosFtLIc.visibility = View.VISIBLE
+            }
+
+            SortingState.POSITION_LAST_TO_FIRST_ORDER -> {
+                binding.sortPosLtFIc.visibility = View.VISIBLE
+            }
+
+            SortingState.NUMBER_FIRST_TO_LAST_ORDER -> {
+                binding.sortNumFtLIc.visibility = View.VISIBLE
+            }
+
+            SortingState.NUMBER_LAST_TO_FIRST_ORDER -> {
+                binding.sortNumLtFIc.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun hideSortingIcon() {
+        binding.sortPosFtLIc.visibility = View.GONE
+        binding.sortPosLtFIc.visibility = View.GONE
+        binding.sortNumFtLIc.visibility = View.GONE
+        binding.sortNumLtFIc.visibility = View.GONE
     }
 
     private fun getFavoriteToggleDrawable(isFavorite: Boolean?): Drawable? {

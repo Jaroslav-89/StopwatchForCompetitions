@@ -6,5 +6,6 @@ data class Athlete(
     val number: String,
     val lapsTime: List<Long>,
     val addLastResult: Long,
-    val isExpandable: Boolean
+    val isExpandable: Boolean,
+    val position: Int = 0,
 )

@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.stopwatchforcompetitions.domain.api.StopwatchInteractor
 import com.example.stopwatchforcompetitions.domain.model.Athlete
 import com.example.stopwatchforcompetitions.domain.model.Race
+import com.example.stopwatchforcompetitions.domain.model.SortingState
+import com.example.stopwatchforcompetitions.ui.race_detail.view_model.state.SortingScreenState
 import com.example.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRaceState
 import kotlinx.coroutines.launch
 
@@ -15,21 +17,20 @@ class SaveRaceViewModel(
 ) : ViewModel() {
 
     private var athletes = emptyList<Athlete>()
-
-    private var currentRace = Race(
-        startTime = 0,
-        name = "",
-        description = "",
-        imgUrl = "",
-        lapDistance = 0,
-        athletes = emptyList(),
-        isStarted = false,
-        isFavorite = false
-    )
+    private var currentRace = Race()
+    private var sortingState: SortingState = SortingState.POSITION_FIRST_TO_LAST_ORDER
+    private var sortingScreenIsVisible = false
 
     private val _saveRacesState = MutableLiveData<SaveRaceState>(SaveRaceState.Empty)
     val saveRacesState: LiveData<SaveRaceState>
         get() = _saveRacesState
+
+    private val _sortingScreenState =
+        MutableLiveData<SortingScreenState>(
+            SortingScreenState.Gone(SortingState.POSITION_FIRST_TO_LAST_ORDER)
+        )
+    val sortingScreenState: LiveData<SortingScreenState>
+        get() = _sortingScreenState
 
     fun getRaceInfo(data: Long) {
         viewModelScope.launch {
@@ -80,6 +81,22 @@ class SaveRaceViewModel(
         renderState(currentRace, newList)
     }
 
+    fun toggleSortingBtn() {
+        if (sortingScreenIsVisible) {
+            sortingScreenIsVisible = false
+            _sortingScreenState.value = SortingScreenState.Gone(sortingState)
+        } else {
+            sortingScreenIsVisible = true
+            _sortingScreenState.value = SortingScreenState.Visible(sortingState)
+        }
+    }
+
+    fun changeSorting(sortType: SortingState) {
+        sortingState = sortType
+        toggleSortingBtn()
+        renderState(currentRace, athletes)
+    }
+
     fun saveResultInXls() {
         viewModelScope.launch {
             interactor.saveResultInXls(currentRace.startTime)
@@ -88,6 +105,41 @@ class SaveRaceViewModel(
     }
 
     private fun renderState(race: Race, athleteList: List<Athlete>) {
-        _saveRacesState.postValue(SaveRaceState.Content(race, athleteList))
+        val getAthleteListWithPositions = getAthleteListWithPositions(athleteList)
+        val sortedList = when (sortingState) {
+            SortingState.POSITION_FIRST_TO_LAST_ORDER -> {
+                getAthleteListWithPositions.sortedBy { it.position }
+            }
+
+            SortingState.POSITION_LAST_TO_FIRST_ORDER -> {
+                getAthleteListWithPositions.sortedByDescending { it.position }
+            }
+
+            SortingState.NUMBER_FIRST_TO_LAST_ORDER -> {
+
+                getAthleteListWithPositions.sortedBy { it.number.toInt() }
+            }
+
+            SortingState.NUMBER_LAST_TO_FIRST_ORDER -> {
+                getAthleteListWithPositions.sortedByDescending { it.number.toInt() }
+            }
+        }
+        _saveRacesState.postValue(SaveRaceState.Content(race, sortedList))
+    }
+
+    private fun getAthleteListWithPositions(athleteList: List<Athlete>): List<Athlete> {
+        val athleteListSortedByPosition =
+            athleteList.sortedBy { it.addLastResult }.sortedByDescending { it.lapsTime.size }
+        val athleteListWithPositions = mutableListOf<Athlete>()
+        for (athlete in athleteListSortedByPosition) {
+            athleteListWithPositions.add(
+                athlete.copy(
+                    position = athleteListSortedByPosition.indexOf(
+                        athlete
+                    ) + 1
+                )
+            )
+        }
+        return athleteListWithPositions
     }
 }

@@ -16,8 +16,7 @@ class RaceDetailAdapter(private val clickListener: AthleteClickListener) :
     private var athletes = emptyList<Athlete>()
     private var race: Race? = null
     fun updateRaceDetailAdapter(athletesList: List<Athlete>, newRace: Race) {
-        athletes =
-            athletesList.sortedBy { it.addLastResult }.sortedByDescending { it.lapsTime.size }
+        athletes = athletesList
         race = newRace
         this.notifyDataSetChanged()
     }
@@ -62,9 +61,8 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
             } else {
                 detailResultItemBg.setBackgroundResource(R.drawable.bg_athlete_result_in_progress_item)
             }
-            
-            val athletePositionInRace = (position + 1)
-            athletePosition.text = athletePositionInRace.toString()
+
+            athletePosition.text = athlete.position.toString()
             athleteNumber.text = athlete.number
             totalLaps.text = athlete.lapsTime.size.toString()
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)

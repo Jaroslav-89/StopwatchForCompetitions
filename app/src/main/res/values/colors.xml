@@ -32,4 +32,5 @@
     <color name="athlete_race_result_laps_done_item">#6EEE64</color>
     <color name="athlete_race_result_item">#FFEB3B</color>
     <color name="athlete_fast_result_item">#FDFDFD</color>
+    <color name="bg_sorting_universal">#CD3A3C4B</color>
 </resources>

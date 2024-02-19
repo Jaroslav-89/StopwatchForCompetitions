@@ -21,7 +21,6 @@
         android:id="@+id/headingTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="14dp"
         android:text="@string/race_history_heading"
         android:textColor="@color/black_day_night"

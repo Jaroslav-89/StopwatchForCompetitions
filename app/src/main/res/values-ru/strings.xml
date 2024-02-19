@@ -72,6 +72,7 @@
     <string name="speed">Скорость км/ч</string>
     <string name="lap_time">Время круга</string>
     <string name="total_lap_in_race_heading">Количество кругов\nв гонке</string>
+    <string name="btn_sorting_description">Кнопка сортировки информации о гонке</string>
     <!--    save_race-->
     <string name="btn_favorite_description">Кнопка добавить событие в избранное</string>
     <string name="btn_save_result_xls_description">Кнопка сохранить результаты в память телефона</string>
@@ -83,6 +84,12 @@
     <string name="save_msg">Файл скачан в папку:</string>
     <string name="xls">xls</string>
     <string name="empty_result">В этом событии нет участников</string>
+    <!--    sorting_screen-->
+    <string name="ic_sorting_description">Выбранный параметр сортировки</string>
+    <string name="pos_first_to_last">Позиция (начиная с первой)</string>
+    <string name="pos_last_to_first">Позиция (начиная с последней)</string>
+    <string name="num_first_to_last">Номер (по возрастанию)</string>
+    <string name="num_last_to_first">Номер (по убыванию)</string>
     <!--    alert_dialog_message-->
     <string name="title_save">Сохранение</string>
     <string name="title_back">Выход</string>

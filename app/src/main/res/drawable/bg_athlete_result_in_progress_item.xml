@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <solid android:color="@color/athlete_fast_result_item" />
-    <stroke android:color="@color/black_day_night" android:width="2dp"/>
+    <stroke android:color="@color/black_universal" android:width="2dp"/>
     <corners android:radius="14dp" />
 
 </shape>

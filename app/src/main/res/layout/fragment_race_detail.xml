@@ -258,6 +258,7 @@
             <ImageView
                 android:id="@+id/sortPosFtLIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortPosFtL"
                 app:layout_constraintStart_toStartOf="@+id/sortPosLtFIc"
                 app:layout_constraintTop_toTopOf="@+id/sortPosFtL"
@@ -273,6 +274,7 @@
             <ImageView
                 android:id="@+id/sortPosLtFIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortPosLtF"
                 app:layout_constraintStart_toEndOf="@+id/sortPosLtF"
                 app:layout_constraintTop_toTopOf="@+id/sortPosLtF"
@@ -288,6 +290,7 @@
             <ImageView
                 android:id="@+id/sortNumFtLIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortNumFtL"
                 app:layout_constraintStart_toStartOf="@+id/sortPosFtLIc"
                 app:layout_constraintTop_toTopOf="@+id/sortNumFtL"
@@ -303,6 +306,7 @@
             <ImageView
                 android:id="@+id/sortNumLtFIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortNumLtF"
                 app:layout_constraintStart_toStartOf="@+id/sortPosFtLIc"
                 app:layout_constraintTop_toTopOf="@+id/sortNumLtF"

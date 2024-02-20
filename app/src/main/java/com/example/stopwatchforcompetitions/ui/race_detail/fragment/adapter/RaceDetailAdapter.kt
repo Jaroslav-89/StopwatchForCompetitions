@@ -65,6 +65,11 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
             athletePosition.text = athlete.position.toString()
             athleteNumber.text = athlete.number
             totalLaps.text = athlete.lapsTime.size.toString()
+            val totalDistance = race.lapDistance * athlete.lapsTime.size
+            val totalRaceTime = athlete.addLastResult - athlete.race
+            averagePace.text = Util.convertToPace(totalDistance, totalRaceTime)
+            averageSpeed.text = Util.convertToSpeed(totalDistance, totalRaceTime)
+            totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             if (athlete.isExpandable) {
                 lapsDetailRv.visibility = View.VISIBLE

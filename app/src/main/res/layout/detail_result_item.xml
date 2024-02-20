@@ -5,10 +5,11 @@
     android:id="@+id/detailResultItemBg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="4dp"
     android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="4dp"
     android:background="@drawable/bg_athlete_result_in_progress_item"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="4dp">
 
     <LinearLayout
         android:id="@+id/raceDetailHeader"
@@ -16,8 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:weightSum="6">
 
         <ImageView
             android:id="@+id/openCloseLapsIc"
@@ -29,46 +29,120 @@
             android:src="@drawable/ic_open_laps_info"
             app:tint="@color/black_universal" />
 
-        <TextView
-            android:id="@+id/athletePositionHeader"
-            style="@style/AthleteDetailResultTxHeader"
-            android:layout_marginStart="0dp"
-            android:text="@string/athlete_position_header" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/athletePosition"
-            style="@style/AthleteDetailResultTx"
-            tools:text="1" />
+            <TextView
+                android:id="@+id/athletePositionHeader"
+                style="@style/AthleteDetailResultTxHeader"
+                android:text="@string/athlete_position_header" />
 
-        <TextView
-            android:id="@+id/athleteNumberHeader"
-            style="@style/AthleteDetailResultTxHeader"
-            android:text="@string/athlete_number_header" />
+            <TextView
+                android:id="@+id/athletePosition"
+                style="@style/AthleteDetailResultTx"
+                tools:text="1" />
 
-        <TextView
-            android:id="@+id/athleteNumber"
-            style="@style/AthleteDetailResultTx"
-            tools:text="25" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/totalLapsHeader"
-            style="@style/AthleteDetailResultTxHeader"
-            android:text="@string/total_laps_header" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/totalLaps"
-            style="@style/AthleteDetailResultTx"
-            tools:text="10" />
+            <TextView
+                android:id="@+id/athleteNumberHeader"
+                style="@style/AthleteDetailResultTxHeader"
+                android:text="@string/athlete_number_header" />
 
-        <TextView
-            android:id="@+id/totalTimeHeader"
-            style="@style/AthleteDetailResultTxHeader"
-            android:text="@string/total_time_header" />
+            <TextView
+                android:id="@+id/athleteNumber"
+                style="@style/AthleteDetailResultTx"
+                tools:text="25" />
 
-        <TextView
-            android:id="@+id/totalTime"
-            style="@style/AthleteDetailResultTx"
-            tools:text="21:14.1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/totalLapsHeader"
+                style="@style/AthleteDetailResultTxHeader"
+                android:text="@string/total_laps_header" />
+
+            <TextView
+                android:id="@+id/totalLaps"
+                style="@style/AthleteDetailResultTx"
+                tools:text="10" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/paceHeader"
+                style="@style/LapDetailItemTxHeader"
+                android:text="@string/average_pace_header" />
+
+            <TextView
+                android:id="@+id/averagePace"
+                style="@style/AthleteDetailResultTx"
+                android:text="@string/not_available" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/speedHeader"
+                style="@style/LapDetailItemTxHeader"
+                android:text="@string/average_speed_header" />
+
+            <TextView
+                android:id="@+id/averageSpeed"
+                style="@style/AthleteDetailResultTx"
+                android:text="@string/not_available" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/totalTimeHeader"
+                style="@style/AthleteDetailResultTxHeader"
+                android:text="@string/total_time_header" />
+
+            <TextView
+                android:id="@+id/totalTime"
+                style="@style/AthleteDetailResultTx"
+                tools:text="121:21:14.1" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

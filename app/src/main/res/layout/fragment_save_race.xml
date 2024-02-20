@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.save_race.fragment.SaveRaceFragment">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/productEditCreateGroup"
@@ -263,7 +263,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/headerGroup"
@@ -339,8 +339,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="12dp"
                 android:paddingVertical="2dp"
-                android:paddingStart="6dp"
                 android:text="@string/pos_first_to_last"
                 android:textColor="@color/black_universal"
                 android:textSize="12sp"
@@ -353,7 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
                 android:contentDescription="@string/btn_sorting_description"
-                android:padding="6dp"
+                android:paddingHorizontal="4dp"
                 android:rotation="90"
                 android:src="@drawable/ic_sorting"
                 android:visibility="gone"
@@ -380,10 +380,11 @@
             android:id="@+id/saveRaceRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="10dp"
             android:visibility="gone"
             tools:itemCount="6"
-            tools:listitem="@layout/detail_result_item" />
+            tools:listitem="@layout/detail_result_item"
+            tools:visibility="visible" />
 
     </LinearLayout>
 
@@ -398,11 +399,11 @@
         android:id="@+id/sortingGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/bg_lap_item"
         android:orientation="horizontal"
         android:padding="8dp"
         android:visibility="gone"
-        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -423,6 +424,7 @@
             <ImageView
                 android:id="@+id/sortPosFtLIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortPosFtL"
                 app:layout_constraintStart_toStartOf="@+id/sortPosLtFIc"
                 app:layout_constraintTop_toTopOf="@+id/sortPosFtL"
@@ -438,6 +440,7 @@
             <ImageView
                 android:id="@+id/sortPosLtFIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortPosLtF"
                 app:layout_constraintStart_toEndOf="@+id/sortPosLtF"
                 app:layout_constraintTop_toTopOf="@+id/sortPosLtF"
@@ -453,6 +456,7 @@
             <ImageView
                 android:id="@+id/sortNumFtLIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortNumFtL"
                 app:layout_constraintStart_toStartOf="@+id/sortPosFtLIc"
                 app:layout_constraintTop_toTopOf="@+id/sortNumFtL"
@@ -468,6 +472,7 @@
             <ImageView
                 android:id="@+id/sortNumLtFIc"
                 style="@style/SortingIc"
+                android:contentDescription="@string/ic_sorting_description"
                 app:layout_constraintBottom_toBottomOf="@+id/sortNumLtF"
                 app:layout_constraintStart_toStartOf="@+id/sortPosFtLIc"
                 app:layout_constraintTop_toTopOf="@+id/sortNumLtF"

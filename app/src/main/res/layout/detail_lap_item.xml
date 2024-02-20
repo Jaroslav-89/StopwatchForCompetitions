@@ -4,50 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="start"
     android:layout_margin="2dp"
-    android:padding="2dp"
     android:background="@drawable/bg_lap_item"
-    android:orientation="horizontal">
+    android:gravity="start"
+    android:orientation="horizontal"
+    android:padding="2dp"
+    android:weightSum="8">
 
     <TextView
         android:id="@+id/lapNumberHeader"
         style="@style/LapDetailItemTxHeader"
+        android:layout_weight="1"
         android:text="@string/lap_number_header" />
 
     <TextView
         android:id="@+id/lapNumber"
         style="@style/LapDetailItemTx"
+        android:layout_weight="1"
         tools:text="3" />
 
     <TextView
         android:id="@+id/paceHeader"
         style="@style/LapDetailItemTxHeader"
+        android:layout_weight="1"
         android:text="@string/pace_header" />
 
     <TextView
         android:id="@+id/pace"
         style="@style/LapDetailItemTx"
+        android:layout_weight="1"
         tools:text="5.11" />
 
     <TextView
         android:id="@+id/speedHeader"
         style="@style/LapDetailItemTxHeader"
+        android:layout_weight="1"
         android:text="@string/speed_header" />
 
     <TextView
         android:id="@+id/speed"
         style="@style/LapDetailItemTx"
+        android:layout_weight="1"
         tools:text="11.7" />
 
     <TextView
         android:id="@+id/lapTimeHeader"
         style="@style/LapDetailItemTxHeader"
+        android:layout_weight="1"
         android:text="@string/lap_time_header" />
 
     <TextView
         android:id="@+id/lapTime"
         style="@style/LapDetailItemTx"
+        android:layout_weight="1"
         tools:text="15:25.1" />
 
 </LinearLayout>

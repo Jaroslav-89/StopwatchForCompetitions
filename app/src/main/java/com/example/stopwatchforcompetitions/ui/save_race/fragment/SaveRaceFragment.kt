@@ -93,20 +93,26 @@ class SaveRaceFragment : Fragment() {
                     }
 
                     BottomSheetBehavior.STATE_EXPANDED -> {
-                        binding.sortingTv.visibility = View.VISIBLE
-                        binding.sortingIc.visibility = View.VISIBLE
                     }
 
                     else -> {
                         binding.overlay.visibility = View.VISIBLE
-                        binding.sortingTv.visibility = View.GONE
-                        binding.sortingIc.visibility = View.GONE
                     }
                 }
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 binding.overlay.alpha = abs(slideOffset)
+                binding.sortingTv.alpha = abs(slideOffset)
+                binding.sortingIc.alpha = abs(slideOffset)
+
+                if (slideOffset > 0.1) {
+                    binding.sortingTv.visibility = View.VISIBLE
+                    binding.sortingIc.visibility = View.VISIBLE
+                } else {
+                    binding.sortingTv.visibility = View.GONE
+                    binding.sortingIc.visibility = View.GONE
+                }
             }
         })
 
@@ -350,5 +356,6 @@ class SaveRaceFragment : Fragment() {
         private const val BS_OFFSET_PX = 24
         private const val BS_MIN_SIZE_PX = 200
         private const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 200
+        private const val DURATION = 200L
     }
 }

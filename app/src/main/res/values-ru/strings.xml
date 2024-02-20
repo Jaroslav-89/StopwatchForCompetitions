@@ -32,15 +32,18 @@
     <string name="last_lap_time_header">Время\nкруга</string>
     <string name="total_time_fast_result_header">Общее\nвремя</string>
     <!--    detail_result_item-->
-    <string name="athlete_position_header">Поз.</string>
-    <string name="athlete_number_header">№</string>
-    <string name="total_laps_header">Завершено\nкругов</string>
+    <string name="athlete_position_header">Поз.\n</string>
+    <string name="athlete_number_header">№\n</string>
+    <string name="total_laps_header">Кругов\n</string>
+    <string name="average_pace_header">Ср.темп\n(мин/км)</string>
+    <string name="average_speed_header">Ср.скорость\n(км/ч)</string>
     <string name="total_time_header">Общее\nвремя</string>
     <string name="btn_open_close_laps_detail_description">Кнопка детальной информации о завершенных кругах</string>
+    <string name="not_available">n/a</string>
     <!--    detail_lap_item-->
     <string name="lap_number_header">Круг</string>
     <string name="pace_header">Темп\n(мин/км)</string>
-    <string name="speed_header">Скорость\n(км/ч)</string>
+    <string name="speed_header">Скор.\n(км/ч)</string>
     <string name="lap_time_header">Время\nкруга</string>
     <!--    edit_race-->
     <string name="btn_album_cover_description">Кнопка изменить обложку события</string>

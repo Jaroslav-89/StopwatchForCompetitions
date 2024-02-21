@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.stopwatchforcompetitions"
+    namespace = "com.jaroapps.stopwatchforcompetitions"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.stopwatchforcompetitions"
+        applicationId = "com.jaroapps.stopwatchforcompetitions"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 112
+        versionName = "1.12"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

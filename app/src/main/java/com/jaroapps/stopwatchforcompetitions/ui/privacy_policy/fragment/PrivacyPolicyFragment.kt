@@ -1,31 +1,28 @@
 package com.jaroapps.stopwatchforcompetitions.ui.privacy_policy.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentPrivacyPolicyBinding
 
-class PrivacyPolicyFragment : Fragment() {
+class PrivacyPolicyFragment : Fragment(R.layout.fragment_privacy_policy) {
 
-    private lateinit var binding: FragmentPrivacyPolicyBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentPrivacyPolicyBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private var _binding: FragmentPrivacyPolicyBinding? = null
+    private val binding get() = _binding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentPrivacyPolicyBinding.bind(view)
 
         binding.backBtn.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

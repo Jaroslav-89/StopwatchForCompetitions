@@ -10,9 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
@@ -37,10 +35,11 @@ import java.io.IOException
 import java.util.Date
 import java.util.Locale
 
-class EditRaceFragment : Fragment() {
-    private var imageUri: Uri? = null
+class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
 
-    private lateinit var binding: FragmentEditRaceBinding
+    private var _binding: FragmentEditRaceBinding? = null
+    private val binding get() = _binding!!
+    private var imageUri: Uri? = null
     private val args: EditRaceFragmentArgs by navArgs()
     private val viewModel: EditRaceViewModel by viewModel()
 
@@ -48,17 +47,9 @@ class EditRaceFragment : Fragment() {
         requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentEditRaceBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentEditRaceBinding.bind(view)
 
         viewModel.getRaceByData(args.startRaceDataEditRace)
 
@@ -75,6 +66,11 @@ class EditRaceFragment : Fragment() {
                     alertDialog(BACK)
                 }
             })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setClickListeners() {

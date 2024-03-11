@@ -122,7 +122,7 @@
     <string name="share_tv">Поделиться приложением</string>
     <string name="support_tv">Связаться с автором</string>
     <string name="agreement_tv">Политика конфиденциальности</string>
-    <string name="share_url"> </string>
+    <string name="share_url">https://play.google.com/store/apps/details?id=com.jaroapps.stopwatchforcompetitions</string>
     <string name="email_support">jar89apps@gmail.com</string>
     <string name="email_support_subject">Stopwatch for competitions</string>
     <string name="email_support_message"> </string>
@@ -134,7 +134,7 @@
     <string name="support_project_btn">Donate stream</string>
     <string name="rate_project_btn">Оценить приложение</string>
     <string name="donate_stream_url">https://donate.stream/jar_apps</string>
-    <string name="rate_app_url"> </string>
+    <string name="rate_app_url">https://play.google.com/store/apps/details?id=com.jaroapps.stopwatchforcompetitions</string>
     <!--    privacy_policy-->
     <string name="privacy_policy_heading">Политика конфиденциальности</string>
     <string name="privacy_policy_text">Политика конфиденциальности\n\n

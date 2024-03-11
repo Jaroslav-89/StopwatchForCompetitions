@@ -2,20 +2,20 @@
 <resources>
     <string name="app_name">Stopwatch For Competitions</string>
     <!--    common-->
-    <string name="btn_back_description">Кнопка назад</string>
-    <string name="album_cover_description">Обложка события</string>
-    <string name="btn_edit_race_description">Кнопка изменить информацию о гонке</string>
+    <string name="btn_back_description">Back button</string>
+    <string name="album_cover_description">Event cover</string>
+    <string name="btn_edit_race_description">Edit race information button</string>
     <!--    stopwatch-->
     <string name="default_timer">00:00.0</string>
-    <string name="athlete_number_hint">№ УЧАСТНИКА</string>
-    <string name="athlete_number_fast_result">№ участника</string>
-    <string name="total_lap_fast_result">Кол-во кругов</string>
-    <string name="total_time_fast_result">Общее время</string>
-    <string name="btn_start_stop_description">Кнопка начать или закончить гонку</string>
-    <string name="btn_menu_description">Кнопка меню</string>
-    <string name="btn_add_result_description">Кнопка добавить результат участника</string>
-    <string name="btn_delete_number_description">Кнопка удалить цифру</string>
-    <string name="empty_field_description">пустое место</string>
+    <string name="athlete_number_hint">PARTICIPANT NO.</string>
+    <string name="athlete_number_fast_result">Participant no.</string>
+    <string name="total_lap_fast_result">Number of laps</string>
+    <string name="total_time_fast_result">Total time</string>
+    <string name="btn_start_stop_description">Start or finish race button</string>
+    <string name="btn_menu_description">Menu button</string>
+    <string name="btn_add_result_description">Add participant result button</string>
+    <string name="btn_delete_number_description">Delete digit button</string>
+    <string name="empty_field_description">Empty field</string>
     <string name="figure_one">1</string>
     <string name="figure_two">2</string>
     <string name="figure_three">3</string>
@@ -27,117 +27,118 @@
     <string name="figure_nine">9</string>
     <string name="figure_zero">0</string>
     <!--    fast_result_item-->
-    <string name="number_header">№</string>
-    <string name="total_lap_header">Кругов\nзавершено</string>
-    <string name="last_lap_time_header">Время\nкруга</string>
-    <string name="total_time_fast_result_header">Общее\nвремя</string>
+    <string name="number_header">No.</string>
+    <string name="total_lap_header">Laps\ncompleted</string>
+    <string name="last_lap_time_header">Lap\ntime</string>
+    <string name="total_time_fast_result_header">Total\ntime</string>
     <!--    detail_result_item-->
-    <string name="athlete_position_header">Поз.\n</string>
-    <string name="athlete_number_header">№\n</string>
-    <string name="total_laps_header">Кругов\n</string>
-    <string name="average_pace_header">Ср.темп\n(мин/км)</string>
-    <string name="average_speed_header">Ср.скорость\n(км/ч)</string>
-    <string name="total_time_header">Общее\nвремя</string>
-    <string name="btn_open_close_laps_detail_description">Кнопка детальной информации о завершенных кругах</string>
+    <string name="athlete_position_header">Pos.\n</string>
+    <string name="athlete_number_header">No.\n</string>
+    <string name="total_laps_header">Laps\n</string>
+    <string name="average_pace_header">Avg. pace\n(min/km)</string>
+    <string name="average_speed_header">Avg. speed\n(km/h)</string>
+    <string name="total_time_header">Total\ntime</string>
+    <string name="btn_open_close_laps_detail_description">Detailed information about completed laps button</string>
     <string name="not_available">n/a</string>
     <!--    detail_lap_item-->
-    <string name="lap_number_header">Круг</string>
-    <string name="pace_header">Темп\n(мин/км)</string>
-    <string name="speed_header">Скор.\n(км/ч)</string>
-    <string name="lap_time_header">Время\nкруга</string>
+    <string name="lap_number_header">Lap</string>
+    <string name="pace_header">Pace\n(min/km)</string>
+    <string name="speed_header">Speed\n(km/h)</string>
+    <string name="lap_time_header">Lap\ntime</string>
     <!--    edit_race-->
-    <string name="btn_album_cover_description">Кнопка изменить обложку события</string>
-    <string name="btn_delete_album_cover_description">Кнопка удалить обложку события</string>
-    <string name="btn_delete_race_description">Кнопка удалить событие</string>
-    <string name="btn_save_race_description">Кнопка сохранить изменения и выйти</string>
-    <string name="race_name_hint">Введите название</string>
-    <string name="race_description_hint">Введите описание</string>
-    <string name="lap_distance_hint">Введите длинну круга</string>
-    <string name="total_lap_in_race_hint">Введите количество кргуов</string>
-    <string name="change_competition">Изменить событие</string>
-    <string name="race_name">Название\nсобытия</string>
-    <string name="race_description">Описание</string>
-    <string name="delete_competition">Удалить событие</string>
-    <string name="start_data">Дата старта</string>
-    <string name="start_time">Время старта</string>
-    <string name="lap_distance">Длинна круга\n(в метрах)</string>
-    <string name="total_lap_in_race">Кругов в\nгонке</string>
+    <string name="btn_album_cover_description">Change event cover button</string>
+    <string name="btn_delete_album_cover_description">Delete event cover button</string>
+    <string name="btn_delete_race_description">Delete event button</string>
+    <string name="btn_save_race_description">Save changes and exit button</string>
+    <string name="race_name_hint">Enter name</string>
+    <string name="race_description_hint">Enter description</string>
+    <string name="lap_distance_hint">Enter lap length</string>
+    <string name="total_lap_in_race_hint">Enter number of laps</string>
+    <string name="change_competition">Change event</string>
+    <string name="race_name">Event\nname</string>
+    <string name="race_description">Description</string>
+    <string name="delete_competition">Delete event</string>
+    <string name="start_data">Start date</string>
+    <string name="start_time">Start time</string>
+    <string name="lap_distance">Lap length\n(in meters)</string>
+    <string name="total_lap_in_race">Laps in\nrace</string>
     <!--    race_detail-->
-    <string name="lap_distance_race_detail">Длинна круга (в метрах)</string>
-    <string name="race_name_race_detail">Название события</string>
-    <string name="race_detail_header">Информация о гонке</string>
-    <string name="position">Позиция</string>
-    <string name="athlete_number">№\nучастника</string>
-    <string name="total_lap">Кол-во\nкругов</string>
-    <string name="total_time">Общее\nвремя</string>
-    <string name="lap_number">№ круга</string>
-    <string name="pace">Темп м/км</string>
-    <string name="speed">Скорость км/ч</string>
-    <string name="lap_time">Время круга</string>
-    <string name="total_lap_in_race_heading">Количество кругов\nв гонке</string>
-    <string name="btn_sorting_description">Кнопка сортировки информации о гонке</string>
+    <string name="lap_distance_race_detail">Lap length (in meters)</string>
+    <string name="race_name_race_detail">Event name</string>
+    <string name="race_detail_header">Race information</string>
+    <string name="position">Position</string>
+    <string name="athlete_number">No.\nparticipant</string>
+    <string name="total_lap">Number of\nlaps</string>
+    <string name="total_time">Total\ntime</string>
+    <string name="lap_number">Lap no.</string>
+    <string name="pace">Pace m/km</string>
+    <string name="speed">Speed km/h</string>
+    <string name="lap_time">Lap time</string>
+    <string name="total_lap_in_race_heading">Number of laps\nin race</string>
+    <string name="btn_sorting_description">Race information sorting button</string>
     <!--    save_race-->
-    <string name="btn_favorite_description">Кнопка добавить событие в избранное</string>
-    <string name="btn_save_result_xls_description">Кнопка сохранить результаты в память телефона</string>
-    <string name="btn_open_race_result_description">Кнопка детальной информации о резулитатах</string>
-    <string name="save_competition_heading">Информация о гонке</string>
-    <string name="number_of_athletes">Количество\nучастников</string>
-    <string name="save_race_xls">Сохранить\nв формате .xls</string>
-    <string name="race_result">Результаты</string>
-    <string name="save_msg">Файл скачан в папку:</string>
+    <string name="btn_favorite_description">Add event to favorites button</string>
+    <string name="btn_save_result_xls_description">Save results to phone memory button</string>
+    <string name="btn_open_race_result_description">Detailed information about results button</string>
+    <string name="save_competition_heading">Race information</string>
+    <string name="number_of_athletes">Number of\nparticipants</string>
+    <string name="save_race_xls">Save\nas .xls</string>
+    <string name="race_result">Results</string>
+    <string name="save_msg">File downloaded to folder:</string>
     <string name="xls">xls</string>
-    <string name="empty_result">В этом событии нет участников</string>
+    <string name="empty_result">There are no participants in this event</string>
     <!--    sorting_screen-->
-    <string name="ic_sorting_description">Выбранный параметр сортировки</string>
-    <string name="pos_first_to_last">Позиция (начиная с первой)</string>
-    <string name="pos_last_to_first">Позиция (начиная с последней)</string>
-    <string name="num_first_to_last">Номер (по возрастанию)</string>
-    <string name="num_last_to_first">Номер (по убыванию)</string>
+    <string name="ic_sorting_description">Selected sorting parameter</string>
+    <string name="pos_first_to_last">Position (from first)</string>
+    <string name="pos_last_to_first">Position (from last)</string>
+    <string name="num_first_to_last">Number (ascending)</string>
+    <string name="num_last_to_first">Number (descending)</string>
     <!--    alert_dialog_message-->
-    <string name="title_save">Сохранение</string>
-    <string name="title_back">Выход</string>
-    <string name="title_delete">Удаление</string>
-    <string name="title_stop_race">Завершение</string>
-    <string name="message_save">Сохранить изменения и выйти?</string>
-    <string name="message_back">Выдти без сохранения?</string>
-    <string name="message_delete_race">Удалить событие из истории?</string>
-    <string name="message_delete_img">Удалить обложку события?</string>
-    <string name="message_stop_race">Завершить событие и перейти к просмотру и сохранению результатов?</string>
-    <string name="answer_positive">Да</string>
-    <string name="answer_negative">Нет</string>
-    <string name="stop_race_answer_positive">Завершить</string>
-    <string name="stop_race_answer_negative">Отмена</string>
+    <string name="title_save">Save</string>
+    <string name="title_back">Exit</string>
+    <string name="title_delete">Delete</string>
+    <string name="title_stop_race">Finish</string>
+    <string name="message_save">Save changes and exit?</string>
+    <string name="message_back">Exit without saving?</string>
+    <string name="message_delete_race">Delete event from history?</string>
+    <string name="message_delete_img">Delete event cover?</string>
+    <string name="message_stop_race">Finish the event and proceed to view and save results?</string>
+    <string name="answer_positive">Yes</string>
+    <string name="answer_negative">No</string>
+    <string name="stop_race_answer_positive">Finish</string>
+    <string name="stop_race_answer_negative">Cancel</string>
     <!--    all_races-->
-    <string name="btn_settings_description">Кнопка настройки</string>
-    <string name="race_history_heading">История</string>
-    <string name="start_data_tv">Дата</string>
-    <string name="start_time_tv">Время старта</string>
-    <string name="race_name_tv">Название</string>
-    <string name="athletes_in_race_tv">Участников</string>
-    <string name="distance_tv">Дистанция</string>
-    <string name="race_history_place_holder_text">История пуста</string>
+    <string name="btn_settings_description">Settings button</string>
+    <string name="race_history_heading">History</string>
+    <string name="start_data_tv">Date</string>
+    <string name="start_time_tv">Start time</string>
+    <string name="race_name_tv">Name</string>
+    <string name="athletes_in_race_tv">Participants</string>
+    <string name="distance_tv">Distance</string>
+    <string name="race_history_place_holder_text">History is empty</string>
     <!--    settings-->
-    <string name="settings_heading">Настройки</string>
-    <string name="night_tv">Темная тема</string>
-    <string name="share_tv">Поделиться приложением</string>
-    <string name="support_tv">Связаться с автором</string>
-    <string name="agreement_tv">Политика конфиденциальности</string>
-    <string name="share_url"> </string>
+    <!--    settings-->
+    <string name="settings_heading">Settings</string>
+    <string name="night_tv">Dark theme</string>
+    <string name="share_tv">Share the app</string>
+    <string name="support_tv">Contact the author</string>
+    <string name="agreement_tv">Privacy policy</string>
+    <string name="share_url">https://play.google.com/store/apps/details?id=com.jaroapps.stopwatchforcompetitions</string>
     <string name="email_support">jar89apps@gmail.com</string>
     <string name="email_support_subject">Stopwatch for competitions</string>
     <string name="email_support_message"> </string>
     <string name="user_agreement_url"> </string>
-    <string name="support_project">Поддержать проект</string>
+    <string name="support_project">Support the project</string>
     <!--    support_project-->
-    <string name="support_project_text">Если вам понравилось мое приложение и вы готовы поддержать развитие проекта финансово, вы можете это сделать с помощью сервиса Donate.stream от Яндекса. Нажав на кнопку ниже вы попадете на страницу проекта в сервисе Donate.stream, где сможете перевести любую сумму и оставить сообщение в котором можете описать улучшения и новые функции, такие изменения будут рассмотрены к добавлению в приоритетном порядке.</string>
-    <string name="rate_project_text">Также вы можете оценить приложение и оставить отзыв, это поможет продвижению.</string>
+    <string name="support_project_text">If you liked my app and are ready to support the project financially, you can do so using the Donate.stream service by Yandex. By clicking the button below, you will go to the project page in the Donate.stream service, where you can transfer any amount and leave a message in which you can describe improvements and new features, such changes will be considered for addition on a priority basis.</string>
+    <string name="rate_project_text">You can also rate the app and leave a review, it will help with promotion.</string>
     <string name="support_project_btn">Donate stream</string>
-    <string name="rate_project_btn">Оценить приложение</string>
+    <string name="rate_project_btn">Rate the app</string>
     <string name="donate_stream_url">https://donate.stream/jar_apps</string>
-    <string name="rate_app_url"> </string>
+    <string name="rate_app_url">https://play.google.com/store/apps/details?id=com.jaroapps.stopwatchforcompetitions</string>
     <!--    privacy_policy-->
-    <string name="privacy_policy_heading">Политика конфиденциальности</string>
-    <string name="privacy_policy_text">Политика конфиденциальности\n\n
-Ярослав создал приложение "Секундомер для соревнований" как бесплатное приложение. Эта УСЛУГА предоставляется Ярославом бесплатно и предназначена для использования как есть. Эта страница используется для информирования посетителей о моих правилах сбора, использования и раскрытия Личной информации, если кто-либо решил воспользоваться моим Сервисом. Если вы решите воспользоваться моим Сервисом, значит, вы соглашаетесь на сбор и использование информации в соответствии с этой политикой. Личная информация, которую я собираю, используется для предоставления и улучшения Сервиса. Я не буду использовать или передавать вашу информацию кому-либо, за исключением случаев, описанных в настоящей Политике конфиденциальности. Термины, используемые в настоящей Политике конфиденциальности, имеют те же значения, что и в наших Положениях и условиях, которые доступны на сайте Stopwatch for competition, если иное не определено в настоящей Политике конфиденциальности.\n\nСбор и использование информации\nДля улучшения работы при использовании нашего Сервиса я могу потребовать от вас предоставить нам определенную личную информацию, включая, но не ограничиваясь, электронную почту. Информация, которую я запрашиваю, будет сохранена на вашем устройстве и никоим образом мной не собирается. Приложение использует сторонние сервисы, которые могут собирать информацию, используемую для вашей идентификации.\nСсылка на политику конфиденциальности сторонних поставщиков услуг, используемых приложением\n\nСервисы Google Play\nGoogle Analytics для Firebase\nFirebase Crashlytics\nДанные Журнала\n\nЯ хочу сообщить вам, что всякий раз, когда вы пользуетесь моим Сервисом, в случае ошибки в приложении я собираю данные и информацию (через продукты сторонних производителей) на вашем телефоне, которые называются Log Data. Эти данные Журнала могут включать такую информацию, как адрес интернет-протокола вашего устройства (“IP”), имя устройства, версию операционной системы, конфигурацию приложения при использовании моего Сервиса, время и дату использования вами Сервиса и другую статистику.\n\nФайлы cookie\nФайлы cookie - это файлы с небольшим объемом данных, которые обычно используются в качестве анонимных уникальных идентификаторов. Они отправляются в ваш браузер с веб-сайтов, которые вы посещаете, и хранятся во внутренней памяти вашего устройства.Этот Сервис не использует эти “файлы cookie” явно. Однако приложение может использовать код сторонних производителей и библиотеки, которые используют “файлы cookie” для сбора информации и улучшения своих услуг. У вас есть возможность принять или отклонить эти файлы cookie и узнать, когда они отправляются на ваше устройство. Если вы решите отказаться от наших файлов cookie, вы не сможете использовать некоторые части этой Услуги.\n\nПоставщики услуг\nЯ могу нанимать сторонние компании и частных лиц по следующим причинам:\n\nДля облегчения работы нашего Сервиса;\nПредоставлять Услугу от нашего имени;\nДля предоставления услуг, связанных с Сервисом;\nили чтобы помочь нам в анализе того, как используется наш Сервис.\n\nЯ хочу проинформировать пользователей этого Сервиса о том, что эти третьи лица имеют доступ к их Личной информации. Причина заключается в выполнении возложенных на них задач от нашего имени. Однако они обязаны не разглашать и не использовать информацию для каких-либо других целей.\n\nБезопасность\nЯ ценю ваше доверие к предоставлению нам вашей Личной информации, поэтому мы стремимся использовать коммерчески приемлемые средства ее защиты. Но помните, что ни один способ передачи данных через Интернет или электронного хранения не является на 100% безопасным, и я не могу гарантировать его абсолютную безопасность.\n\nСсылки на другие сайты\nЭтот Сервис может содержать ссылки на другие сайты. Если вы нажмете на ссылку сторонних производителей, вы будете перенаправлены на этот сайт. Обратите внимание, что я не управляю этими внешними сайтами. Поэтому я настоятельно рекомендую вам ознакомиться с Политикой конфиденциальности этих веб-сайтов. Я не контролирую и не несу никакой ответственности за содержание, политику конфиденциальности или практику любых сторонних сайтов или сервисов.\n\nКонфиденциальность детей\nЭти Сервисы не предназначены для лиц младше 13 лет. Я сознательно не собираю личную информацию от детей младше 13 лет. В случае, если я обнаружу, что ребенок младше 13 лет предоставил мне личную информацию, я немедленно удаляю ее с наших серверов. Если вы являетесь родителем или опекуном и вам известно, что ваш ребенок предоставил нам личную информацию, пожалуйста, свяжитесь со мной, чтобы я смог выполнить необходимые действия.\n\nИзменения в этой Политике конфиденциальности\nЯ могу время от времени обновлять нашу Политику конфиденциальности. Таким образом, вам рекомендуется периодически просматривать эту страницу на предмет любых изменений. Я уведомлю вас о любых изменениях, разместив новую Политику конфиденциальности на этой странице.\n\nНастоящая политика вступает в силу с 2024-02-11\n\nСвязаться с нами\nЕсли у вас есть какие-либо вопросы или предложения по поводу моей Политики конфиденциальности, не стесняйтесь обращаться ко мне по адресу\njar89apps@gmail.com</string>
+    <string name="privacy_policy_heading">Privacy Policy</string>
+    <string name="privacy_policy_text">Privacy Policy/n/n
+        Yaroslav has created the "Stopwatch for Competitions" app as a free application. This SERVICE is provided by Yaroslav at no cost and is intended for use as is. This page is used to inform visitors about my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service. If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy. The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which is accessible at Stopwatch for competition unless otherwise defined in this Privacy Policy./n/nCollection and Use of Information/nFor a better experience while using our Service, I may require you to provide us with certain personally identifiable information, including but not limited to your email address. The information that I request will be retained on your device and is not collected by me in any way. The app does use third–party services that may collect information used to identify you./nLink to the privacy policy of third–party service providers used by the app/n/nGoogle Play Services/nGoogle Analytics for Firebase/nFirebase Crashlytics/nLog Data/n/nI want to inform you that whenever you use my Service, in the case of an error in the app I collect data and information (through third–party products) on your phone called Log Data. This Log Data may include information such as your device\'s Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics./n/nCookies/nCookies are files with a small amount of data that are commonly used as anonymous unique identifiers. These are sent to your browser from the websites that you visit and are stored on your device\'s internal memory. This Service does not use these “cookies” explicitly. However, the app may use third–party code and libraries that use “cookies” to collect information and improve their services. You have the option to either accept or refuse these cookies and know when a cookie is being sent to your device. If you choose to refuse our cookies, you may not be able to use some portions of this Service./n/nService Providers/nI may employ third–party companies and individuals due to the following reasons:/n/nTo facilitate our Service;/nTo provide the Service on our behalf;/nTo perform Service–related services;/nOr to assist us in analyzing how our Service is used./n/nI want to inform users of this Service that these third parties have access to your Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose./n/nSecurity/nI value your trust in providing us your Personal Information, thus we are striving to use commercially acceptable means of protecting it. But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and I cannot guarantee its absolute security./n/nLinks to Other Sites/nThis Service may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that these external sites are not operated by me. Therefore, I strongly advise you to review the Privacy Policy of these websites. I have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services./n/nChildren’s Privacy/nThese Services do not address anyone under the age of 13. I do not knowingly collect personally identifiable information from children under 13. In the case I discover that a child under 13 has provided me with personal information, I immediately delete this from our servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact me so that I will be able to do necessary actions./n/nChanges to This Privacy Policy/nI may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Privacy Policy on this page./n/nThis policy is effective as of 2024-02-11/n/nContact Us/nIf you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at jar89apps@gmail.com.</string>
 
 </resources>

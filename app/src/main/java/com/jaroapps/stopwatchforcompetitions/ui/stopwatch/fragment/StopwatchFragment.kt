@@ -2,9 +2,7 @@ package com.jaroapps.stopwatchforcompetitions.ui.stopwatch.fragment
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -19,23 +17,17 @@ import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.FastR
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.TimerState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class StopwatchFragment : Fragment() {
+class StopwatchFragment : Fragment(R.layout.fragment_stopwatch) {
 
-    private lateinit var binding: FragmentStopwatchBinding
+    private var _binding: FragmentStopwatchBinding? = null
+    private val binding get() = _binding!!
     private val fastResultAdapter = FastResultAdapter()
     private var raceWasStarted = false
     private val viewModel: StopwatchViewModel by viewModel()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentStopwatchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentStopwatchBinding.bind(view)
 
         setFastResultAdapter()
         checkRaceHasBeenStarted()
@@ -54,6 +46,11 @@ class StopwatchFragment : Fragment() {
         viewModel.addAthleteNumberState.observe(viewLifecycleOwner) {
             renderAthleteNumberState(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setFastResultAdapter() {

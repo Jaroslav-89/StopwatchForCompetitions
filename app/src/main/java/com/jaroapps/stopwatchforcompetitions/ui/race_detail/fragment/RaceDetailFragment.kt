@@ -1,9 +1,7 @@
 package com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jaroapps.stopwatchforcompetitions.R
@@ -16,25 +14,19 @@ import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.state.Sor
 import com.jaroapps.stopwatchforcompetitions.util.Util
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class RaceDetailFragment : Fragment() {
-    private lateinit var binding: FragmentRaceDetailBinding
+class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
+
+    private var _binding: FragmentRaceDetailBinding? = null
+    private val binding get() = _binding!!
     private val raceDetailAdapter = RaceDetailAdapter {
         viewModel.toggleLapDetail(it)
     }
     private var startRaceData = 0L
     private val viewModel: RaceDetailViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentRaceDetailBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentRaceDetailBinding.bind(view)
 
         setRaceDetailAdapter()
         viewModel.getRaceInfo()
@@ -47,6 +39,11 @@ class RaceDetailFragment : Fragment() {
         viewModel.sortingScreenState.observe(viewLifecycleOwner) {
             renderSortingScreen(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setClickListeners() {

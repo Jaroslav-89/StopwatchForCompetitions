@@ -9,9 +9,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -25,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentSaveRaceBinding
 import com.jaroapps.stopwatchforcompetitions.domain.model.SortingState
@@ -33,13 +32,14 @@ import com.jaroapps.stopwatchforcompetitions.ui.save_race.fragment.adapter.SaveR
 import com.jaroapps.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceViewModel
 import com.jaroapps.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRaceState
 import com.jaroapps.stopwatchforcompetitions.util.Util
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
 
 
-class SaveRaceFragment : Fragment() {
-    private lateinit var binding: FragmentSaveRaceBinding
+class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
+
+    private var _binding: FragmentSaveRaceBinding? = null
+    private val binding get() = _binding!!
     private lateinit var vibrator: Vibrator
     private lateinit var raceResultBottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private val args: SaveRaceFragmentArgs by navArgs()
@@ -50,20 +50,12 @@ class SaveRaceFragment : Fragment() {
         viewModel.toggleLapDetail(it)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSaveRaceBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentSaveRaceBinding.bind(view)
         binding.root.doOnNextLayout {
             calculatePeekHeight()
         }
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         viewModel.getRaceInfo(args.startRaceDataSaveRace)
         initBottomSheets()
@@ -76,6 +68,11 @@ class SaveRaceFragment : Fragment() {
         viewModel.sortingScreenState.observe(viewLifecycleOwner) {
             renderSortingScreen(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun initBottomSheets() {

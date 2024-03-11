@@ -7,13 +7,13 @@ import com.jaroapps.stopwatchforcompetitions.domain.model.EmailData
 
 class ExternalNavigator(private val context: Context) {
     fun shareLink(url: String) {
-//        Intent().apply {
-//            action = Intent.ACTION_SEND
-//            putExtra(Intent.EXTRA_TEXT, url)
-//            type = "text/plain"
-//            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            context.startActivity(this)
-//        }
+        Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, url)
+            type = "text/plain"
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(this)
+        }
     }
 
     fun donateStreamLink(url: String) {
@@ -26,12 +26,17 @@ class ExternalNavigator(private val context: Context) {
     }
 
     fun rateLink(url: String) {
-//        Intent().apply {
-//            action = Intent.ACTION_VIEW
-//            data = Uri.parse(url)
-//            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//            context.startActivity(this)
-//        }
+        try {
+            Intent().apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse(url)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity(this)
+            }
+        } catch (_:Exception) {
+
+        }
+
     }
 
     fun openLink(url: String) {

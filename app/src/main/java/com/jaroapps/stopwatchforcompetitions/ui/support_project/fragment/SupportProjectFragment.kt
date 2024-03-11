@@ -1,34 +1,31 @@
 package com.jaroapps.stopwatchforcompetitions.ui.support_project.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentSupportProjectBinding
 import com.jaroapps.stopwatchforcompetitions.ui.support_project.view_model.SupportProjectViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SupportProjectFragment : Fragment() {
+class SupportProjectFragment : Fragment(R.layout.fragment_support_project) {
 
-    private lateinit var binding: FragmentSupportProjectBinding
+
+    private var _binding: FragmentSupportProjectBinding? = null
+    private val binding get() = _binding!!
     private val viewModel: SupportProjectViewModel by viewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSupportProjectBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentSupportProjectBinding.bind(view)
 
         setClickListeners()
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setClickListeners() {

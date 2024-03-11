@@ -1,9 +1,7 @@
 package com.jaroapps.stopwatchforcompetitions.ui.all_races.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jaroapps.stopwatchforcompetitions.R
@@ -13,9 +11,10 @@ import com.jaroapps.stopwatchforcompetitions.ui.all_races.view_model.AllRacesVie
 import com.jaroapps.stopwatchforcompetitions.ui.all_races.view_model.state.AllRaceState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class AllRacesFragment : Fragment() {
+class AllRacesFragment : Fragment(R.layout.fragment_all_races) {
 
-    private lateinit var binding: FragmentAllRacesBinding
+    private var _binding: FragmentAllRacesBinding? = null
+    private val binding get() = _binding!!
     private val allRacesAdapter =
         AllRacesAdapter {
             val argument = it.startTime
@@ -25,17 +24,9 @@ class AllRacesFragment : Fragment() {
         }
     private val viewModel: AllRacesViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAllRacesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentAllRacesBinding.bind(view)
 
         setAdapter()
         viewModel.loadRaceHistory()
@@ -44,6 +35,11 @@ class AllRacesFragment : Fragment() {
         viewModel.allRacesState.observe(viewLifecycleOwner) {
             renderRaceList(it)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setAdapter() {

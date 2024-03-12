@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentStopwatchBinding
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.fragment.adapter.FastResultAdapter
@@ -55,6 +56,10 @@ class StopwatchFragment : Fragment(R.layout.fragment_stopwatch) {
 
     private fun setFastResultAdapter() {
         binding.fastResultRv.adapter = fastResultAdapter
+        val itemAnimator = binding.fastResultRv.itemAnimator
+        if (itemAnimator is DefaultItemAnimator) {
+            itemAnimator.supportsChangeAnimations = false
+        }
     }
 
     private fun checkRaceHasBeenStarted() {

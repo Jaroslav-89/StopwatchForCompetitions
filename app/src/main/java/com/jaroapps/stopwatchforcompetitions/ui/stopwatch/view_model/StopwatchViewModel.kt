@@ -193,23 +193,23 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
             var addAthleteNumber = ""
             when (btnNumber) {
                 1 -> {
-                    addAthleteNumber = valueOfTextViewOne
-                    valueOfTextViewOne = ""
+                        addAthleteNumber = valueOfTextViewOne
+                        valueOfTextViewOne = ""
                 }
 
                 2 -> {
-                    addAthleteNumber = valueOfTextViewTwo
-                    valueOfTextViewTwo = ""
+                        addAthleteNumber = valueOfTextViewTwo
+                        valueOfTextViewTwo = ""
                 }
 
                 3 -> {
-                    addAthleteNumber = valueOfTextViewThree
-                    valueOfTextViewThree = ""
+                        addAthleteNumber = valueOfTextViewThree
+                        valueOfTextViewThree = ""
                 }
 
-                else -> {
-                    addAthleteNumber = valueOfTextViewFour
-                    valueOfTextViewFour = ""
+                4 -> {
+                        addAthleteNumber = valueOfTextViewFour
+                        valueOfTextViewFour = ""
                 }
             }
             renderAddAthleteNumberState()
@@ -260,7 +260,8 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
     }
 
     private fun renderAthletesFastResult(athletesList: List<Athlete>) {
-        _fastResultState.value = FastResultState.Content(athletesList, currentRace)
+            _fastResultState.value = FastResultState.Content(athletesList, currentRace)
+
     }
 
     private fun renderAddAthleteNumberState() {

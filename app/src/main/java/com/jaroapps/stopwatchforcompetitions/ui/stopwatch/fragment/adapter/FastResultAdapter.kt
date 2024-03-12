@@ -2,11 +2,13 @@ package com.jaroapps.stopwatchforcompetitions.ui.stopwatch.fragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FastResultItemBinding
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
 import com.jaroapps.stopwatchforcompetitions.domain.model.Race
+import com.jaroapps.stopwatchforcompetitions.ui.common.ui.adapter.AthleteDiffCallback
 import com.jaroapps.stopwatchforcompetitions.util.Util
 import com.jaroapps.stopwatchforcompetitions.util.Util.getTimeFormat
 
@@ -16,10 +18,11 @@ class FastResultAdapter :
     private var athletes = emptyList<Athlete>()
     private var race: Race? = null
 
-    fun updateFastResultAdapter(content: List<Athlete>, newRace: Race?) {
-        athletes = content
+    fun updateFastResultAdapter(athletesList: List<Athlete>, newRace: Race?) {
+        val diffResult = DiffUtil.calculateDiff(AthleteDiffCallback(athletes, athletesList))
+        athletes = athletesList
         race = newRace
-        this.notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FastResultViewHolder {

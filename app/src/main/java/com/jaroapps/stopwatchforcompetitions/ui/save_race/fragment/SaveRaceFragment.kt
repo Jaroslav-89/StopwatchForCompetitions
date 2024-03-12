@@ -19,6 +19,7 @@ import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -115,6 +116,10 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
 
         binding.saveRaceRv.layoutManager = LinearLayoutManager(requireContext())
         binding.saveRaceRv.adapter = saveRaceAdapter
+        val itemAnimator = binding.saveRaceRv.itemAnimator
+        if (itemAnimator is DefaultItemAnimator) {
+            itemAnimator.supportsChangeAnimations = false
+        }
     }
 
     override fun onRequestPermissionsResult(

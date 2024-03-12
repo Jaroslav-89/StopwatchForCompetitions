@@ -11,7 +11,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SupportProjectFragment : Fragment(R.layout.fragment_support_project) {
 
-
     private var _binding: FragmentSupportProjectBinding? = null
     private val binding get() = _binding!!
     private val viewModel: SupportProjectViewModel by viewModel()

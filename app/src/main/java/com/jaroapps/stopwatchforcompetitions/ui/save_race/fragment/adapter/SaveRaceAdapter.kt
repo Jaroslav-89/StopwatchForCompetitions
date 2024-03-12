@@ -3,11 +3,13 @@ package com.jaroapps.stopwatchforcompetitions.ui.save_race.fragment.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.DetailResultItemBinding
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
 import com.jaroapps.stopwatchforcompetitions.domain.model.Race
+import com.jaroapps.stopwatchforcompetitions.ui.common.ui.adapter.AthleteDiffCallback
 import com.jaroapps.stopwatchforcompetitions.util.Util
 
 class SaveRaceAdapter(private val clickListener: AthleteClickListener) :
@@ -16,9 +18,10 @@ class SaveRaceAdapter(private val clickListener: AthleteClickListener) :
     private var athletes = emptyList<Athlete>()
     private var race: Race? = null
     fun updateRaceDetailAdapter(athletesList: List<Athlete>, newRace: Race) {
+        val diffResult = DiffUtil.calculateDiff(AthleteDiffCallback(athletes, athletesList))
         athletes = athletesList
         race = newRace
-        this.notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SaveRaceViewHolder {

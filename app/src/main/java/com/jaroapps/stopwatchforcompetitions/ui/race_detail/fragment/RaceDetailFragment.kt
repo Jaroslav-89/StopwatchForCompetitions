@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentRaceDetailBinding
 import com.jaroapps.stopwatchforcompetitions.domain.model.SortingState
@@ -92,18 +93,22 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
 
     private fun setRaceDetailAdapter() {
         binding.raceDetailRv.adapter = raceDetailAdapter
+        val itemAnimator = binding.raceDetailRv.itemAnimator
+        if (itemAnimator is DefaultItemAnimator) {
+            itemAnimator.supportsChangeAnimations = false
+        }
     }
 
     private fun renderRaceDetail(raceInfo: RaceDetailState) {
         if (raceInfo is RaceDetailState.Content) {
             startRaceData = raceInfo.race.startTime
             with(binding) {
+                raceDetailAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
                 startDate.text = Util.convertLongToDate(raceInfo.race.startTime)
                 startTime.text = Util.convertLongToTime(raceInfo.race.startTime)
                 raceName.text = raceInfo.race.name
                 lapDistance.text = raceInfo.race.lapDistance.toString()
                 totalLapInRace.text = raceInfo.race.totalLapsInRace.toString()
-                raceDetailAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
             }
         }
     }

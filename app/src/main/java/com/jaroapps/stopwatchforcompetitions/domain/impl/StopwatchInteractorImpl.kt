@@ -1,5 +1,6 @@
 package com.jaroapps.stopwatchforcompetitions.domain.impl
 
+import android.net.Uri
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchInteractor
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchRepository
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
@@ -43,7 +44,7 @@ class StopwatchInteractorImpl(private val repository: StopwatchRepository) : Sto
         return repository.getLastRace()
     }
 
-    override suspend fun saveResultInXls(race: Long) {
-        repository.saveResultInXls(race)
+    override suspend fun saveResultInXls(race: Long, uri: Uri) {
+        repository.saveResultInXls(race, uri)
     }
 }

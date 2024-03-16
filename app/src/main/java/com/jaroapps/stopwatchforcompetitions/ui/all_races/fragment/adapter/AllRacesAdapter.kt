@@ -3,6 +3,7 @@ package com.jaroapps.stopwatchforcompetitions.ui.all_races.fragment.adapter
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
@@ -70,8 +71,9 @@ class AllRacesViewHolder(private val binding: RaceItemBinding) :
     }
 
     private fun getFavoriteToggleDrawable(isFavorite: Boolean?): Drawable? {
-        return itemView.context.getDrawable(
-            if (isFavorite == null || !isFavorite) R.drawable.ic_inactive_favorite else R.drawable.ic_active_favorite
-        )
+        return if (isFavorite == null || !isFavorite)
+            getDrawable(itemView.context, R.drawable.ic_inactive_favorite)
+        else
+            getDrawable(itemView.context, R.drawable.ic_active_favorite)
     }
 }

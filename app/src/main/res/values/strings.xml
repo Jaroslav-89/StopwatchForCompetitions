@@ -26,6 +26,7 @@
     <string name="figure_eight">8</string>
     <string name="figure_nine">9</string>
     <string name="figure_zero">0</string>
+    <string name="cant_save_file">Can\'t save file</string>
     <!--    fast_result_item-->
     <string name="number_header">No.</string>
     <string name="total_lap_header">Laps\ncompleted</string>
@@ -84,9 +85,10 @@
     <string name="number_of_athletes">Number of\nparticipants</string>
     <string name="save_race_xls">Save\nas .xls</string>
     <string name="race_result">Results</string>
-    <string name="save_msg">File downloaded to folder:</string>
+    <string name="save_msg">File downloaded to folder:\n</string>
     <string name="xls">xls</string>
     <string name="empty_result">There are no participants in this event</string>
+    <string name="xls_name">race result</string>
     <!--    sorting_screen-->
     <string name="ic_sorting_description">Selected sorting parameter</string>
     <string name="pos_first_to_last">Position (from first)</string>

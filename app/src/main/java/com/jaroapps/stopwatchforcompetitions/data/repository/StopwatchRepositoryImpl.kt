@@ -1,5 +1,6 @@
 package com.jaroapps.stopwatchforcompetitions.data.repository
 
+import android.net.Uri
 import com.jaroapps.stopwatchforcompetitions.data.converters.AthleteDbConvertor
 import com.jaroapps.stopwatchforcompetitions.data.converters.RaceDbConvertor
 import com.jaroapps.stopwatchforcompetitions.data.db.AppDataBase
@@ -75,11 +76,11 @@ class StopwatchRepositoryImpl(
         return raceDbConvertor.map(dataBase.raceDao().getLastRace())
     }
 
-    override suspend fun saveResultInXls(race: Long) {
+    override suspend fun saveResultInXls(race: Long, uri: Uri) {
         val raceEntity = dataBase.raceDao().getRaceInformation(race)
         dataBase.athleteDao().getAllAthletesInRace(race).collect() {
             val athletesEntity = it
-            saveResultXls.saveRaceInXls(raceEntity, athletesEntity)
+            saveResultXls.saveRaceInXls(raceEntity, athletesEntity, uri)
         }
     }
 }

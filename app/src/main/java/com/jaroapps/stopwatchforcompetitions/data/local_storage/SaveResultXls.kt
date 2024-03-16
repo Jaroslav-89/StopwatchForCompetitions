@@ -1,10 +1,7 @@
 package com.jaroapps.stopwatchforcompetitions.data.local_storage
 
-import android.content.ContentValues
 import android.content.Context
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
+import android.net.Uri
 import android.util.Log
 import com.jaroapps.stopwatchforcompetitions.data.converters.AthleteDbConvertor
 import com.jaroapps.stopwatchforcompetitions.data.db.entity.AthleteEntity
@@ -12,17 +9,15 @@ import com.jaroapps.stopwatchforcompetitions.data.db.entity.RaceEntity
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
 import com.jaroapps.stopwatchforcompetitions.util.Util
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
-import java.io.File
-import java.io.FileOutputStream
 
 class SaveResultXls(
     private val context: Context,
-    private val athleteDbConvertor: AthleteDbConvertor
+    private val athleteDbConvertor: AthleteDbConvertor,
 ) {
-
     fun saveRaceInXls(
         race: RaceEntity,
-        athletesEntity: List<AthleteEntity>
+        athletesEntity: List<AthleteEntity>,
+        uri: Uri,
     ) {
         try {
             val athletes = athleteDbConvertor.mapList(athletesEntity)
@@ -61,17 +56,23 @@ class SaveResultXls(
 
             row = sheet.createRow(4)
             cell = row.createCell(0)
+            cell.setCellValue("Кругов в гонке:")
+            cell = row.createCell(1)
+            cell.setCellValue("${race.totalLapsInRace}")
+
+            row = sheet.createRow(5)
+            cell = row.createCell(0)
             cell.setCellValue("Участников:")
             cell = row.createCell(1)
             cell.setCellValue("${athletes.size}")
 
-            row = sheet.createRow(5)
+            row = sheet.createRow(6)
             cell = row.createCell(0)
             cell.setCellValue("Описание:")
             cell = row.createCell(1)
             cell.setCellValue(race.description)
 
-            row = sheet.createRow(7)
+            row = sheet.createRow(8)
             cell = row.createCell(0)
             cell.setCellValue("Место")
             cell = row.createCell(1)
@@ -88,7 +89,7 @@ class SaveResultXls(
 
             for (athlete in athletesSortedByPosition) {
                 val lapsTime = athlete.lapsTime
-                val athleteRow = athletesSortedByPosition.indexOf(athlete) + 8
+                val athleteRow = athletesSortedByPosition.indexOf(athlete) + 9
                 row = sheet.createRow(athleteRow)
                 cell = row.createCell(0)
                 val athletePosition = athletesSortedByPosition.indexOf(athlete) + 1
@@ -116,51 +117,10 @@ class SaveResultXls(
                 cell.setCellValue(totalRaceTime)
             }
 
-            if (Build.VERSION.SDK_INT > 29) {
-                val contentValues = ContentValues().apply {
-                    put(
-                        MediaStore.MediaColumns.DISPLAY_NAME,
-                        "${Util.convertLongToDate(race.startTime)} ${Util.convertLongToTime(race.startTime)}.xls"
-                    )
-                    put(MediaStore.Downloads.MIME_TYPE, "application/vnd.ms-excel")
-                    put(MediaStore.Downloads.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
-                }
-                val dstUri =
-                    context.contentResolver.insert(
-                        MediaStore.Downloads.EXTERNAL_CONTENT_URI,
-                        contentValues
-                    )
-                if (dstUri != null) {
-                    val dst = context.contentResolver.openOutputStream(dstUri)
-                    wb.write(dst)
-                    dst?.close()
-                }
-            } else {
-                val downloadsDirectory =
-                    context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-                val file = File(
-                    downloadsDirectory,
-                    "${Util.convertLongToDate(race.startTime)} ${Util.convertLongToTime(race.startTime)}.xls"
-                )
-                file.createNewFile()
+            context.contentResolver.openOutputStream(uri)?.use {
+                wb.write(it)
+            } ?: throw IllegalStateException("Can't open output stream")
 
-                val fileOutputStream = FileOutputStream(file)
-
-                wb.write(fileOutputStream)
-                fileOutputStream.close()
-
-                context.openFileOutput(
-                    "${Util.convertLongToDate(race.startTime)}:${
-                        Util.convertLongToTime(
-                            race.startTime
-                        )
-                    }.xls", Context.MODE_APPEND
-                )
-                val outputStream = FileOutputStream(file,true)
-
-                wb.write(outputStream)
-                outputStream.close()
-            }
         } catch (e: Exception) {
             Log.d("xxx", e.toString())
         }

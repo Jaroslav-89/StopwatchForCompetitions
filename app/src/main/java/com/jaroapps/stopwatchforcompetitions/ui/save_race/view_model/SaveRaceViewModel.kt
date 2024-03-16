@@ -1,5 +1,6 @@
 package com.jaroapps.stopwatchforcompetitions.ui.save_race.view_model
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -97,10 +98,9 @@ class SaveRaceViewModel(
         renderState(currentRace, athletes)
     }
 
-    fun saveResultInXls() {
+    fun saveResultInXls(uri: Uri) {
         viewModelScope.launch {
-            interactor.saveResultInXls(currentRace.startTime)
-
+            interactor.saveResultInXls(currentRace.startTime, uri)
         }
     }
 

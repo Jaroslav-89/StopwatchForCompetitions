@@ -3,6 +3,7 @@ package com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jaroapps.stopwatchforcompetitions.R
@@ -76,10 +77,10 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             if (athlete.isExpandable) {
                 lapsDetailRv.visibility = View.VISIBLE
-                openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_close_laps_info))
+                openCloseLapsIc.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_close_laps_info))
             } else {
                 lapsDetailRv.visibility = View.GONE
-                openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_open_laps_info))
+                openCloseLapsIc.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_open_laps_info))
             }
         }
     }

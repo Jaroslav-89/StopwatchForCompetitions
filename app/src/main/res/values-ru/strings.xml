@@ -26,6 +26,7 @@
     <string name="figure_eight">8</string>
     <string name="figure_nine">9</string>
     <string name="figure_zero">0</string>
+    <string name="cant_save_file">Ошибка при сохранении файла</string>
     <!--    fast_result_item-->
     <string name="number_header">№</string>
     <string name="total_lap_header">Кругов\nзавершено</string>
@@ -84,9 +85,10 @@
     <string name="number_of_athletes">Количество\nучастников</string>
     <string name="save_race_xls">Сохранить\nв формате .xls</string>
     <string name="race_result">Результаты</string>
-    <string name="save_msg">Файл скачан в папку:</string>
+    <string name="save_msg">Файл скачан в папку:\n</string>
     <string name="xls">xls</string>
     <string name="empty_result">В этом событии нет участников</string>
+    <string name="xls_name">результаты соревнования</string>
     <!--    sorting_screen-->
     <string name="ic_sorting_description">Выбранный параметр сортировки</string>
     <string name="pos_first_to_last">Позиция (начиная с первой)</string>

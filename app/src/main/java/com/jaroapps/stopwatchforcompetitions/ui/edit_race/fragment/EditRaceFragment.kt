@@ -1,19 +1,16 @@
 package com.jaroapps.stopwatchforcompetitions.ui.edit_race.fragment
 
-import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
-import androidx.annotation.RequiresApi
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
@@ -46,6 +43,21 @@ class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
     private val keyboard by lazy {
         requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
+
+    private val takePhotoLauncher =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+            if (isSuccess) {
+                viewModel.editPlaceHolderImg(imageUri.toString())
+            }
+        }
+
+    private val imagePicker =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                imageUri = uri
+                viewModel.editPlaceHolderImg(imageUri.toString())
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,7 +97,7 @@ class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
 
         binding.addRaceImg.setOnClickListener {
             saveEditTextValueViewModel()
-            dispatchPickImageIntent()
+            showImageSourceDialog()
         }
 
         binding.deleteImgBtn.setOnClickListener {
@@ -128,6 +140,56 @@ class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
         keyboard.hideSoftInputFromWindow(binding.raceDescription.windowToken, 0)
     }
 
+    private fun showImageSourceDialog() {
+        // Создаем диалоговое окно для выбора между камерой и галереей
+        val options = arrayOf("Сделать фото", "Выбрать из галереи")
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setItems(options) { _, which ->
+            when (which) {
+                0 -> takePicture() // Сделать фото
+                1 -> pickImageFromGallery() // Выбрать из галереи
+            }
+        }
+        builder.show()
+    }
+
+    private fun takePicture() {
+        // Создаем файл и Uri для сохранения фотографии
+        imageUri = createImageUri()
+        imageUri?.let { uri ->
+            takePhotoLauncher.launch(uri)
+        }
+    }
+
+    private fun createImageUri(): Uri? {
+        // Создаем файловое имя с помощью текущего времени, чтобы избежать дублирования
+        val timeStamp: String =
+            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val imageFileName = "JPEG_${timeStamp}_"
+        // Получаем хранилище для фотографий
+        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return try {
+            // Создаем файл изображения
+            val file = File.createTempFile(imageFileName, ".jpg", storageDir).apply {
+                imageUri = Uri.fromFile(this)
+            }
+            //   Получаем URI для файла с помощью FileProvider
+            FileProvider.getUriForFile(
+                requireContext(),
+                FILE_PROVIDER,
+                file
+            )
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
+
+    private fun pickImageFromGallery() {
+        // Запускаем выбор изображения из галереи
+        imagePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }
+
     private fun setImgFromPlaceHolder(uri: String) {
         if (uri.isNotBlank()) {
             binding.deleteImgBtn.visibility = View.VISIBLE
@@ -145,65 +207,6 @@ class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
                 ),
             )
             .into(binding.competitionImage)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        try {
-            if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_PICK) {
-                imageUri = data?.data ?: imageUri
-                viewModel.editPlaceHolderImg(imageUri.toString())
-            }
-        } catch (e: Exception) {
-
-        }
-    }
-
-    private fun dispatchPickImageIntent() {
-        // Create an intent with action as ACTION_PICK
-        val pickImageIntent =
-            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).apply {
-                // Set the type as image
-                type = "image/*"
-            }
-
-        // Create an intent with action as ACTION_IMAGE_CAPTURE
-        val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
-            // Ensure that there's a camera activity to handle the intent
-            resolveActivity(requireContext().packageManager)?.also {
-                val photoFile: File? = try {
-                    createImageFile()
-                } catch (ex: IOException) {
-                    null
-                }
-
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        requireContext(),
-                        "com.jaroapps.stopwatchforcompetitions.fileprovider",
-                        it
-                    )
-                    putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                }
-            }
-        }
-
-        // Start the intent to get the image
-        val chooser = Intent.createChooser(pickImageIntent, "Select or take a new picture")
-        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(takePhotoIntent))
-        startActivityForResult(chooser, REQUEST_IMAGE_PICK)
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun createImageFile(): File {
-        val timeStamp: String =
-            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
-        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("JPEG_${timeStamp}_", ".jpg", storageDir).apply {
-            // Save a file: path for use with ACTION_VIEW intents
-            imageUri = Uri.fromFile(this)
-        }
     }
 
     private fun alertDialog(state: String) {
@@ -299,7 +302,7 @@ class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
     }
 
     companion object {
-        private const val REQUEST_IMAGE_PICK = 2
+        private const val FILE_PROVIDER = "com.jaroapps.stopwatchforcompetitions.fileprovider"
         private const val DELETE_RACE = "delete_race"
         private const val DELETE_IMG = "delete_img"
         private const val BACK = "back"

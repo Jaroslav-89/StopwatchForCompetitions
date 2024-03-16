@@ -1,18 +1,16 @@
 package com.jaroapps.stopwatchforcompetitions.ui.save_race.fragment
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.core.content.ContextCompat
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.view.doOnNextLayout
@@ -36,7 +34,6 @@ import com.jaroapps.stopwatchforcompetitions.util.Util
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
 
-
 class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
 
     private var _binding: FragmentSaveRaceBinding? = null
@@ -50,6 +47,18 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
     private val saveRaceAdapter = SaveRaceAdapter {
         viewModel.toggleLapDetail(it)
     }
+
+    private val saveLauncher =
+        registerForActivityResult(ActivityResultContracts.CreateDocument(MIME_TYPE_EXEL)) { uri ->
+            try {
+                uri?.let {
+                    viewModel.saveResultInXls(uri)
+                    showToast(getString(R.string.save_msg) + uri.path)
+                }
+            } catch (e: Exception) {
+                Log.d("e", e.toString())
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -122,25 +131,6 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    showToast()
-                    viewModel.saveResultInXls()
-                }
-                return
-            }
-
-            else -> {
-            }
-        }
-    }
-
     @SuppressLint("Recycle")
     private fun setClickListeners() {
         with(binding) {
@@ -160,24 +150,7 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
             }
 
             saveXlsBtn.setOnClickListener {
-                if (Build.VERSION.SDK_INT > 29) {
-                    showToast()
-                    viewModel.saveResultInXls()
-                } else {
-                    if (ContextCompat.checkSelfPermission(
-                            requireContext(),
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        ) != PackageManager.PERMISSION_GRANTED
-                    ) {
-                        requireActivity().requestPermissions(
-                            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                            MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
-                        )
-                    } else {
-                        showToast()
-                        viewModel.saveResultInXls()
-                    }
-                }
+                saveLauncher.launch(getString(R.string.xls_name))
             }
 
             sortingBtn.setOnClickListener {
@@ -240,7 +213,6 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
                 binding.sortingGroup.visibility = View.GONE
                 binding.resultBottomSheet.visibility = View.VISIBLE
                 binding.sortingTv.text = getSortingText(sortingScreenState.sortingState)
-
             }
 
             is SortingScreenState.Visible -> {
@@ -306,23 +278,18 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
 
     private fun getFavoriteToggleDrawable(isFavorite: Boolean?): Drawable? {
         return if (isFavorite == null || !isFavorite) {
-            requireContext().getDrawable(R.drawable.ic_inactive_favorite_save_race)
+            getDrawable(requireContext(), R.drawable.ic_inactive_favorite_save_race)
         } else {
-            requireContext().getDrawable(R.drawable.ic_active_favorite__save_race)
+            getDrawable(requireContext(), R.drawable.ic_active_favorite__save_race)
         }
     }
 
-    private fun showToast() {
+    private fun showToast(msg: String) {
         vibrate()
-        val msg = if (Build.VERSION.SDK_INT > 29) {
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                .toString()
-        } else {
-            requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString()
-        }
         Toast.makeText(
             requireContext(),
-            getString(R.string.save_msg) + msg, Toast.LENGTH_LONG
+            msg,
+            Toast.LENGTH_LONG
         ).show()
     }
 
@@ -357,7 +324,6 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
     companion object {
         private const val BS_OFFSET_PX = 24
         private const val BS_MIN_SIZE_PX = 200
-        private const val MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 200
-        private const val DURATION = 200L
+        private const val MIME_TYPE_EXEL = "application/vnd.ms-excel"
     }
 }

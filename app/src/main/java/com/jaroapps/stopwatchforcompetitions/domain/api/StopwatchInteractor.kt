@@ -1,5 +1,6 @@
 package com.jaroapps.stopwatchforcompetitions.domain.api
 
+import android.net.Uri
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
 import com.jaroapps.stopwatchforcompetitions.domain.model.Race
 import kotlinx.coroutines.flow.Flow
@@ -14,5 +15,5 @@ interface StopwatchInteractor {
     fun getAllAthletesInRace(race: Long): Flow<List<Athlete>>
     fun getAllRaces(): Flow<List<Race>>
     suspend fun getLastRace(): Race
-    suspend fun saveResultInXls(race: Long)
+    suspend fun saveResultInXls(race: Long, uri: Uri)
 }

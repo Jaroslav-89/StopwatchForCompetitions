@@ -6,10 +6,11 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission
-        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
         tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:name=".app.App"
@@ -21,7 +22,7 @@
         android:roundIcon="@mipmap/ic_launcher_new_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StopwatchForCompetitions"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
             android:name=".root.RootActivity"
             android:exported="true"
@@ -35,7 +36,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.stopwatchforcompetitions.fileprovider"
+            android:authorities="com.jaroapps.stopwatchforcompetitions.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

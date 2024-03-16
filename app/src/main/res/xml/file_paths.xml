@@ -2,6 +2,6 @@
 <paths>
     <external-path
         name="my_images"
-        path="Android/data/com.example.stopwatchforcompetitions/files/Pictures" />
+        path="Android/data/com.jaroapps.stopwatchforcompetitions/files/Pictures" />
     <!-- другие пути... -->
 </paths>

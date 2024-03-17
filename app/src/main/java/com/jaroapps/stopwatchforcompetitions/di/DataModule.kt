@@ -15,6 +15,7 @@ val dataModule = module {
             .addMigrations(
                 AppDataBase.MIGRATION_2_3,
                 AppDataBase.MIGRATION_3_4,
+                AppDataBase.MIGRATION_4_5,
             )
             .build()
     }

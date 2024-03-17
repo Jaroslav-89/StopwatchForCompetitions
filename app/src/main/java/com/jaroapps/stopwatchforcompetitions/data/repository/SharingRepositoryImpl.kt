@@ -14,14 +14,6 @@ class SharingRepositoryImpl(
         externalNavigator.shareLink(getShareAppLink())
     }
 
-    override fun donateStream() {
-        externalNavigator.donateStreamLink(getDonateStreamLink())
-    }
-
-    override fun rateApp() {
-        externalNavigator.rateLink(getRateAppLink())
-    }
-
     override fun openTerms() {
         externalNavigator.openLink(getTermsLink())
     }
@@ -32,14 +24,6 @@ class SharingRepositoryImpl(
 
     private fun getShareAppLink(): String {
         return context.getString(R.string.share_url)
-    }
-
-    private fun getDonateStreamLink(): String {
-        return context.getString(R.string.donate_stream_url)
-    }
-
-    private fun getRateAppLink(): String {
-        return context.getString(R.string.rate_app_url)
     }
 
     private fun getTermsLink(): String {

@@ -129,14 +129,6 @@
     <string name="email_support_subject">Stopwatch for competitions</string>
     <string name="email_support_message"> </string>
     <string name="user_agreement_url"> </string>
-    <string name="support_project">Поддержать проект</string>
-    <!--    support_project-->
-    <string name="support_project_text">Если вам понравилось мое приложение и вы готовы поддержать развитие проекта финансово, вы можете это сделать с помощью сервиса Donate.stream от Яндекса. Нажав на кнопку ниже вы попадете на страницу проекта в сервисе Donate.stream, где сможете перевести любую сумму и оставить сообщение в котором можете описать улучшения и новые функции, такие изменения будут рассмотрены к добавлению в приоритетном порядке.</string>
-    <string name="rate_project_text">Также вы можете оценить приложение и оставить отзыв, это поможет продвижению.</string>
-    <string name="support_project_btn">Donate stream</string>
-    <string name="rate_project_btn">Оценить приложение</string>
-    <string name="donate_stream_url">https://donate.stream/jar_apps</string>
-    <string name="rate_app_url">https://play.google.com/store/apps/details?id=com.jaroapps.stopwatchforcompetitions</string>
     <!--    privacy_policy-->
     <string name="privacy_policy_heading">Политика конфиденциальности</string>
     <string name="privacy_policy_text">Политика конфиденциальности\n\n

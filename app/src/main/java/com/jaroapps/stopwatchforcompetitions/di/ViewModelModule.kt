@@ -6,7 +6,6 @@ import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.RaceDetai
 import com.jaroapps.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceViewModel
 import com.jaroapps.stopwatchforcompetitions.ui.settings.view_model.SettingsViewModel
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.StopwatchViewModel
-import com.jaroapps.stopwatchforcompetitions.ui.support_project.view_model.SupportProjectViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -45,12 +44,6 @@ val viewModelModule = module {
         SettingsViewModel(
             settingsInteractor = get(),
             sharingInteractor = get(),
-        )
-    }
-
-    viewModel {
-        SupportProjectViewModel(
-            sharingInteractor = get()
         )
     }
 }

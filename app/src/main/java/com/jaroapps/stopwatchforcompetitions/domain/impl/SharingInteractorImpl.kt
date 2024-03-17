@@ -8,14 +8,6 @@ class SharingInteractorImpl(private val sharingRepository: SharingRepository) : 
         sharingRepository.shareApp()
     }
 
-    override fun donateStream() {
-        sharingRepository.donateStream()
-    }
-
-    override fun rateApp() {
-        sharingRepository.rateApp()
-    }
-
     override fun contactSupport() {
         sharingRepository.contactSupport()
     }

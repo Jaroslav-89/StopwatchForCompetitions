@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-   // id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
 }
@@ -14,8 +13,8 @@ android {
         applicationId = "com.jaroapps.stopwatchforcompetitions"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 112
-        versionName = "1.12"
+        versionCode = 115
+        versionName = "1.15"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

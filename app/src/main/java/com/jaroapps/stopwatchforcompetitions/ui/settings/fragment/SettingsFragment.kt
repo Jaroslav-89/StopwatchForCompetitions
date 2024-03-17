@@ -48,9 +48,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.privacyPolicyBtn.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_privacyPolicyFragment)
         }
-        binding.supportProjectBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_supportProjectFragment)
-        }
     }
 
     private fun renderState(darkMode: Boolean) {

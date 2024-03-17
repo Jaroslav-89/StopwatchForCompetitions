@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchInteractor
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
+import com.jaroapps.stopwatchforcompetitions.domain.model.FastResultAthleteHistory
 import com.jaroapps.stopwatchforcompetitions.domain.model.Race
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.fragment.StopwatchFragment
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.AddAthleteNumberState
@@ -22,6 +23,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
     private var isStarted = false
     private var startRaceData = 0L
     private var updateAthletesInformationJob: Job? = null
+    private var updateFastResultJob: Job? = null
 
     private var numberOfTextView = StopwatchFragment.FIRST_EDIT_TEXT
     private var valueOfTextViewOne = ""
@@ -32,6 +34,8 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
     private var currentRace = Race()
 
     private var athletesListInCurrentRace = emptyList<Athlete>()
+    private var athletesFastResult = emptyList<FastResultAthleteHistory>()
+
 
     private val _timerState = MutableLiveData<TimerState>(TimerState.Default)
     val timerState: LiveData<TimerState>
@@ -107,13 +111,25 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
                         if (athletesListInCurrentRace != it) {
                             athletesListInCurrentRace = it
                         }
-                        renderAthletesFastResult(athletesListInCurrentRace)
                     }
                 }
-            } else renderAthletesFastResult(athletesListInCurrentRace)
+            } else renderAthletesFastResult(athletesFastResult)
+
+            if (updateFastResultJob == null) {
+                updateFastResultJob = viewModelScope.launch {
+                    interactor.getAllFastResultInRace().collect() {
+                        if (athletesFastResult != it) {
+                            athletesFastResult = it
+                        }
+                        renderAthletesFastResult(athletesFastResult)
+                    }
+                }
+            } else renderAthletesFastResult(athletesFastResult)
         } else {
             updateAthletesInformationJob?.cancel()
+            updateFastResultJob?.cancel()
             updateAthletesInformationJob = null
+            updateFastResultJob = null
             _fastResultState.value = FastResultState.Default
         }
     }
@@ -148,6 +164,7 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
         isStarted = false
         currentRace = Race()
         athletesListInCurrentRace = emptyList<Athlete>()
+        athletesFastResult = emptyList<FastResultAthleteHistory>()
         renderAddAthleteNumberState()
         updateTimer()
         updateAthletesInformation(currentRace)
@@ -193,23 +210,23 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
             var addAthleteNumber = ""
             when (btnNumber) {
                 1 -> {
-                        addAthleteNumber = valueOfTextViewOne
-                        valueOfTextViewOne = ""
+                    addAthleteNumber = valueOfTextViewOne
+                    valueOfTextViewOne = ""
                 }
 
                 2 -> {
-                        addAthleteNumber = valueOfTextViewTwo
-                        valueOfTextViewTwo = ""
+                    addAthleteNumber = valueOfTextViewTwo
+                    valueOfTextViewTwo = ""
                 }
 
                 3 -> {
-                        addAthleteNumber = valueOfTextViewThree
-                        valueOfTextViewThree = ""
+                    addAthleteNumber = valueOfTextViewThree
+                    valueOfTextViewThree = ""
                 }
 
                 4 -> {
-                        addAthleteNumber = valueOfTextViewFour
-                        valueOfTextViewFour = ""
+                    addAthleteNumber = valueOfTextViewFour
+                    valueOfTextViewFour = ""
                 }
             }
             renderAddAthleteNumberState()
@@ -259,9 +276,8 @@ class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewMode
         _timerState.postValue(state)
     }
 
-    private fun renderAthletesFastResult(athletesList: List<Athlete>) {
-            _fastResultState.value = FastResultState.Content(athletesList, currentRace)
-
+    private fun renderAthletesFastResult(fastResultList: List<FastResultAthleteHistory>) {
+        _fastResultState.value = FastResultState.Content(fastResultList, currentRace)
     }
 
     private fun renderAddAthleteNumberState() {

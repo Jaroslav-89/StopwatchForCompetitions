@@ -1,7 +1,9 @@
 package com.jaroapps.stopwatchforcompetitions.data.converters
 
 import com.jaroapps.stopwatchforcompetitions.data.db.entity.AthleteEntity
+import com.jaroapps.stopwatchforcompetitions.data.db.entity.FastResultHistoryEntity
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
+import com.jaroapps.stopwatchforcompetitions.domain.model.FastResultAthleteHistory
 
 class AthleteDbConvertor {
     fun map(athlete: Athlete): AthleteEntity {
@@ -25,6 +27,39 @@ class AthleteDbConvertor {
         )
     }
 
+    fun map(athlete: FastResultAthleteHistory): FastResultHistoryEntity {
+        return FastResultHistoryEntity(
+            id = athlete.id,
+            race = athlete.race,
+            number = athlete.number,
+            currentLapNumber = athlete.currentLapNumber,
+            currentLapTime = athlete.currentLapTime,
+            addLastResult = athlete.addLastResult,
+        )
+    }
+
+    fun map(athlete: FastResultHistoryEntity): FastResultAthleteHistory {
+        return FastResultAthleteHistory(
+            id = athlete.id,
+            race = athlete.race,
+            number = athlete.number,
+            currentLapNumber = athlete.currentLapNumber,
+            currentLapTime = athlete.currentLapTime,
+            addLastResult = athlete.addLastResult,
+        )
+    }
+
+    fun mapAthleteToFastResult(athlete: Athlete): FastResultAthleteHistory {
+        return FastResultAthleteHistory(
+            id = athlete.id,
+            race = athlete.race,
+            number = athlete.number,
+            currentLapNumber = athlete.lapsTime.size,
+            currentLapTime = getCurrentLapTime(athlete),
+            addLastResult = athlete.addLastResult,
+        )
+    }
+
     fun mapList(athletes: List<AthleteEntity>): List<Athlete> {
         val result = mutableListOf<Athlete>()
         for (athlete in athletes) {
@@ -33,7 +68,15 @@ class AthleteDbConvertor {
         return result.toList()
     }
 
-    fun mapStringToListLong(lapsTime: String): List<Long> {
+    private fun getCurrentLapTime(athlete: Athlete): Long {
+        return if (athlete.lapsTime.size > 2) {
+            athlete.lapsTime[athlete.lapsTime.size - 1] - athlete.lapsTime[athlete.lapsTime.size - 2]
+        } else {
+            athlete.lapsTime[athlete.lapsTime.size - 1] - athlete.race
+        }
+    }
+
+    private fun mapStringToListLong(lapsTime: String): List<Long> {
         return if (lapsTime.isEmpty()) {
             emptyList()
         } else {

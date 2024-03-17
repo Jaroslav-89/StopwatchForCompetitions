@@ -290,9 +290,13 @@ class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
             startDate.text = convertLongToDate(race.startTime)
             startTime.text = convertLongToTime(race.startTime)
             raceName.setText(race.name)
+            raceName.setSelection(raceName.length())
             raceDescription.setText(race.description)
+            raceDescription.setSelection(raceDescription.length())
             lapDistance.setText(race.lapDistance.toString())
+            lapDistance.setSelection(lapDistance.length())
             totalLapInRace.setText(race.totalLapsInRace.toString())
+            totalLapInRace.setSelection(totalLapInRace.length())
             setImgFromPlaceHolder(race.imgUrl)
             if (race.isStarted)
                 binding.deleteRaceBtn.visibility = View.GONE

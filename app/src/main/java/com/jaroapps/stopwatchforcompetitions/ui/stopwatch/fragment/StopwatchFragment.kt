@@ -217,7 +217,7 @@ class StopwatchFragment : Fragment(R.layout.fragment_stopwatch) {
         when (athletesResults) {
             is FastResultState.Content -> {
                 fastResultAdapter.updateFastResultAdapter(
-                    athletesResults.athletesList,
+                    athletesResults.fastResultList,
                     athletesResults.race
                 )
                 binding.fastResultRv.smoothScrollToPosition(0)

@@ -1,5 +1,6 @@
 package com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,10 @@ class RaceDetailAdapter(private val clickListener: AthleteClickListener) :
     fun updateRaceDetailAdapter(athletesList: List<Athlete>, newRace: Race) {
         val diffResult = DiffUtil.calculateDiff(AthleteDiffCallback(athletes, athletesList))
         athletes = athletesList
+        if (race !=newRace) {
+            notifyDataSetChanged()
+            Log.d("adapter", "notifyDataSetChanged")
+        }
         race = newRace
         diffResult.dispatchUpdatesTo(this)
     }

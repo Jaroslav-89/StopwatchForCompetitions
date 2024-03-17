@@ -4,6 +4,7 @@ import android.net.Uri
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchInteractor
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchRepository
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
+import com.jaroapps.stopwatchforcompetitions.domain.model.FastResultAthleteHistory
 import com.jaroapps.stopwatchforcompetitions.domain.model.Race
 import kotlinx.coroutines.flow.Flow
 
@@ -34,6 +35,10 @@ class StopwatchInteractorImpl(private val repository: StopwatchRepository) : Sto
 
     override fun getAllAthletesInRace(race: Long): Flow<List<Athlete>> {
         return repository.getAllAthletesInRace(race)
+    }
+
+    override fun getAllFastResultInRace(): Flow<List<FastResultAthleteHistory>> {
+        return repository.getAllFastResultInRace()
     }
 
     override fun getAllRaces(): Flow<List<Race>> {

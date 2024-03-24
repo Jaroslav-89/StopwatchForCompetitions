@@ -5,7 +5,7 @@ import com.jaroapps.stopwatchforcompetitions.data.db.entity.FastResultHistoryEnt
 import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
 import com.jaroapps.stopwatchforcompetitions.domain.model.FastResultAthleteHistory
 
-class AthleteDbConvertor {
+object AthleteDbConvertor {
     fun map(athlete: Athlete): AthleteEntity {
         return AthleteEntity(
             id = athlete.id,

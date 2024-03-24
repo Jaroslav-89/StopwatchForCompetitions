@@ -17,25 +17,23 @@ import kotlinx.coroutines.flow.map
 
 class StopwatchRepositoryImpl(
     private val dataBase: AppDataBase,
-    private val raceDbConvertor: RaceDbConvertor,
-    private val athleteDbConvertor: AthleteDbConvertor,
-    private val saveResultXls: SaveResultXls
+    private val saveResultXls: SaveResultXls,
 ) : StopwatchRepository {
 
     override suspend fun checkRaceIsStarted(): Race? {
         val raceEntity = dataBase.raceDao().checkRaceOnStarted(true)
         return if (raceEntity != null)
-            raceDbConvertor.map(raceEntity)
+            RaceDbConvertor.map(raceEntity)
         else
             null
     }
 
     override suspend fun getRaceInformation(startData: Long): Race {
-        return raceDbConvertor.map(dataBase.raceDao().getRaceInformation(startData))
+        return RaceDbConvertor.map(dataBase.raceDao().getRaceInformation(startData))
     }
 
     override suspend fun updateRace(race: Race) {
-        val raceEntity = raceDbConvertor.map(race)
+        val raceEntity = RaceDbConvertor.map(race)
         dataBase.raceDao().insertRace(raceEntity)
     }
 
@@ -52,42 +50,42 @@ class StopwatchRepositoryImpl(
 
     override suspend fun addAthleteResult(newAthlete: Athlete) {
         val addTime = System.currentTimeMillis()
-        val fastResulAthlete = athleteDbConvertor.mapAthleteToFastResult(
+        val fastResulAthlete = AthleteDbConvertor.mapAthleteToFastResult(
             newAthlete.copy(addLastResult = addTime)
         )
         dataBase.athleteDao().insertAthlete(
-            athleteDbConvertor.map(
+            AthleteDbConvertor.map(
                 newAthlete.copy(
                     addLastResult = addTime
                 )
             )
         )
         dataBase.fastResultHistoryDao().addAthleteResult(
-            athleteDbConvertor.map(fastResulAthlete)
+            AthleteDbConvertor.map(fastResulAthlete)
         )
     }
 
     override fun getAllAthletesInRace(race: Long): Flow<List<Athlete>> {
         return dataBase.athleteDao().getAllAthletesInRace(race)
-            .map { value: List<AthleteEntity> -> value.map { athleteDbConvertor.map(it) } }
+            .map { value: List<AthleteEntity> -> value.map { AthleteDbConvertor.map(it) } }
     }
 
     override fun getAllFastResultInRace(): Flow<List<FastResultAthleteHistory>> {
         return dataBase.fastResultHistoryDao().getAllResultHistory()
-            .map { value: List<FastResultHistoryEntity> -> value.map { athleteDbConvertor.map(it) } }
+            .map { value: List<FastResultHistoryEntity> -> value.map { AthleteDbConvertor.map(it) } }
     }
 
     override fun getAllRaces(): Flow<List<Race>> = flow {
         val raceEntityList = dataBase.raceDao().getAllRaces()
         if (raceEntityList.isNotEmpty()) {
-            emit(raceEntityList.map { raceDbConvertor.map(it) })
+            emit(raceEntityList.map { RaceDbConvertor.map(it) })
         } else {
             emit(emptyList())
         }
     }
 
     override suspend fun getLastRace(): Race {
-        return raceDbConvertor.map(dataBase.raceDao().getLastRace())
+        return RaceDbConvertor.map(dataBase.raceDao().getLastRace())
     }
 
     override suspend fun saveResultInXls(race: Long, uri: Uri) {

@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -62,4 +63,6 @@ dependencies {
     annotationProcessor(libs.glide.compiler)
     implementation(libs.apache.poi)
     implementation(libs.apache.poi.ooxml)
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
 }

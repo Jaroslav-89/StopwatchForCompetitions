@@ -6,9 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.jaroapps.stopwatchforcompetitions.domain.api.SettingsInteractor
 import com.jaroapps.stopwatchforcompetitions.domain.api.SharingInteractor
 import com.jaroapps.stopwatchforcompetitions.domain.model.ThemeSettings
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SettingsViewModel(private val settingsInteractor: SettingsInteractor,
-                        private val sharingInteractor: SharingInteractor
+@HiltViewModel
+class SettingsViewModel @Inject constructor(
+    private val settingsInteractor: SettingsInteractor,
+    private val sharingInteractor: SharingInteractor,
 ) : ViewModel() {
 
     private val _themeSwitcherState = MutableLiveData<Boolean>()

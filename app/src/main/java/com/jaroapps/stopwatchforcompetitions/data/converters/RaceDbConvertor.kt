@@ -3,7 +3,7 @@ package com.jaroapps.stopwatchforcompetitions.data.converters
 import com.jaroapps.stopwatchforcompetitions.data.db.entity.RaceEntity
 import com.jaroapps.stopwatchforcompetitions.domain.model.Race
 
-class RaceDbConvertor {
+object RaceDbConvertor {
     fun map(race: Race): RaceEntity {
         return RaceEntity(
             startTime = race.startTime,

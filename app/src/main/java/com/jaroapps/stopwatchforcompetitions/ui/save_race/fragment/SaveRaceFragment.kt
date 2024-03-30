@@ -15,6 +15,7 @@ import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.view.doOnNextLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -31,9 +32,10 @@ import com.jaroapps.stopwatchforcompetitions.ui.save_race.fragment.adapter.SaveR
 import com.jaroapps.stopwatchforcompetitions.ui.save_race.view_model.SaveRaceViewModel
 import com.jaroapps.stopwatchforcompetitions.ui.save_race.view_model.state.SaveRaceState
 import com.jaroapps.stopwatchforcompetitions.util.Util
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
+@AndroidEntryPoint
 class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
 
     private var _binding: FragmentSaveRaceBinding? = null
@@ -43,7 +45,7 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
     private val args: SaveRaceFragmentArgs by navArgs()
     private var startRaceData = 0L
 
-    private val viewModel: SaveRaceViewModel by viewModel()
+    private val viewModel: SaveRaceViewModel by viewModels()
     private val saveRaceAdapter = SaveRaceAdapter {
         viewModel.toggleLapDetail(it)
     }

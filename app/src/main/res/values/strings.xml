@@ -119,7 +119,6 @@
     <string name="distance_tv">Distance</string>
     <string name="race_history_place_holder_text">History is empty</string>
     <!--    settings-->
-    <!--    settings-->
     <string name="settings_heading">Settings</string>
     <string name="night_tv">Dark theme</string>
     <string name="share_tv">Share the app</string>
@@ -130,14 +129,6 @@
     <string name="email_support_subject">Stopwatch for competitions</string>
     <string name="email_support_message"> </string>
     <string name="user_agreement_url"> </string>
-    <string name="support_project">Support the project</string>
-    <!--    support_project-->
-    <string name="support_project_text">If you liked my app and are ready to support the project financially, you can do so using the Donate.stream service by Yandex. By clicking the button below, you will go to the project page in the Donate.stream service, where you can transfer any amount and leave a message in which you can describe improvements and new features, such changes will be considered for addition on a priority basis.</string>
-    <string name="rate_project_text">You can also rate the app and leave a review, it will help with promotion.</string>
-    <string name="support_project_btn">Donate stream</string>
-    <string name="rate_project_btn">Rate the app</string>
-    <string name="donate_stream_url">https://donate.stream/jar_apps</string>
-    <string name="rate_app_url">https://play.google.com/store/apps/details?id=com.jaroapps.stopwatchforcompetitions</string>
     <!--    privacy_policy-->
     <string name="privacy_policy_heading">Privacy Policy</string>
     <string name="privacy_policy_text">Privacy Policy/n/n

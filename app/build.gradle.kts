@@ -1,9 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-   // id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -14,8 +14,8 @@ android {
         applicationId = "com.jaroapps.stopwatchforcompetitions"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 112
-        versionName = "1.12"
+        versionCode = 115
+        versionName = "1.15"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -63,4 +63,6 @@ dependencies {
     annotationProcessor(libs.glide.compiler)
     implementation(libs.apache.poi)
     implementation(libs.apache.poi.ooxml)
+    implementation(libs.hilt)
+    ksp(libs.hilt.compiler)
 }

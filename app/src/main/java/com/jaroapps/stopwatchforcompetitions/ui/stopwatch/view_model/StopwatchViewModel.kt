@@ -13,11 +13,16 @@ import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.AddAt
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.FastResultState
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.TimerState
 import com.jaroapps.stopwatchforcompetitions.util.Util
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class StopwatchViewModel(private val interactor: StopwatchInteractor) : ViewModel() {
+@HiltViewModel
+class StopwatchViewModel @Inject constructor(
+    private val interactor: StopwatchInteractor,
+) : ViewModel() {
 
     private var timerJob: Job? = null
     private var isStarted = false

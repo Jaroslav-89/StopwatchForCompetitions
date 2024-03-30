@@ -16,5 +16,5 @@ interface FastResultHistoryDao {
     fun getAllResultHistory(): Flow<List<FastResultHistoryEntity>>
 
     @Query("DELETE FROM fast_result_history_table")
-    fun deleteAllAthletesInRace()
+    suspend fun deleteAllAthletesInRace()
 }

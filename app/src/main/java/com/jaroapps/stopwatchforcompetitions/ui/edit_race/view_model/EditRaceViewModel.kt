@@ -6,10 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchInteractor
 import com.jaroapps.stopwatchforcompetitions.domain.model.Race
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditRaceViewModel(
-    private val interactor: StopwatchInteractor
+@HiltViewModel
+class EditRaceViewModel @Inject constructor(
+    private val interactor: StopwatchInteractor,
 ) : ViewModel() {
 
     private var raceBeforeChange: Race? = null

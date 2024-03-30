@@ -10,10 +10,13 @@ import com.jaroapps.stopwatchforcompetitions.domain.model.Race
 import com.jaroapps.stopwatchforcompetitions.domain.model.SortingState
 import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.state.RaceDetailState
 import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.state.SortingScreenState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RaceDetailViewModel(
-    private val interactor: StopwatchInteractor
+@HiltViewModel
+class RaceDetailViewModel @Inject constructor(
+    private val interactor: StopwatchInteractor,
 ) : ViewModel() {
 
     private var athletes = emptyList<Athlete>()

@@ -7,6 +7,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.jaroapps.stopwatchforcompetitions.R
@@ -16,15 +17,16 @@ import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.StopwatchVi
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.AddAthleteNumberState
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.FastResultState
 import com.jaroapps.stopwatchforcompetitions.ui.stopwatch.view_model.state.TimerState
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StopwatchFragment : Fragment(R.layout.fragment_stopwatch) {
 
     private var _binding: FragmentStopwatchBinding? = null
     private val binding get() = _binding!!
     private val fastResultAdapter = FastResultAdapter()
     private var raceWasStarted = false
-    private val viewModel: StopwatchViewModel by viewModel()
+    private val viewModel: StopwatchViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -3,17 +3,19 @@ package com.jaroapps.stopwatchforcompetitions.ui.settings.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentSettingsBinding
 import com.jaroapps.stopwatchforcompetitions.ui.settings.view_model.SettingsViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: SettingsViewModel by viewModel()
+    private val viewModel: SettingsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,9 +49,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.settingsSupportBtn.setOnClickListener { viewModel.contactSupport() }
         binding.privacyPolicyBtn.setOnClickListener {
             findNavController().navigate(R.id.action_settingsFragment_to_privacyPolicyFragment)
-        }
-        binding.supportProjectBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_supportProjectFragment)
         }
     }
 

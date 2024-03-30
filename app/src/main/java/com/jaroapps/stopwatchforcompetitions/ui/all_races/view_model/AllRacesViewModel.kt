@@ -6,9 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchInteractor
 import com.jaroapps.stopwatchforcompetitions.ui.all_races.view_model.state.AllRaceState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AllRacesViewModel(private val interactor: StopwatchInteractor) : ViewModel() {
+@HiltViewModel
+class AllRacesViewModel @Inject constructor(
+    private val interactor: StopwatchInteractor,
+) : ViewModel() {
 
     private val _allRacesState = MutableLiveData<AllRaceState>()
     val allRacesState: LiveData<AllRaceState>

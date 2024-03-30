@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentPrivacyPolicyBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PrivacyPolicyFragment : Fragment(R.layout.fragment_privacy_policy) {
 
     private var _binding: FragmentPrivacyPolicyBinding? = null

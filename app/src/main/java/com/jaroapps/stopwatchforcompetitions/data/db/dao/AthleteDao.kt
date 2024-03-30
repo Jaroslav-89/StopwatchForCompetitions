@@ -15,5 +15,5 @@ interface AthleteDao {
     fun getAllAthletesInRace(race: Long): Flow<List<AthleteEntity>>
 
     @Query("DELETE FROM athlete_table WHERE race = :race")
-    fun deleteAllAthletesInRace(race: Long)
+    suspend fun deleteAllAthletesInRace(race: Long)
 }

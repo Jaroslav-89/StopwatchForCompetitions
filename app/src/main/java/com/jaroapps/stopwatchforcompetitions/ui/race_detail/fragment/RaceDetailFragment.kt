@@ -3,6 +3,7 @@ package com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.jaroapps.stopwatchforcompetitions.R
@@ -13,8 +14,9 @@ import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.RaceDetai
 import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.state.RaceDetailState
 import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.state.SortingScreenState
 import com.jaroapps.stopwatchforcompetitions.util.Util
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
 
     private var _binding: FragmentRaceDetailBinding? = null
@@ -23,7 +25,7 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
         viewModel.toggleLapDetail(it)
     }
     private var startRaceData = 0L
-    private val viewModel: RaceDetailViewModel by viewModel()
+    private val viewModel: RaceDetailViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

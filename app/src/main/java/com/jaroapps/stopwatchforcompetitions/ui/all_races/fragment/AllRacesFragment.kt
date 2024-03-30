@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentAllRacesBinding
+import com.jaroapps.stopwatchforcompetitions.domain.model.Race
 import com.jaroapps.stopwatchforcompetitions.ui.all_races.fragment.adapter.AllRacesAdapter
 import com.jaroapps.stopwatchforcompetitions.ui.all_races.view_model.AllRacesViewModel
 import com.jaroapps.stopwatchforcompetitions.ui.all_races.view_model.state.AllRaceState
@@ -18,12 +19,19 @@ class AllRacesFragment : Fragment(R.layout.fragment_all_races) {
     private var _binding: FragmentAllRacesBinding? = null
     private val binding get() = _binding!!
     private val allRacesAdapter =
-        AllRacesAdapter {
-            val argument = it.startTime
-            val action =
-                AllRacesFragmentDirections.actionAllRacesFragmentToSaveRaceFragment(argument)
-            findNavController().navigate(action)
-        }
+        AllRacesAdapter(object : AllRacesAdapter.RaceClickListener {
+            override fun onRaceClick(race: Race) {
+                val argument = race.startTime
+                val action =
+                    AllRacesFragmentDirections.actionAllRacesFragmentToSaveRaceFragment(argument)
+                findNavController().navigate(action)
+            }
+
+            override fun onFavoriteToggleClick(race: Race) {
+                viewModel.toggleFavoriteBtn(race)
+            }
+
+        })
     private val viewModel: AllRacesViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

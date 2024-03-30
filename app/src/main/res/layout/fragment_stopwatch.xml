@@ -138,7 +138,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="3.0">
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/athlete_number_add_tx_1"
@@ -162,7 +162,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="3.0">
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/athlete_number_add_tx_2"
@@ -186,7 +186,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="3.0">
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/athlete_number_add_tx_3"
@@ -210,7 +210,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:weightSum="3.0">
+            android:weightSum="1">
 
             <TextView
                 android:id="@+id/athlete_number_add_tx_4"

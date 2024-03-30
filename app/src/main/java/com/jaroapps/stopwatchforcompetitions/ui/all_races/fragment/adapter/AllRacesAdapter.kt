@@ -30,7 +30,7 @@ class AllRacesAdapter(private val clickListener: RaceClickListener) :
             parent,
             false
         )
-        return AllRacesViewHolder(binding)
+        return AllRacesViewHolder(binding, clickListener)
     }
 
     override fun onBindViewHolder(holder: AllRacesViewHolder, position: Int) {
@@ -40,16 +40,20 @@ class AllRacesAdapter(private val clickListener: RaceClickListener) :
 
     override fun getItemCount() = raceList.size
 
-    fun interface RaceClickListener {
+    interface RaceClickListener {
         fun onRaceClick(race: Race)
+        fun onFavoriteToggleClick(race: Race)
     }
 }
 
-class AllRacesViewHolder(private val binding: RaceItemBinding) :
+class AllRacesViewHolder(
+    private val binding: RaceItemBinding,
+    private val clickListener: AllRacesAdapter.RaceClickListener) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(race: Race) {
         with(binding) {
+            favorite.setOnClickListener { clickListener.onFavoriteToggleClick(race) }
             startDate.text = convertLongToDate(race.startTime)
             startTime.text = convertLongToTime(race.startTime)
             raceName.text = race.name

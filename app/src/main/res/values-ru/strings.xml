@@ -61,10 +61,10 @@
     <string name="delete_competition">Удалить событие</string>
     <string name="start_data">Дата старта</string>
     <string name="start_time">Время старта</string>
-    <string name="lap_distance">Длинна круга\n(в метрах)</string>
+    <string name="lap_distance">Длина круга\n(в метрах)</string>
     <string name="total_lap_in_race">Кругов в\nгонке</string>
     <!--    race_detail-->
-    <string name="lap_distance_race_detail">Длинна круга (в метрах)</string>
+    <string name="lap_distance_race_detail">Длина круга (в метрах)</string>
     <string name="race_name_race_detail">Название события</string>
     <string name="race_detail_header">Информация о гонке</string>
     <string name="position">Позиция</string>

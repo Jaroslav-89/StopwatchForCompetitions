@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaroapps.stopwatchforcompetitions.domain.api.StopwatchInteractor
+import com.jaroapps.stopwatchforcompetitions.domain.model.Race
 import com.jaroapps.stopwatchforcompetitions.ui.all_races.view_model.state.AllRaceState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,6 +28,16 @@ class AllRacesViewModel @Inject constructor(
                 } else {
                     _allRacesState.postValue(AllRaceState.Content(raceList = raceList.sortedByDescending { it.isFavorite }))
                 }
+            }
+        }
+    }
+
+    fun toggleFavoriteBtn(race: Race) {
+        viewModelScope.launch {
+            if (race.isFavorite) {
+                interactor.updateRace(race.copy(isFavorite = false))
+            } else {
+                interactor.updateRace(race.copy(isFavorite = true))
             }
         }
     }

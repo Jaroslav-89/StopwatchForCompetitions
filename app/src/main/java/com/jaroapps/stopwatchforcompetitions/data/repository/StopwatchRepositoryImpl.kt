@@ -76,11 +76,13 @@ class StopwatchRepositoryImpl(
     }
 
     override fun getAllRaces(): Flow<List<Race>> = flow {
-        val raceEntityList = dataBase.raceDao().getAllRaces()
-        if (raceEntityList.isNotEmpty()) {
-            emit(raceEntityList.map { RaceDbConvertor.map(it) })
-        } else {
-            emit(emptyList())
+        dataBase.raceDao().getAllRaces().collect() {
+            val raceEntityList = it
+            if (raceEntityList.isNotEmpty()) {
+                emit(raceEntityList.map { RaceDbConvertor.map(it) })
+            } else {
+                emit(emptyList())
+            }
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
 import com.jaroapps.stopwatchforcompetitions.data.db.entity.RaceEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RaceDao {
@@ -17,7 +18,7 @@ interface RaceDao {
     suspend fun getRaceInformation(startData: Long): RaceEntity
 
     @Query("SELECT * FROM race_table ORDER BY startTime DESC")
-    suspend fun getAllRaces(): List<RaceEntity>
+    fun getAllRaces(): Flow<List<RaceEntity>>
 
     @Query("SELECT * FROM race_table ORDER BY startTime DESC LIMIT 1")
     suspend fun getLastRace(): RaceEntity

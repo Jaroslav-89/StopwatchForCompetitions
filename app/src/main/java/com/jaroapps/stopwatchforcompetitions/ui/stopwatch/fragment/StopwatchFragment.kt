@@ -204,6 +204,7 @@ class StopwatchFragment : Fragment(R.layout.fragment_stopwatch) {
             raceWasStarted = true
             requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             binding.timerTv.text = state.time
+            makeButtonsNotTransparent()
             showStopBtn()
             showRaceDetailBtn()
         } else {
@@ -247,6 +248,26 @@ class StopwatchFragment : Fragment(R.layout.fragment_stopwatch) {
             )
         )
         binding.startStopBtn.setIconResource(R.drawable.ic_start)
+    }
+
+    private fun makeButtonsNotTransparent() {
+        with(binding) {
+            athleteNumberAddBtn1.alpha = 1F
+            athleteNumberAddBtn2.alpha = 1F
+            athleteNumberAddBtn3.alpha = 1F
+            athleteNumberAddBtn4.alpha = 1F
+            figureOne.alpha = 1F
+            figureTwo.alpha = 1F
+            figureThree.alpha = 1F
+            figureFour.alpha = 1F
+            figureFive.alpha = 1F
+            figureSix.alpha = 1F
+            figureSeven.alpha = 1F
+            figureEight.alpha = 1F
+            figureNine.alpha = 1F
+            figureZero.alpha = 1F
+            del.alpha = 1F
+        }
     }
 
     private fun showStopBtn() {

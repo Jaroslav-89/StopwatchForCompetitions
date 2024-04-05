@@ -3,6 +3,7 @@ package com.jaroapps.stopwatchforcompetitions.ui.save_race.fragment.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jaroapps.stopwatchforcompetitions.R
@@ -20,6 +21,9 @@ class SaveRaceAdapter(private val clickListener: AthleteClickListener) :
     fun updateRaceDetailAdapter(athletesList: List<Athlete>, newRace: Race) {
         val diffResult = DiffUtil.calculateDiff(AthleteDiffCallback(athletes, athletesList))
         athletes = athletesList
+        if (race != newRace) {
+            notifyDataSetChanged()
+        }
         race = newRace
         diffResult.dispatchUpdatesTo(this)
     }
@@ -37,10 +41,7 @@ class SaveRaceAdapter(private val clickListener: AthleteClickListener) :
         holder.lapsRv.setHasFixedSize(true)
         val adapter = SaveRaceLapsAdapter(athletes[position], race!!)
         holder.lapsRv.adapter = adapter
-        holder.bind(athletes[position], position, race!!)
-        holder.itemView.setOnClickListener {
-            clickListener.onAthleteClick(athletes[position])
-        }
+        holder.bind(athletes[position], race!!, clickListener)
     }
 
     override fun getItemCount() = athletes.size
@@ -55,9 +56,16 @@ class SaveRaceViewHolder(private val binding: DetailResultItemBinding) :
 
     val lapsRv = binding.lapsDetailRv
 
-    fun bind(athlete: Athlete, position: Int, race: Race) {
+    fun bind(
+        athlete: Athlete,
+        race: Race,
+        clickListener: SaveRaceAdapter.AthleteClickListener
+    ) {
 
         with(binding) {
+            detailResultItemBg.setOnClickListener {
+                clickListener.onAthleteClick(athlete)
+            }
             if (race.totalLapsInRace > 0) {
                 if (athlete.lapsTime.size >= race.totalLapsInRace) {
                     detailResultItemBg.setBackgroundResource(R.drawable.bg_athlete_result_laps_done_item)
@@ -78,10 +86,20 @@ class SaveRaceViewHolder(private val binding: DetailResultItemBinding) :
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             if (athlete.isExpandable) {
                 lapsDetailRv.visibility = View.VISIBLE
-                openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_close_laps_info))
+                openCloseLapsIc.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_close_laps_info
+                    )
+                )
             } else {
                 lapsDetailRv.visibility = View.GONE
-                openCloseLapsIc.setImageDrawable(itemView.context.getDrawable(R.drawable.ic_open_laps_info))
+                openCloseLapsIc.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        itemView.context,
+                        R.drawable.ic_open_laps_info
+                    )
+                )
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +21,8 @@ class RaceDetailAdapter(private val clickListener: AthleteClickListener) :
     fun updateRaceDetailAdapter(athletesList: List<Athlete>, newRace: Race) {
         val diffResult = DiffUtil.calculateDiff(AthleteDiffCallback(athletes, athletesList))
         athletes = athletesList
-        if (race !=newRace) {
+        if (race != newRace) {
             notifyDataSetChanged()
-            Log.d("adapter", "notifyDataSetChanged")
         }
         race = newRace
         diffResult.dispatchUpdatesTo(this)
@@ -43,7 +41,7 @@ class RaceDetailAdapter(private val clickListener: AthleteClickListener) :
         holder.lapsRv.setHasFixedSize(true)
         val adapter = LapsAdapter(athletes[position], race!!)
         holder.lapsRv.adapter = adapter
-        holder.bind(athletes[position], position, race!!)
+        holder.bind(athletes[position], race!!, clickListener)
         holder.itemView.setOnClickListener { clickListener.onAthleteClick(athletes[position]) }
     }
 
@@ -58,9 +56,16 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     val lapsRv = binding.lapsDetailRv
-    fun bind(athlete: Athlete, position: Int, race: Race) {
+    fun bind(
+        athlete: Athlete,
+        race: Race,
+        clickListener: RaceDetailAdapter.AthleteClickListener,
+    ) {
 
         with(binding) {
+            detailResultItemBg.setOnClickListener {
+                clickListener.onAthleteClick(athlete)
+            }
             if (race.totalLapsInRace > 0) {
                 if (athlete.lapsTime.size >= race.totalLapsInRace) {
                     detailResultItemBg.setBackgroundResource(R.drawable.bg_athlete_result_laps_done_item)
@@ -82,10 +87,20 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             if (athlete.isExpandable) {
                 lapsDetailRv.visibility = View.VISIBLE
-                openCloseLapsIc.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_close_laps_info))
+                openCloseLapsIc.setImageDrawable(
+                    getDrawable(
+                        itemView.context,
+                        R.drawable.ic_close_laps_info
+                    )
+                )
             } else {
                 lapsDetailRv.visibility = View.GONE
-                openCloseLapsIc.setImageDrawable(getDrawable(itemView.context, R.drawable.ic_open_laps_info))
+                openCloseLapsIc.setImageDrawable(
+                    getDrawable(
+                        itemView.context,
+                        R.drawable.ic_open_laps_info
+                    )
+                )
             }
         }
     }

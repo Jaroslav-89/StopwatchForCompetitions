@@ -63,6 +63,8 @@
     <string name="start_time">Start time</string>
     <string name="lap_distance">Lap length\n(in meters)</string>
     <string name="total_lap_in_race">Laps in\nrace</string>
+    <string name="take_picture_alert_dialog">Take picture</string>
+    <string name="pick_image_from_gallery_alert_dialog">Pick image from gallery</string>
     <!--    race_detail-->
     <string name="lap_distance_race_detail">Lap length (in meters)</string>
     <string name="race_name_race_detail">Event name</string>

@@ -144,12 +144,15 @@ class EditRaceFragment : Fragment(R.layout.fragment_edit_race) {
 
     private fun showImageSourceDialog() {
         // Создаем диалоговое окно для выбора между камерой и галереей
-        val options = arrayOf("Сделать фото", "Выбрать из галереи")
+        val options = arrayOf(
+            requireContext().getString(R.string.take_picture_alert_dialog),
+            requireContext().getString(R.string.pick_image_from_gallery_alert_dialog)
+        )
         val builder = AlertDialog.Builder(requireContext())
         builder.setItems(options) { _, which ->
             when (which) {
-                0 -> takePicture() // Сделать фото
-                1 -> pickImageFromGallery() // Выбрать из галереи
+                0 -> takePicture()
+                1 -> pickImageFromGallery()
             }
         }
         builder.show()

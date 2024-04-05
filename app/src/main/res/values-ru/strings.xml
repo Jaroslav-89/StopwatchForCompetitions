@@ -53,7 +53,7 @@
     <string name="btn_save_race_description">Кнопка сохранить изменения и выйти</string>
     <string name="race_name_hint">Введите название</string>
     <string name="race_description_hint">Введите описание</string>
-    <string name="lap_distance_hint">Введите длинну круга</string>
+    <string name="lap_distance_hint">Введите длину круга</string>
     <string name="total_lap_in_race_hint">Введите количество кргуов</string>
     <string name="change_competition">Изменить событие</string>
     <string name="race_name">Название\nсобытия</string>
@@ -63,6 +63,8 @@
     <string name="start_time">Время старта</string>
     <string name="lap_distance">Длина круга\n(в метрах)</string>
     <string name="total_lap_in_race">Кругов в\nгонке</string>
+    <string name="take_picture_alert_dialog">Сделать фото</string>
+    <string name="pick_image_from_gallery_alert_dialog">Выбрать из галереи</string>
     <!--    race_detail-->
     <string name="lap_distance_race_detail">Длина круга (в метрах)</string>
     <string name="race_name_race_detail">Название события</string>

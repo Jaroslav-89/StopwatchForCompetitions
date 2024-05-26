@@ -47,8 +47,9 @@ class RaceDetailAdapter(private val clickListener: AthleteClickListener) :
 
     override fun getItemCount() = athletes.size
 
-    fun interface AthleteClickListener {
+    interface AthleteClickListener {
         fun onAthleteClick(athlete: Athlete)
+        fun onAthleteNumberClick(athlete: Athlete)
     }
 }
 
@@ -65,6 +66,9 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
         with(binding) {
             detailResultItemBg.setOnClickListener {
                 clickListener.onAthleteClick(athlete)
+            }
+            editAthleteNumber.setOnClickListener {
+                clickListener.onAthleteNumberClick(athlete)
             }
             if (race.totalLapsInRace > 0) {
                 if (athlete.lapsTime.size >= race.totalLapsInRace) {

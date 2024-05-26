@@ -129,7 +129,6 @@
                 android:text="@string/race_name"
                 android:textColor="@color/black_day_night"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDateHeading"
                 app:layout_constraintTop_toTopOf="@+id/raceName" />
 
@@ -167,6 +166,7 @@
                 android:focusedByDefault="false"
                 android:hint="@string/lap_distance_hint"
                 android:inputType="number"
+                android:maxLength="10"
                 android:textColor="@color/black_day_night"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDate"
@@ -192,6 +192,7 @@
                 android:focusedByDefault="false"
                 android:hint="@string/total_lap_in_race_hint"
                 android:inputType="number"
+                android:maxLength="10"
                 android:textColor="@color/black_day_night"
                 app:layout_constraintEnd_toEndOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDate"

@@ -201,7 +201,7 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
                         saveRaceAdapter.updateRaceDetailAdapter(raceInfo.athleteList, raceInfo.race)
                     } else {
                         placeholderMessage.visibility = View.VISIBLE
-                        saveRaceRv.visibility = View.GONE
+                        saveRaceRv.visibility = View.VISIBLE
                     }
                 }
             }

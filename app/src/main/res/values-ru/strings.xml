@@ -79,6 +79,8 @@
     <string name="lap_time">Время круга</string>
     <string name="total_lap_in_race_heading">Количество кругов\nв гонке</string>
     <string name="btn_sorting_description">Кнопка сортировки информации о гонке</string>
+    <string name="manual_edit_athlet_number_alert_dialog">Ввести новый номер</string>
+    <string name="qr_edit_athlet_number_alert_dialog">Отсканировать QR</string>
     <!--    save_race-->
     <string name="btn_favorite_description">Кнопка добавить событие в избранное</string>
     <string name="btn_save_result_xls_description">Кнопка сохранить результаты в память телефона</string>
@@ -111,6 +113,8 @@
     <string name="answer_negative">Нет</string>
     <string name="stop_race_answer_positive">Завершить</string>
     <string name="stop_race_answer_negative">Отмена</string>
+    <string name="edit_athlete_number_alert_dialog_hint">Введите новый номер</string>
+    <string name="edit_athlete_number_alert_dialog_apply">Применить</string>
     <!--    all_races-->
     <string name="btn_settings_description">Кнопка настройки</string>
     <string name="race_history_heading">История</string>
@@ -119,6 +123,7 @@
     <string name="race_name_tv">Название</string>
     <string name="athletes_in_race_tv">Участников</string>
     <string name="distance_tv">Дистанция</string>
+    <string name="total_lap_tv">Кол-во кругов</string>
     <string name="race_history_place_holder_text">История пуста</string>
     <!--    settings-->
     <string name="settings_heading">Настройки</string>

@@ -2,6 +2,7 @@ package com.jaroapps.stopwatchforcompetitions.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Upsert
 import com.jaroapps.stopwatchforcompetitions.data.db.entity.AthleteEntity
 import kotlinx.coroutines.flow.Flow
@@ -16,4 +17,16 @@ interface AthleteDao {
 
     @Query("DELETE FROM athlete_table WHERE race = :race")
     suspend fun deleteAllAthletesInRace(race: Long)
+
+    @Transaction
+    suspend fun changeAthleteNumber(
+        athleteForChange: AthleteEntity,
+        newAthlete: AthleteEntity,
+    ) {
+        deleteAthleteInRace(athleteForChange.race, athleteForChange.number)
+        insertAthlete(newAthlete)
+    }
+
+    @Query("DELETE FROM athlete_table WHERE race = :race AND number = :number")
+    suspend fun deleteAthleteInRace(race: Long, number: String)
 }

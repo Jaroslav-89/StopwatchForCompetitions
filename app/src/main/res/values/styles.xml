@@ -23,21 +23,24 @@
         <item name="android:layout_margin">0dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1.5</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:clickable">false</item>
         <item name="android:textColor">@color/black_day_night</item>
         <item name="android:hint">@string/athlete_number_hint</item>
         <item name="android:textColorHint">@color/text_hint_day_night</item>
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:padding">2dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">10</item>
     </style>
 
     <style name="AddNumberButton">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:layout_weight">1.5</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:alpha">0.5</item>
         <item name="android:clickable">false</item>
         <item name="android:layout_margin">0dp</item>
         <item name="android:backgroundTint">@color/start_btn_green</item>
@@ -49,6 +52,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:alpha">0.5</item>
         <item name="fontFamily">sans-serif</item>
         <item name="android:textSize">26sp</item>
         <item name="android:textColor">@color/white_universal</item>
@@ -155,6 +159,7 @@
 
     <style name="RaceItemTv">
         <item name="android:textSize">12sp</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/black_day_night</item>
     </style>
 </resources>

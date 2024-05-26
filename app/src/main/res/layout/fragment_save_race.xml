@@ -140,7 +140,6 @@
                 android:text="@string/race_name"
                 android:textColor="@color/black_day_night"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/raceName"
                 app:layout_constraintStart_toStartOf="@+id/startDateHeading"
                 app:layout_constraintTop_toTopOf="@+id/raceName" />
 
@@ -150,9 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
-                android:ellipsize="end"
                 android:gravity="center"
-                android:maxLines="1"
                 android:textColor="@color/black_day_night"
                 android:textSize="20sp"
                 android:textStyle="bold"

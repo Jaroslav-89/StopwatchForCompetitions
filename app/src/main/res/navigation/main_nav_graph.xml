@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/stopwatch"
-        android:name="com.example.stopwatchforcompetitions.ui.stopwatch.fragment.StopwatchFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.stopwatch.fragment.StopwatchFragment"
         android:label="Stopwatch"
         tools:layout="@layout/fragment_stopwatch">
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/allRacesFragment"
-        android:name="com.example.stopwatchforcompetitions.ui.all_races.fragment.AllRacesFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.all_races.fragment.AllRacesFragment"
         android:label="AllRacesFragment"
         tools:layout="@layout/fragment_all_races">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/raceDetailFragment"
-        android:name="com.example.stopwatchforcompetitions.ui.race_detail.fragment.RaceDetailFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment.RaceDetailFragment"
         android:label="RaceDetailFragment"
         tools:layout="@layout/fragment_race_detail">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/saveRaceFragment"
-        android:name="com.example.stopwatchforcompetitions.ui.save_race.fragment.SaveRaceFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.save_race.fragment.SaveRaceFragment"
         android:label="SaveRaceFragment"
         tools:layout="@layout/old_fragment_save_race">
         <action
@@ -55,7 +55,7 @@
     </fragment>
     <fragment
         android:id="@+id/editRaceFragment"
-        android:name="com.example.stopwatchforcompetitions.ui.edit_race.fragment.EditRaceFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.edit_race.fragment.EditRaceFragment"
         android:label="EditRaceFragment"
         tools:layout="@layout/fragment_edit_race">
         <argument
@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.stopwatchforcompetitions.ui.settings.fragment.SettingsFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.settings.fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -76,12 +76,12 @@
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="com.example.stopwatchforcompetitions.ui.privacy_policy.fragment.PrivacyPolicyFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.privacy_policy.fragment.PrivacyPolicyFragment"
         android:label="fragment_privacy_policy"
         tools:layout="@layout/fragment_privacy_policy" />
     <fragment
         android:id="@+id/supportProjectFragment"
-        android:name="com.example.stopwatchforcompetitions.ui.support_project.fragment.SupportProjectFragment"
+        android:name="com.jaroapps.stopwatchforcompetitions.ui.support_project.fragment.SupportProjectFragment"
         android:label="fragment_support_project"
         tools:layout="@layout/fragment_support_project" />
 </navigation>

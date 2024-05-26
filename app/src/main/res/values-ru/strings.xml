@@ -26,6 +26,7 @@
     <string name="figure_eight">8</string>
     <string name="figure_nine">9</string>
     <string name="figure_zero">0</string>
+    <string name="cant_save_file">Ошибка при сохранении файла</string>
     <!--    fast_result_item-->
     <string name="number_header">№</string>
     <string name="total_lap_header">Кругов\nзавершено</string>
@@ -52,7 +53,7 @@
     <string name="btn_save_race_description">Кнопка сохранить изменения и выйти</string>
     <string name="race_name_hint">Введите название</string>
     <string name="race_description_hint">Введите описание</string>
-    <string name="lap_distance_hint">Введите длинну круга</string>
+    <string name="lap_distance_hint">Введите длину круга</string>
     <string name="total_lap_in_race_hint">Введите количество кргуов</string>
     <string name="change_competition">Изменить событие</string>
     <string name="race_name">Название\nсобытия</string>
@@ -60,10 +61,12 @@
     <string name="delete_competition">Удалить событие</string>
     <string name="start_data">Дата старта</string>
     <string name="start_time">Время старта</string>
-    <string name="lap_distance">Длинна круга\n(в метрах)</string>
+    <string name="lap_distance">Длина круга\n(в метрах)</string>
     <string name="total_lap_in_race">Кругов в\nгонке</string>
+    <string name="take_picture_alert_dialog">Сделать фото</string>
+    <string name="pick_image_from_gallery_alert_dialog">Выбрать из галереи</string>
     <!--    race_detail-->
-    <string name="lap_distance_race_detail">Длинна круга (в метрах)</string>
+    <string name="lap_distance_race_detail">Длина круга (в метрах)</string>
     <string name="race_name_race_detail">Название события</string>
     <string name="race_detail_header">Информация о гонке</string>
     <string name="position">Позиция</string>
@@ -76,6 +79,8 @@
     <string name="lap_time">Время круга</string>
     <string name="total_lap_in_race_heading">Количество кругов\nв гонке</string>
     <string name="btn_sorting_description">Кнопка сортировки информации о гонке</string>
+    <string name="manual_edit_athlet_number_alert_dialog">Ввести новый номер</string>
+    <string name="qr_edit_athlet_number_alert_dialog">Отсканировать QR</string>
     <!--    save_race-->
     <string name="btn_favorite_description">Кнопка добавить событие в избранное</string>
     <string name="btn_save_result_xls_description">Кнопка сохранить результаты в память телефона</string>
@@ -84,9 +89,10 @@
     <string name="number_of_athletes">Количество\nучастников</string>
     <string name="save_race_xls">Сохранить\nв формате .xls</string>
     <string name="race_result">Результаты</string>
-    <string name="save_msg">Файл скачан в папку:</string>
+    <string name="save_msg">Файл скачан в папку:\n</string>
     <string name="xls">xls</string>
     <string name="empty_result">В этом событии нет участников</string>
+    <string name="xls_name">результаты соревнования</string>
     <!--    sorting_screen-->
     <string name="ic_sorting_description">Выбранный параметр сортировки</string>
     <string name="pos_first_to_last">Позиция (начиная с первой)</string>
@@ -107,6 +113,8 @@
     <string name="answer_negative">Нет</string>
     <string name="stop_race_answer_positive">Завершить</string>
     <string name="stop_race_answer_negative">Отмена</string>
+    <string name="edit_athlete_number_alert_dialog_hint">Введите новый номер</string>
+    <string name="edit_athlete_number_alert_dialog_apply">Применить</string>
     <!--    all_races-->
     <string name="btn_settings_description">Кнопка настройки</string>
     <string name="race_history_heading">История</string>
@@ -115,6 +123,7 @@
     <string name="race_name_tv">Название</string>
     <string name="athletes_in_race_tv">Участников</string>
     <string name="distance_tv">Дистанция</string>
+    <string name="total_lap_tv">Кол-во кругов</string>
     <string name="race_history_place_holder_text">История пуста</string>
     <!--    settings-->
     <string name="settings_heading">Настройки</string>
@@ -122,19 +131,12 @@
     <string name="share_tv">Поделиться приложением</string>
     <string name="support_tv">Связаться с автором</string>
     <string name="agreement_tv">Политика конфиденциальности</string>
-    <string name="share_url"> </string>
+    <string name="share_text">Установить приложение Stopwatch for competition:\n</string>
+    <string name="share_url">https://store.nashstore.ru/store/65fdbf660a39b29c04bae71d</string>
     <string name="email_support">jar89apps@gmail.com</string>
     <string name="email_support_subject">Stopwatch for competitions</string>
     <string name="email_support_message"> </string>
     <string name="user_agreement_url"> </string>
-    <string name="support_project">Поддержать проект</string>
-    <!--    support_project-->
-    <string name="support_project_text">Если вам понравилось мое приложение и вы готовы поддержать развитие проекта финансово, вы можете это сделать с помощью сервиса Donate.stream от Яндекса. Нажав на кнопку ниже вы попадете на страницу проекта в сервисе Donate.stream, где сможете перевести любую сумму и оставить сообщение в котором можете описать улучшения и новые функции, такие изменения будут рассмотрены к добавлению в приоритетном порядке.</string>
-    <string name="rate_project_text">Также вы можете оценить приложение и оставить отзыв, это поможет продвижению.</string>
-    <string name="support_project_btn">Donate stream</string>
-    <string name="rate_project_btn">Оценить приложение</string>
-    <string name="donate_stream_url">https://donate.stream/jar_apps</string>
-    <string name="rate_app_url"> </string>
     <!--    privacy_policy-->
     <string name="privacy_policy_heading">Политика конфиденциальности</string>
     <string name="privacy_policy_text">Политика конфиденциальности\n\n

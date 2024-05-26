@@ -2,14 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission
-        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".app.App"
@@ -21,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_new_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StopwatchForCompetitions"
-        tools:targetApi="31">
+        tools:targetApi="33">
         <activity
             android:name=".root.RootActivity"
             android:exported="true"
@@ -32,10 +30,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.race_detail.fragment.PortraitCaptureActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/zxing_CaptureTheme"></activity>
+
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.stopwatchforcompetitions.fileprovider"
+            android:authorities="com.jaroapps.stopwatchforcompetitions.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

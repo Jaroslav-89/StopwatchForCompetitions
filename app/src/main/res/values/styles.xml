@@ -32,6 +32,9 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:padding">2dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">10</item>
     </style>
 
     <style name="AddNumberButton">
@@ -156,6 +159,7 @@
 
     <style name="RaceItemTv">
         <item name="android:textSize">12sp</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/black_day_night</item>
     </style>
 </resources>

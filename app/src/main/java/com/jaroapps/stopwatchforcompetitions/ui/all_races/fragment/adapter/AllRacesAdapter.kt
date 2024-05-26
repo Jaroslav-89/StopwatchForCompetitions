@@ -48,7 +48,8 @@ class AllRacesAdapter(private val clickListener: RaceClickListener) :
 
 class AllRacesViewHolder(
     private val binding: RaceItemBinding,
-    private val clickListener: AllRacesAdapter.RaceClickListener) :
+    private val clickListener: AllRacesAdapter.RaceClickListener
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(race: Race) {
@@ -59,6 +60,7 @@ class AllRacesViewHolder(
             raceName.text = race.name
             numberOfAthletes.text = race.athletes.size.toString()
             lapDistance.text = race.lapDistance.toString()
+            totalLaps.text = race.totalLapsInRace.toString()
             favorite.setImageDrawable(getFavoriteToggleDrawable(race.isFavorite))
 
             Glide.with(itemView)

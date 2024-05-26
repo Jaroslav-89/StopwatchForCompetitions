@@ -20,7 +20,9 @@ class RaceDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private var athletes = emptyList<Athlete>()
+
     private var currentRace = Race()
+    private var newAthleteNumber = ""
     private var sortingState: SortingState = SortingState.POSITION_FIRST_TO_LAST_ORDER
     private var sortingScreenIsVisible = false
     private val _raceDetailState = MutableLiveData<RaceDetailState>(RaceDetailState.Empty)
@@ -34,6 +36,10 @@ class RaceDetailViewModel @Inject constructor(
     val sortingScreenState: LiveData<SortingScreenState>
         get() = _sortingScreenState
 
+    private val _numberAvailable = MutableLiveData<Boolean>()
+    val numberAvailable: LiveData<Boolean>
+        get() = _numberAvailable
+
     fun getRaceInfo() {
         viewModelScope.launch {
             val race = interactor.checkRaceIsStarted()
@@ -43,6 +49,33 @@ class RaceDetailViewModel @Inject constructor(
                     athletes = it
                     renderState(race = currentRace, athleteList = athletes)
                 }
+            }
+        }
+    }
+
+    fun checkNumberAvailability(number: String) {
+        if (number.trim().isNotBlank()) {
+            newAthleteNumber = number
+            if (currentRace.athletes.contains(number)) {
+                _numberAvailable.postValue(false)
+            } else {
+                _numberAvailable.postValue(true)
+            }
+        }
+    }
+
+    fun changeAthleteNumber(athleteForChange: Athlete) {
+        val newAthlete = athleteForChange.copy(number = newAthleteNumber)
+        val newAthleteList = currentRace.athletes.toMutableList()
+        newAthleteList.remove(athleteForChange.number)
+        newAthleteList.add(newAthlete.number)
+        val newRace = currentRace.copy(athletes = newAthleteList)
+        currentRace = newRace
+        viewModelScope.launch {
+            interactor.changeAthleteNumber(athleteForChange, newAthlete, currentRace)
+            val race = interactor.checkRaceIsStarted()
+            if (race != null) {
+                currentRace = race
             }
         }
     }

@@ -18,4 +18,5 @@ interface StopwatchInteractor {
     fun getAllRaces(): Flow<List<Race>>
     suspend fun getLastRace(): Race
     suspend fun saveResultInXls(race: Long, uri: Uri)
+    suspend fun changeAthleteNumber(athleteForChange: Athlete, newAthlete: Athlete, race: Race)
 }

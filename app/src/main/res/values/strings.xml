@@ -79,6 +79,8 @@
     <string name="lap_time">Lap time</string>
     <string name="total_lap_in_race_heading">Number of laps\nin race</string>
     <string name="btn_sorting_description">Race information sorting button</string>
+    <string name="manual_edit_athlet_number_alert_dialog">Enter a new number</string>
+    <string name="qr_edit_athlet_number_alert_dialog">Scan the QR code</string>
     <!--    save_race-->
     <string name="btn_favorite_description">Add event to favorites button</string>
     <string name="btn_save_result_xls_description">Save results to phone memory button</string>
@@ -111,6 +113,8 @@
     <string name="answer_negative">No</string>
     <string name="stop_race_answer_positive">Finish</string>
     <string name="stop_race_answer_negative">Cancel</string>
+    <string name="edit_athlete_number_alert_dialog_hint">Enter a new number</string>
+    <string name="edit_athlete_number_alert_dialog_apply">Apply</string>
     <!--    all_races-->
     <string name="btn_settings_description">Settings button</string>
     <string name="race_history_heading">History</string>
@@ -119,6 +123,7 @@
     <string name="race_name_tv">Name</string>
     <string name="athletes_in_race_tv">Participants</string>
     <string name="distance_tv">Distance</string>
+    <string name="total_lap_tv">Number of laps</string>
     <string name="race_history_place_holder_text">History is empty</string>
     <!--    settings-->
     <string name="settings_heading">Settings</string>

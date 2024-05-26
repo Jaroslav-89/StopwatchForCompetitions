@@ -52,4 +52,8 @@ class StopwatchInteractorImpl(private val repository: StopwatchRepository) : Sto
     override suspend fun saveResultInXls(race: Long, uri: Uri) {
         repository.saveResultInXls(race, uri)
     }
+
+    override suspend fun changeAthleteNumber(athleteForChange: Athlete, newAthlete: Athlete, race: Race) {
+        repository.changeAthleteNumber(athleteForChange, newAthlete, race)
+    }
 }

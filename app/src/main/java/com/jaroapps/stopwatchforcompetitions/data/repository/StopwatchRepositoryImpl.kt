@@ -97,4 +97,27 @@ class StopwatchRepositoryImpl(
             saveResultXls.saveRaceInXls(raceEntity, athletesEntity, uri)
         }
     }
+
+    override suspend fun changeAthleteNumber(
+        athleteForChange: Athlete,
+        newAthlete: Athlete,
+        race: Race,
+    ) {
+        val athleteForChangeEntity = AthleteDbConvertor.map(athleteForChange)
+        val newAthleteEntity = AthleteDbConvertor.map(newAthlete)
+        val raceEntity = RaceDbConvertor.map(race)
+
+        val fastResultList = dataBase.fastResultHistoryDao()
+            .getResultHistoryWithAthleteNumber(athleteForChangeEntity.number)
+        val newFastResultList = mutableListOf<FastResultHistoryEntity>()
+        for (fastResult in fastResultList) {
+            val newFastResult = fastResult.copy(number = newAthleteEntity.number)
+            newFastResultList.add(newFastResult)
+        }
+
+        dataBase.fastResultHistoryDao().deleteAthleteByNumber(athleteForChangeEntity.number)
+        dataBase.fastResultHistoryDao().addAllAthleteResultWithNewNumber(newFastResultList)
+        dataBase.athleteDao().changeAthleteNumber(athleteForChangeEntity, newAthleteEntity)
+        dataBase.raceDao().insertRace(raceEntity)
+    }
 }

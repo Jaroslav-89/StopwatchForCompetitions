@@ -200,10 +200,33 @@ class StopwatchViewModel @Inject constructor(
                 }
             } else {
                 when (numberOfTextView) {
-                    StopwatchFragment.FIRST_EDIT_TEXT -> valueOfTextViewOne += char
-                    StopwatchFragment.SECOND_EDIT_TEXT -> valueOfTextViewTwo += char
-                    StopwatchFragment.THIRD_EDIT_TEXT -> valueOfTextViewThree += char
-                    StopwatchFragment.FOURTH_EDIT_TEXT -> valueOfTextViewFour += char
+                    StopwatchFragment.FIRST_EDIT_TEXT ->
+                        if (valueOfTextViewOne.isNotBlank()) {
+                            if (valueOfTextViewOne.toLong() < NUMBER_MAX_SIZE) valueOfTextViewOne += char
+                        } else {
+                            valueOfTextViewOne += char
+                        }
+
+                    StopwatchFragment.SECOND_EDIT_TEXT ->
+                        if (valueOfTextViewTwo.isNotBlank()) {
+                            if (valueOfTextViewTwo.toLong() < NUMBER_MAX_SIZE) valueOfTextViewTwo += char
+                        } else {
+                            valueOfTextViewTwo += char
+                        }
+
+                    StopwatchFragment.THIRD_EDIT_TEXT ->
+                        if (valueOfTextViewThree.isNotBlank()) {
+                            if (valueOfTextViewThree.toLong() < NUMBER_MAX_SIZE) valueOfTextViewThree += char
+                        } else {
+                            valueOfTextViewThree += char
+                        }
+
+                    StopwatchFragment.FOURTH_EDIT_TEXT ->
+                        if (valueOfTextViewFour.isNotBlank()) {
+                            if (valueOfTextViewFour.toLong() < NUMBER_MAX_SIZE) valueOfTextViewFour += char
+                        } else {
+                            valueOfTextViewFour += char
+                        }
                 }
             }
             renderAddAthleteNumberState()
@@ -274,7 +297,8 @@ class StopwatchViewModel @Inject constructor(
     }
 
     private fun getAthleteId(number: String): Long {
-        return (currentRace.startTime.toString() + number).toLong()
+        return (System.currentTimeMillis() + number.toLong())
+        //(currentRace.startTime.toString() + number).toLong()
     }
 
     private fun renderTimer(state: TimerState) {
@@ -308,5 +332,6 @@ class StopwatchViewModel @Inject constructor(
 
     companion object {
         private const val UPDATE_DELAY = 100L
+        private const val NUMBER_MAX_SIZE = 1000000
     }
 }

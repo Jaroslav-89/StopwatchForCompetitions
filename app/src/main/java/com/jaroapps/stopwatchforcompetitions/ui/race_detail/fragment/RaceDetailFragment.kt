@@ -1,13 +1,18 @@
 package com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
+import com.google.zxing.integration.android.IntentIntegrator
 import com.jaroapps.stopwatchforcompetitions.R
 import com.jaroapps.stopwatchforcompetitions.databinding.FragmentRaceDetailBinding
+import com.jaroapps.stopwatchforcompetitions.domain.model.Athlete
 import com.jaroapps.stopwatchforcompetitions.domain.model.SortingState
 import com.jaroapps.stopwatchforcompetitions.ui.race_detail.fragment.adapter.RaceDetailAdapter
 import com.jaroapps.stopwatchforcompetitions.ui.race_detail.view_model.RaceDetailViewModel
@@ -21,11 +26,38 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
 
     private var _binding: FragmentRaceDetailBinding? = null
     private val binding get() = _binding!!
-    private val raceDetailAdapter = RaceDetailAdapter {
-        viewModel.toggleLapDetail(it)
-    }
+    private val raceDetailAdapter =
+        RaceDetailAdapter(object : RaceDetailAdapter.AthleteClickListener {
+            override fun onAthleteClick(athlete: Athlete) {
+                viewModel.toggleLapDetail(athlete)
+            }
+
+            override fun onAthleteNumberClick(athlete: Athlete) {
+                editAthleteNumber(athlete)
+            }
+        })
     private var startRaceData = 0L
+    private var athleteForChangeNumber: Athlete? = null
     private val viewModel: RaceDetailViewModel by viewModels()
+
+    private val qrScanLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val scanResult =
+                    IntentIntegrator.parseActivityResult(result.resultCode, result.data)
+                if (scanResult.contents == null) {
+                    Toast.makeText(requireContext(), "Cancelled", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Scanned: " + scanResult.contents,
+                        Toast.LENGTH_LONG
+                    ).show()
+                    // Отобразите сканированное значение в TextView
+                    binding.newAthleteNumberEt.setText(scanResult.contents)
+                }
+            }
+        }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +73,10 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
 
         viewModel.sortingScreenState.observe(viewLifecycleOwner) {
             renderSortingScreen(it)
+        }
+
+        viewModel.numberAvailable.observe(viewLifecycleOwner) {
+            renderNewAthleteNumber(it)
         }
     }
 
@@ -85,12 +121,27 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
             overlay.setOnClickListener {
                 viewModel.toggleSortingBtn()
             }
-        }
-    }
 
-    private fun hideSortingMenu() {
-        binding.sortingGroup.visibility = View.GONE
-        binding.overlay.visibility = View.GONE
+            applyNewAthleteNumber.setOnClickListener {
+                viewModel.checkNumberAvailability(newAthleteNumberEt.text.toString())
+            }
+
+            overlayEditAthleteNumber.setOnClickListener {
+                overlayEditAthleteNumber.visibility = View.GONE
+                editAthleteNumberGroup.visibility = View.GONE
+                binding.newAthleteNumberEt.setText("")
+            }
+
+            qrScanner.setOnClickListener {
+                val integrator = IntentIntegrator(requireActivity())
+                integrator.setPrompt("Scan a QR code")
+                integrator.setOrientationLocked(false)
+                integrator.setBeepEnabled(false)
+                integrator.captureActivity = PortraitCaptureActivity::class.java
+                val intent = integrator.createScanIntent()
+                qrScanLauncher.launch(intent)
+            }
+        }
     }
 
     private fun setRaceDetailAdapter() {
@@ -99,6 +150,12 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
         if (itemAnimator is DefaultItemAnimator) {
             itemAnimator.supportsChangeAnimations = false
         }
+    }
+
+    private fun editAthleteNumber(athlete: Athlete) {
+        binding.overlayEditAthleteNumber.visibility = View.VISIBLE
+        binding.editAthleteNumberGroup.visibility = View.VISIBLE
+        athleteForChangeNumber = athlete
     }
 
     private fun renderRaceDetail(raceInfo: RaceDetailState) {
@@ -129,6 +186,27 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
                 showSelectSortingPosition(sortingScreenState.sortingState)
             }
         }
+    }
+
+    private fun renderNewAthleteNumber(numberAvailable: Boolean) {
+        if (numberAvailable) {
+            athleteForChangeNumber?.let {
+                viewModel.changeAthleteNumber(it)
+            }
+            binding.overlayEditAthleteNumber.visibility = View.GONE
+            binding.editAthleteNumberGroup.visibility = View.GONE
+            binding.newAthleteNumberEt.setText("")
+        } else {
+            showToast("Такой номер уже есть в гонке, введите новый номер.")
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(
+            requireContext(),
+            message,
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun getSortingText(sortingState: SortingState): String {

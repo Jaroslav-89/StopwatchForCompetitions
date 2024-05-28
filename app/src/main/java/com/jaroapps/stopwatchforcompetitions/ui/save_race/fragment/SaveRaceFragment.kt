@@ -159,19 +159,19 @@ class SaveRaceFragment : Fragment(R.layout.fragment_save_race) {
                 viewModel.toggleSortingBtn()
             }
 
-            sortPosFtL.setOnClickListener {
+            sortPosFtLGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.POSITION_FIRST_TO_LAST_ORDER)
             }
 
-            sortPosLtF.setOnClickListener {
+            sortPosLtFGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.POSITION_LAST_TO_FIRST_ORDER)
             }
 
-            sortNumFtL.setOnClickListener {
+            sortNumFtLGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.NUMBER_FIRST_TO_LAST_ORDER)
             }
 
-            sortNumLtF.setOnClickListener {
+            sortNumLtFGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.NUMBER_LAST_TO_FIRST_ORDER)
             }
 

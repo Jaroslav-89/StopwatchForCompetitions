@@ -102,19 +102,19 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
                 viewModel.toggleSortingBtn()
             }
 
-            sortPosFtL.setOnClickListener {
+            sortPosFtLGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.POSITION_FIRST_TO_LAST_ORDER)
             }
 
-            sortPosLtF.setOnClickListener {
+            sortPosLtFGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.POSITION_LAST_TO_FIRST_ORDER)
             }
 
-            sortNumFtL.setOnClickListener {
+            sortNumFtLGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.NUMBER_FIRST_TO_LAST_ORDER)
             }
 
-            sortNumLtF.setOnClickListener {
+            sortNumLtFGroup.setOnClickListener {
                 viewModel.changeSorting(SortingState.NUMBER_LAST_TO_FIRST_ORDER)
             }
 
@@ -197,7 +197,7 @@ class RaceDetailFragment : Fragment(R.layout.fragment_race_detail) {
             binding.editAthleteNumberGroup.visibility = View.GONE
             binding.newAthleteNumberEt.setText("")
         } else {
-            showToast("Такой номер уже есть в гонке, введите новый номер.")
+            showToast(getString(R.string.already_exist_number_toast))
         }
     }
 

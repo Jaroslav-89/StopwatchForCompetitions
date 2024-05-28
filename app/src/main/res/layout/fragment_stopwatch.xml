@@ -47,7 +47,6 @@
         app:iconPadding="0dp"
         app:iconSize="48dp"
         app:iconTint="@color/white_universal"
-        app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineStartButton"
@@ -63,7 +62,6 @@
         app:iconPadding="0dp"
         app:iconSize="48dp"
         app:iconTint="@color/white_universal"
-        app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="@+id/guidelineStopButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +71,14 @@
         android:id="@+id/timer_tv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:textColor="@color/black_day_night"
-        android:layout_marginVertical="10dp"
-        android:gravity="center"
-        android:textSize="44sp"
+        android:layout_marginVertical="8dp"
+        android:autoSizeMaxTextSize="100sp"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
         android:background="@drawable/bg_timer"
+        android:gravity="center"
+        android:textColor="@color/black_day_night"
         app:layout_constraintBottom_toBottomOf="@+id/guidelineTimer"
         app:layout_constraintEnd_toEndOf="@+id/guidelineStartButton"
         app:layout_constraintStart_toStartOf="@+id/guidelineStopButton"
@@ -134,9 +135,10 @@
         <LinearLayout
             android:id="@+id/addAthleteNumberFieldOne"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -147,6 +149,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/athlete_number_add_btn_1"
                 style="@style/AddNumberButton"
+                android:layout_gravity="center"
                 android:contentDescription="@string/btn_add_result_description"
                 app:icon="@drawable/ic_add_athlete_result"
                 app:iconGravity="textStart"
@@ -158,9 +161,10 @@
         <LinearLayout
             android:id="@+id/addAthleteNumberFieldTwo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -182,9 +186,10 @@
         <LinearLayout
             android:id="@+id/addAthleteNumberFieldTree"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -206,9 +211,10 @@
         <LinearLayout
             android:id="@+id/addAthleteNumberFieldFour"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="1">
 

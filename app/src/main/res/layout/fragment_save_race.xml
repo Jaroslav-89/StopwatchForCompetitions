@@ -394,11 +394,12 @@
 
     <LinearLayout
         android:id="@+id/sortingGroup"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="32dp"
         android:background="@drawable/bg_lap_item"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:padding="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -407,75 +408,77 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <FrameLayout
+            android:id="@+id/sortPosFtLGroup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/sortPosFtL"
                 style="@style/SortingTx"
-                android:text="@string/pos_first_to_last"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:text="@string/pos_first_to_last" />
 
             <ImageView
                 android:id="@+id/sortPosFtLIc"
                 style="@style/SortingIc"
                 android:contentDescription="@string/ic_sorting_description"
-                app:layout_constraintBottom_toBottomOf="@+id/sortPosFtL"
-                app:layout_constraintStart_toStartOf="@+id/sortPosLtFIc"
-                app:layout_constraintTop_toTopOf="@+id/sortPosFtL"
                 tools:visibility="visible" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/sortPosLtFGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/sortPosLtF"
                 style="@style/SortingTx"
-                android:text="@string/pos_last_to_first"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sortPosFtL" />
+                android:text="@string/pos_last_to_first" />
 
             <ImageView
                 android:id="@+id/sortPosLtFIc"
                 style="@style/SortingIc"
                 android:contentDescription="@string/ic_sorting_description"
-                app:layout_constraintBottom_toBottomOf="@+id/sortPosLtF"
-                app:layout_constraintStart_toEndOf="@+id/sortPosLtF"
-                app:layout_constraintTop_toTopOf="@+id/sortPosLtF"
                 tools:visibility="visible" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/sortNumFtLGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/sortNumFtL"
                 style="@style/SortingTx"
-                android:text="@string/num_first_to_last"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sortPosLtF" />
+                android:text="@string/num_first_to_last" />
 
             <ImageView
                 android:id="@+id/sortNumFtLIc"
                 style="@style/SortingIc"
                 android:contentDescription="@string/ic_sorting_description"
-                app:layout_constraintBottom_toBottomOf="@+id/sortNumFtL"
-                app:layout_constraintStart_toStartOf="@+id/sortPosFtLIc"
-                app:layout_constraintTop_toTopOf="@+id/sortNumFtL"
                 tools:visibility="visible" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/sortNumLtFGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/sortNumLtF"
                 style="@style/SortingTx"
-                android:text="@string/num_last_to_first"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sortNumFtL" />
+                android:text="@string/num_last_to_first" />
 
             <ImageView
                 android:id="@+id/sortNumLtFIc"
                 style="@style/SortingIc"
                 android:contentDescription="@string/ic_sorting_description"
-                app:layout_constraintBottom_toBottomOf="@+id/sortNumLtF"
-                app:layout_constraintStart_toStartOf="@+id/sortPosFtLIc"
-                app:layout_constraintTop_toTopOf="@+id/sortNumLtF"
                 tools:visibility="visible" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
 
     </LinearLayout>
 

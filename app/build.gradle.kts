@@ -14,8 +14,8 @@ android {
         applicationId = "com.jaroapps.stopwatchforcompetitions"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 118
-        versionName = "1.18"
+        versionCode = 119
+        versionName = "1.19"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

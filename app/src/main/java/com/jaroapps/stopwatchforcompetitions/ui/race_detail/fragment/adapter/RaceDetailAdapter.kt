@@ -42,7 +42,6 @@ class RaceDetailAdapter(private val clickListener: AthleteClickListener) :
         val adapter = LapsAdapter(athletes[position], race!!)
         holder.lapsRv.adapter = adapter
         holder.bind(athletes[position], race!!, clickListener)
-        holder.itemView.setOnClickListener { clickListener.onAthleteClick(athletes[position]) }
     }
 
     override fun getItemCount() = athletes.size
@@ -87,7 +86,6 @@ class RaceDetailViewHolder(private val binding: DetailResultItemBinding) :
             val totalRaceTime = athlete.addLastResult - athlete.race
             averagePace.text = Util.convertToPace(totalDistance, totalRaceTime)
             averageSpeed.text = Util.convertToSpeed(totalDistance, totalRaceTime)
-            totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             totalTime.text = Util.getTimeFormat(athlete.addLastResult - athlete.race)
             if (athlete.isExpandable) {
                 lapsDetailRv.visibility = View.VISIBLE

@@ -115,6 +115,8 @@
     <string name="stop_race_answer_negative">Cancel</string>
     <string name="edit_athlete_number_alert_dialog_hint">Enter a new number</string>
     <string name="edit_athlete_number_alert_dialog_apply">Apply</string>
+    <!--    toast_message-->
+    <string name="already_exist_number_toast">This number is already in the race, enter a new number.</string>
     <!--    all_races-->
     <string name="btn_settings_description">Settings button</string>
     <string name="race_history_heading">History</string>

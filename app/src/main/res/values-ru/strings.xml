@@ -115,6 +115,8 @@
     <string name="stop_race_answer_negative">Отмена</string>
     <string name="edit_athlete_number_alert_dialog_hint">Введите новый номер</string>
     <string name="edit_athlete_number_alert_dialog_apply">Применить</string>
+    <!--    toast_message-->
+    <string name="already_exist_number_toast">Такой номер уже есть в гонке, введите новый номер.</string>
     <!--    all_races-->
     <string name="btn_settings_description">Кнопка настройки</string>
     <string name="race_history_heading">История</string>

@@ -20,8 +20,7 @@
     </style>
 
     <style name="AddNumberEditText">
-        <item name="android:layout_margin">0dp</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:clickable">false</item>
@@ -35,6 +34,10 @@
         <item name="android:maxLines">1</item>
         <item name="android:singleLine">true</item>
         <item name="android:maxLength">10</item>
+        <item name="android:autoSizeMaxTextSize">100sp</item>
+        <item name="android:autoSizeMinTextSize">12sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="android:autoSizeTextType">uniform</item>
     </style>
 
     <style name="AddNumberButton">
@@ -128,10 +131,10 @@
     <style name="SortingTx">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">start|center</item>
         <item name="android:textColor">@color/black_universal</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:paddingHorizontal">4dp</item>
         <item name="android:paddingVertical">8dp</item>
         <item name="android:layout_margin">6dp</item>
@@ -140,8 +143,8 @@
     <style name="SortingIc">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">end|center</item>
         <item name="android:visibility">gone</item>
         <item name="android:src">@drawable/ic_done_active</item>
         <item name="android:tint">@color/blue</item>

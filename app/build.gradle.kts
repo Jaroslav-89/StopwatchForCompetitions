@@ -14,8 +14,8 @@ android {
         applicationId = "com.jaroapps.stopwatchforcompetitions"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 119
-        versionName = "1.19"
+        versionCode = 121
+        versionName = "1.21"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         viewBinding = true
@@ -66,6 +66,6 @@ dependencies {
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
 
-    implementation("com.journeyapps:zxing-android-embedded:4.2.0")
-    implementation("com.google.zxing:core:3.4.1")
+    implementation(libs.zxing.android.embedded)
+    implementation(libs.core)
 }
